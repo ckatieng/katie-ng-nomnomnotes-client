@@ -1,0 +1,34 @@
+@use "./variables" as *;
+
+/* Responsive Design */
+@mixin tablet {
+    @media (min-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $desktop-width) {
+        @content;
+    }
+}
+
+/* Mobile Padding */
+@mixin mobile-padding() {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+/* Tablet & Desktop Padding */
+@mixin tablet-padding() {
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+/* Desktop Margins */
+@mixin desktop-margin() {
+    min-width: 1020px;
+    max-width: 1020px;
+    margin-right: auto;
+    margin-left: auto;
+}
