@@ -23,6 +23,9 @@ function MuiNavigation() {
                     fontWeight: '600',
                     fontSize: '11px',
                 },
+                '& .MuiBottomNavigationAction-label.Mui-selected': {
+                    fontSize: '11px',
+                },
             }}
             showLabels
             value={value}
