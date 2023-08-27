@@ -5,6 +5,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import MuiTheme from './components/MuiTheme/MuiTheme';
 import MuiNavigation from './components/MuiNavigation/MuiNavigation';
 
+import MustTryPage from '../src/pages/MustTryPage/MustTryPage';
+import FavouritesPage from '../src/pages/FavouritesPage/FavouritesPage';
+import VisitedPage from '../src/pages/VisitedPage/VisitedPage';
+import NearbyPage from '../src/pages/NearbyPage/NearbyPage';
+
 
 /*
  * App.jsx
@@ -19,11 +24,11 @@ function App() {
                 <div className="App">
                     <Routes>
                         {/* Home Page */}
-                        {/* <Route path="/" element={<MustTryPage />} /> */}
-                        <Route path="/" element={<MuiNavigation />} />
+                        <Route path="/" element={<MustTryPage />} />
+                        {/* <Route path="/" element={<MuiNavigation />} /> */}
 
                         {/* Must-Try Page */}
-                        {/* <Route path="/musttry" element={<MustTryPage />} /> */}
+                        <Route path="/musttry" element={<MustTryPage />} />
 
                         {/* Single Restaurant Details */}
                         {/* <Route path="/musttry/:id" element={<RestaurantDetails />} /> */}
@@ -32,7 +37,7 @@ function App() {
                         {/* <Route path="/musttry/:id/delete" element={<MustTryPage/>} /> */}
 
                         {/* Favourites Page */}
-                        {/* <Route path="/favourites" element={<FavouritesPage />} /> */}
+                        <Route path="/favourites" element={<FavouritesPage />} />
 
                         {/* Single Restaurant Details */}
                         {/* <Route path="/favourites/:id" element={<RestaurantDetails />} /> */}
@@ -41,7 +46,7 @@ function App() {
                         {/* <Route path="/favourites/:id/delete" element={<FavouritesPage />} /> */}
 
                         {/* Visited Page */}
-                        {/* <Route path="/visited" element={<VisitedPage />} /> */}
+                        <Route path="/visited" element={<VisitedPage />} />
 
                         {/* Single Restaurant Details */}
                         {/* <Route path="/visited/:id" element={<RestaurantDetails />} /> */}
@@ -49,9 +54,14 @@ function App() {
                         {/* Delete Restaurant from VisitedPage */}
                         {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
 
+                        {/* Nearby Page */}
+                        <Route path="/nearby" element={<NearbyPage />} />
+
                         {/* Catch-all to redirect to Home Page */}
                         {/* <Route path="*" element={<MustTryPage />} /> */}
                     </Routes>
+
+                    <MuiNavigation />
                 </div>
             </BrowserRouter>
         </ThemeProvider>
