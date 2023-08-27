@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import './App.scss';
 
 import MustTryPage from '../src/pages/MustTryPage/MustTryPage';
 import FavouritesPage from '../src/pages/FavouritesPage/FavouritesPage';
 import VisitedPage from '../src/pages/VisitedPage/VisitedPage';
 import NearbyPage from '../src/pages/NearbyPage/NearbyPage';
+
+import LoadingScreen from '../src/components/LoadingScreen/LoadingScreen';
 
 import { ThemeProvider } from '@mui/material/styles';
 import MuiTheme from './components/MuiTheme/MuiTheme';
@@ -18,13 +21,23 @@ import MuiNavigation from './components/MuiNavigation/MuiNavigation';
  */
 
 function App() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Simulate content loading using useEffect
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2000); 
+    }, []);
+
     return (
         <ThemeProvider theme={MuiTheme}>
-            <BrowserRouter>
-                <div className="App">
+            <div className="App">
+                <BrowserRouter>
+                    {isLoading && <LoadingScreen />}
                     <Routes>
                         {/* Home Page */}
-                        <Route path="/" element={<MustTryPage />} />
+                        <Route path="/" element={isLoading ? <LoadingScreen /> : <MustTryPage />} />
                         {/* <Route path="/" element={<MuiNavigation />} /> */}
 
                         {/* Must-Try Page */}
@@ -60,10 +73,9 @@ function App() {
                         {/* Catch-all to redirect to Home Page */}
                         {/* <Route path="*" element={<MustTryPage />} /> */}
                     </Routes>
-
-                    <MuiNavigation />
-                </div>
-            </BrowserRouter>
+                    {!isLoading && <MuiNavigation />}
+                </BrowserRouter>
+            </div>
         </ThemeProvider>
     );
 }
