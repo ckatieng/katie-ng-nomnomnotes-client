@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 
-import { ThemeProvider } from '@mui/material/styles';
-import MuiTheme from './components/MuiTheme/MuiTheme';
-import MuiNavigation from './components/MuiNavigation/MuiNavigation';
-
 import MustTryPage from '../src/pages/MustTryPage/MustTryPage';
 import FavouritesPage from '../src/pages/FavouritesPage/FavouritesPage';
 import VisitedPage from '../src/pages/VisitedPage/VisitedPage';
 import NearbyPage from '../src/pages/NearbyPage/NearbyPage';
+
+import { ThemeProvider } from '@mui/material/styles';
+import MuiTheme from './components/MuiTheme/MuiTheme';
+import MuiNavigation from './components/MuiNavigation/MuiNavigation';
 
 
 /*
