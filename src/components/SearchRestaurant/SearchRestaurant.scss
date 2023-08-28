@@ -1,0 +1,11 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.search-restaurant {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(235,114,255,0.5);
+}

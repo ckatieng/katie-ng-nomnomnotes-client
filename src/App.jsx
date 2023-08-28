@@ -1,18 +1,16 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import './App.scss';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import "./App.scss";
 
-import MustTryPage from '../src/pages/MustTryPage/MustTryPage';
-import FavouritesPage from '../src/pages/FavouritesPage/FavouritesPage';
-import VisitedPage from '../src/pages/VisitedPage/VisitedPage';
-import NearbyPage from '../src/pages/NearbyPage/NearbyPage';
-import LoadingScreen from '../src/components/LoadingScreen/LoadingScreen';
+import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
+import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
+import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
+import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
+import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
-// import MuiTheme from './components/MuiTheme/MuiTheme';
-import MuiNavigation from './components/MuiNavigation/MuiNavigation';
-import ToggleColorMode from './components/ToggleColorMode/ToggleColorMode';
-import { CssBaseline } from '@mui/material';
+import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
+import ToggleColorMode from "./components/ToggleColorMode/ToggleColorMode";
+import { CssBaseline } from "@mui/material";
 
 /*
  * App.jsx
@@ -22,31 +20,57 @@ import { CssBaseline } from '@mui/material';
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
+    // State to track whether "Add Restaurant" button is clicked
+    const [showSearchRestaurant, setShowSearchRestaurant] = useState(false);
 
     // Simulate content loading using useEffect
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 2000); 
+         }, 2000);
     }, []);
 
+    // Function to handle when "Add Restaurant" button is clicked
+    const handleAddRestaurantClick = () => {
+        setShowSearchRestaurant(true);
+    };
+
+    // Function to handle when "Cancel" button is clicked in SearchRestaurant component
+    const handleCancelAddRestaurantClick = () => {
+        setShowSearchRestaurant(false);
+    };
+
     return (
-        // <ThemeProvider theme={MuiTheme}>
-        // <ToggleColorMode>
-            
         <BrowserRouter>
             <div className="App">
                 {isLoading && <LoadingScreen />}
                 {!isLoading && (
-                    <ToggleColorMode>
+                    // <>
+                    // {!showSearchRestaurant && (
+                <ToggleColorMode showSearchRestaurant={showSearchRestaurant}>
                     <CssBaseline />
                     <Routes>
                         {/* Home Page */}
-                        <Route path="/" element={isLoading ? <LoadingScreen /> : <MustTryPage />} />
-                        {/* <Route path="/" element={<MuiNavigation />} /> */}
+                        <Route path="/" element={
+                            isLoading ? (
+                                <LoadingScreen />
+                            ) : (
+                                <MustTryPage
+                                    showSearchRestaurant={showSearchRestaurant}
+                                    handleAddRestaurantClick={handleAddRestaurantClick}
+                                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                />
+                            )}
+                        />
 
                         {/* Must-Try Page */}
-                        <Route path="/musttry" element={<MustTryPage />} />
+                        <Route path="/musttry" element={
+                            <MustTryPage
+                                showSearchRestaurant={showSearchRestaurant}
+                                handleAddRestaurantClick={handleAddRestaurantClick}
+                                handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                            />
+                        }/>
 
                         {/* Single Restaurant Details */}
                         {/* <Route path="/musttry/:id" element={<RestaurantDetails />} /> */}
@@ -78,14 +102,14 @@ function App() {
                         {/* Catch-all to redirect to Home Page */}
                         {/* <Route path="*" element={<MustTryPage />} /> */}
                     </Routes>
-                        {/* {!isLoading && <MuiNavigation />} */}
-                    <MuiNavigation />
-                    </ToggleColorMode>
-                )}
+                    {/* {!isLoading && <MuiNavigation />} */}
+                    {!showSearchRestaurant && <MuiNavigation />}
+                </ToggleColorMode>
+                    )}
+                    {/* </>
+                )} */}
             </div>
         </BrowserRouter>
-        // </ToggleColorMode>
-        // </ThemeProvider>
     );
 }
 

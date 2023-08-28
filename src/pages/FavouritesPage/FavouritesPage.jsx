@@ -2,7 +2,9 @@ import './FavouritesPage.scss';
 
 function FavouritesPage () {
     return (
-        <h1>Favourites List</h1>
+        <div className="favourites">
+            <h2 className="favourites__title">Favourites List</h2>
+        </div>
     );
 }
 

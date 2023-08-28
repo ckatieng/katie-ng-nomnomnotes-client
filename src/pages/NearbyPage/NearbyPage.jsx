@@ -2,7 +2,9 @@ import './NearbyPage.scss';
 
 function NearbyPage () {
     return (
-        <h1>Nearby List</h1>
+        <div className="nearby">
+            <h2 className="nearby__title">Nearby List</h2>
+        </div>
     );
 }
 

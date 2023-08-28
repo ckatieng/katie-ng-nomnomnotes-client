@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function ToggleColorMode({ children }) {
+function ToggleColorMode({ children, showSearchRestaurant }) {
     const theme = useTheme();
     const [mode, setMode] = useState('light');
   
@@ -27,7 +27,7 @@ function ToggleColorMode({ children }) {
             // ...(mode === 'light'
             //     ? {
             //         // palette values for light mode
-            //         primary: amber,
+            //         primary: #F3F6FC,
             //         divider: amber[200],
             //         text: {
             //             primary: grey[900],
@@ -58,25 +58,27 @@ function ToggleColorMode({ children }) {
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={updatedTheme}>
-                <Box
-                    sx={{
-                    display: 'flex',
-                    width: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    // bgcolor: 'background.default',
-                    // color: 'text.primary',
-                    borderRadius: 1,
-                    // p: 3,
-                    mt: '15px',
-                    ml: '10px',
-                    }}
-                >
-                {/* {mode} mode */}
-                    <IconButton onClick={colorMode.toggleColorMode} color="inherit">
-                        {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-                    </IconButton>
-                </Box>
+                {!showSearchRestaurant && (
+                    <Box
+                        sx={{
+                        display: 'flex',
+                        width: '100%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        // bgcolor: 'background.default',
+                        // color: 'text.primary',
+                        borderRadius: 1,
+                        // p: 3,
+                        pt: '15px',
+                        pl: '10px',
+                        }}
+                    >
+                    {/* {mode} mode */}
+                        <IconButton onClick={colorMode.toggleColorMode} color="inherit">
+                            {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                        </IconButton>
+                    </Box>
+                )}
                 {children}
             </ThemeProvider>
         </ColorModeContext.Provider>

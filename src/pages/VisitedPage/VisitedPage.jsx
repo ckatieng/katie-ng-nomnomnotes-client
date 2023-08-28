@@ -2,7 +2,9 @@ import './VisitedPage.scss';
 
 function VisitedPage () {
     return (
-        <h1>Visited List</h1>
+        <div className="visited">
+            <h2 className="visited__title">Visited List</h2>
+        </div>
     );
 }
 
