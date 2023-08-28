@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.scss';
 
@@ -32,11 +32,14 @@ function App() {
 
     return (
         // <ThemeProvider theme={MuiTheme}>
-        <ToggleColorMode>
-            <CssBaseline />
-            <BrowserRouter>
-                <div className="App">
-                    {isLoading && <LoadingScreen />}
+        // <ToggleColorMode>
+            
+        <BrowserRouter>
+            <div className="App">
+                {isLoading && <LoadingScreen />}
+                {!isLoading && (
+                    <ToggleColorMode>
+                    <CssBaseline />
                     <Routes>
                         {/* Home Page */}
                         <Route path="/" element={isLoading ? <LoadingScreen /> : <MustTryPage />} />
@@ -75,10 +78,13 @@ function App() {
                         {/* Catch-all to redirect to Home Page */}
                         {/* <Route path="*" element={<MustTryPage />} /> */}
                     </Routes>
-                    {!isLoading && <MuiNavigation />}
-                </div>
-            </BrowserRouter>
-        </ToggleColorMode>
+                        {/* {!isLoading && <MuiNavigation />} */}
+                    <MuiNavigation />
+                    </ToggleColorMode>
+                )}
+            </div>
+        </BrowserRouter>
+        // </ToggleColorMode>
         // </ThemeProvider>
     );
 }

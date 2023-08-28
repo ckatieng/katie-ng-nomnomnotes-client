@@ -19,16 +19,18 @@ function MuiNavigation() {
                 bottom: 0, 
                 left: 0, 
                 right: 0,
+                // backgroundColor: 'rgb(243, 246, 252)',
+                // height: '70px',
+                // p: '20px 0',
                 // navigation labels
                 '& .MuiBottomNavigationAction-label': {
                     fontWeight: '600',
                     fontSize: '11px',
-                    // color: 'purple',
                 },
                 // selected navigation label
                 '& .MuiBottomNavigationAction-label.Mui-selected': {
                     fontSize: '11px',
-                    color: '#E388F1',
+                    // color: '#EB72FF',
                 },
                 // navigation icons
                 // '& .MuiSvgIcon-root': {
@@ -36,11 +38,11 @@ function MuiNavigation() {
                 // },
                 // selected navigation icon
                 '& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root': {
-                    color: '#E388F1', 
+                    // color: '#FFFFFF', 
                 },
                 // selection effect
                 '& .MuiBottomNavigationAction-root.Mui-selected': {
-                    color: '#E388F1', 
+                    color: '#EB72FF',
                 },
             }}
             showLabels

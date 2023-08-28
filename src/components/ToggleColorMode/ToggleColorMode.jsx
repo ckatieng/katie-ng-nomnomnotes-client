@@ -1,11 +1,11 @@
 
-import { useState, useMemo, createContext, useContext } from 'react';
+import { useState, useMemo, createContext} from 'react';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-import { amber, deepOrange, grey } from '@mui/material/colors';
+// import { amber, deepOrange, grey } from '@mui/material/colors';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -63,16 +63,18 @@ function ToggleColorMode({ children }) {
                     display: 'flex',
                     width: '100%',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    bgcolor: 'background.default',
-                    color: 'text.primary',
+                    justifyContent: 'flex-start',
+                    // bgcolor: 'background.default',
+                    // color: 'text.primary',
                     borderRadius: 1,
-                    p: 3,
+                    // p: 3,
+                    mt: '15px',
+                    ml: '10px',
                     }}
                 >
-                {mode} mode
-                    <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-                    {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                {/* {mode} mode */}
+                    <IconButton onClick={colorMode.toggleColorMode} color="inherit">
+                        {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
                 </Box>
                 {children}
