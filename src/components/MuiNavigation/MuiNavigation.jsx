@@ -19,12 +19,28 @@ function MuiNavigation() {
                 bottom: 0, 
                 left: 0, 
                 right: 0,
+                // navigation labels
                 '& .MuiBottomNavigationAction-label': {
                     fontWeight: '600',
                     fontSize: '11px',
+                    // color: 'purple',
                 },
+                // selected navigation label
                 '& .MuiBottomNavigationAction-label.Mui-selected': {
                     fontSize: '11px',
+                    color: '#E388F1',
+                },
+                // navigation icons
+                // '& .MuiSvgIcon-root': {
+                //     color: 'purple', 
+                // },
+                // selected navigation icon
+                '& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root': {
+                    color: '#E388F1', 
+                },
+                // selection effect
+                '& .MuiBottomNavigationAction-root.Mui-selected': {
+                    color: '#E388F1', 
                 },
             }}
             showLabels

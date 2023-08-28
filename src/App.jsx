@@ -6,18 +6,18 @@ import MustTryPage from '../src/pages/MustTryPage/MustTryPage';
 import FavouritesPage from '../src/pages/FavouritesPage/FavouritesPage';
 import VisitedPage from '../src/pages/VisitedPage/VisitedPage';
 import NearbyPage from '../src/pages/NearbyPage/NearbyPage';
-
 import LoadingScreen from '../src/components/LoadingScreen/LoadingScreen';
 
-import { ThemeProvider } from '@mui/material/styles';
-import MuiTheme from './components/MuiTheme/MuiTheme';
+// import { ThemeProvider, createTheme } from '@mui/material/styles';
+// import MuiTheme from './components/MuiTheme/MuiTheme';
 import MuiNavigation from './components/MuiNavigation/MuiNavigation';
-
+import ToggleColorMode from './components/ToggleColorMode/ToggleColorMode';
+import { CssBaseline } from '@mui/material';
 
 /*
  * App.jsx
  * - Represents the main component of the application
- * - Contains header, footer and defines routes for different pages
+ * - Contains navigation and defines routes for different pages
  */
 
 function App() {
@@ -31,9 +31,11 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={MuiTheme}>
-            <div className="App">
-                <BrowserRouter>
+        // <ThemeProvider theme={MuiTheme}>
+        <ToggleColorMode>
+            <CssBaseline />
+            <BrowserRouter>
+                <div className="App">
                     {isLoading && <LoadingScreen />}
                     <Routes>
                         {/* Home Page */}
@@ -74,9 +76,10 @@ function App() {
                         {/* <Route path="*" element={<MustTryPage />} /> */}
                     </Routes>
                     {!isLoading && <MuiNavigation />}
-                </BrowserRouter>
-            </div>
-        </ThemeProvider>
+                </div>
+            </BrowserRouter>
+        </ToggleColorMode>
+        // </ThemeProvider>
     );
 }
 
