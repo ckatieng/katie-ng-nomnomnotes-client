@@ -8,7 +8,7 @@ function FavouritesPage () {
     const [isLoading, setIsLoading] = useState(true);
 
     // Favourites API URL
-    const favouritesURL = "http://localhost:5050/visited";
+    const favouritesURL = "http://localhost:5050/favourites";
 
     // GET request
     useEffect(() => {
