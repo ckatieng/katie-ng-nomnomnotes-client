@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import './FavouritesPage.scss';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import "./FavouritesPage.scss";
 
 function FavouritesPage () {
     // States
@@ -8,13 +8,13 @@ function FavouritesPage () {
 
     // GET request
     useEffect(() => {
-        // GET array of all favourite restaurants
+        // GET array of all favourite items
         axios.get("http://localhost:5050/favourites")
             .then((response) => {
                 setFavouriteItems(response.data);
             })
             .catch((error) => {
-                console.error('Error fetching favourite items:', error);
+                console.error("Error fetching favourite items:", error);
             });
     }, []);
 
