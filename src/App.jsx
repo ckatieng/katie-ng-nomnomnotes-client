@@ -45,69 +45,70 @@ function App() {
             <div className="App">
                 {isLoading && <LoadingScreen />}
                 {!isLoading && (
-                    // <>
-                    // {!showSearchRestaurant && (
-                <ToggleColorMode showSearchRestaurant={showSearchRestaurant}>
-                    <CssBaseline />
-                    <Routes>
-                        {/* Home Page */}
-                        <Route path="/" element={
-                            isLoading ? (
-                                <LoadingScreen />
-                            ) : (
+                    <ToggleColorMode showSearchRestaurant={showSearchRestaurant}>
+                        <CssBaseline />
+                        <Routes>
+                            {/* Home Page */}
+                            <Route path="/" element={
+                                isLoading ? (
+                                    <LoadingScreen />
+                                ) : (
+                                    <MustTryPage
+                                        showSearchRestaurant={showSearchRestaurant}
+                                        handleAddRestaurantClick={handleAddRestaurantClick}
+                                        handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                    />
+                                )}
+                            />
+
+                            {/* Must-Try Page */}
+                            <Route path="/musttry" element={
                                 <MustTryPage
                                     showSearchRestaurant={showSearchRestaurant}
                                     handleAddRestaurantClick={handleAddRestaurantClick}
                                     handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
                                 />
-                            )}
-                        />
+                            }/>
 
-                        {/* Must-Try Page */}
-                        <Route path="/musttry" element={
-                            <MustTryPage
-                                showSearchRestaurant={showSearchRestaurant}
-                                handleAddRestaurantClick={handleAddRestaurantClick}
-                                handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
-                            />
-                        }/>
+                            {/* Single Restaurant Details */}
+                            {/* <Route path="/musttry/:id" element={<RestaurantDetails />} /> */}
 
-                        {/* Single Restaurant Details */}
-                        {/* <Route path="/musttry/:id" element={<RestaurantDetails />} /> */}
+                            {/* Delete Restaurant from MustTryPage */}
+                            {/* <Route path="/musttry/:id/delete" element={<MustTryPage/>} /> */}
 
-                        {/* Delete Restaurant from MustTryPage */}
-                        {/* <Route path="/musttry/:id/delete" element={<MustTryPage/>} /> */}
+                            {/* Favourites Page */}
+                            <Route path="/favourites" element={<FavouritesPage />} />
 
-                        {/* Favourites Page */}
-                        <Route path="/favourites" element={<FavouritesPage />} />
+                            {/* Single Restaurant Details */}
+                            {/* <Route path="/favourites/:id" element={<RestaurantDetails />} /> */}
 
-                        {/* Single Restaurant Details */}
-                        {/* <Route path="/favourites/:id" element={<RestaurantDetails />} /> */}
+                            {/* Delete Restaurant from FavouritesPage */}
+                            {/* <Route path="/favourites/:id/delete" element={<FavouritesPage />} /> */}
 
-                        {/* Delete Restaurant from FavouritesPage */}
-                        {/* <Route path="/favourites/:id/delete" element={<FavouritesPage />} /> */}
+                            {/* Visited Page */}
+                            <Route path="/visited" element={<VisitedPage />} />
 
-                        {/* Visited Page */}
-                        <Route path="/visited" element={<VisitedPage />} />
+                            {/* Single Restaurant Details */}
+                            {/* <Route path="/visited/:id" element={<RestaurantDetails />} /> */}
 
-                        {/* Single Restaurant Details */}
-                        {/* <Route path="/visited/:id" element={<RestaurantDetails />} /> */}
+                            {/* Delete Restaurant from VisitedPage */}
+                            {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
 
-                        {/* Delete Restaurant from VisitedPage */}
-                        {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
+                            {/* Nearby Page */}
+                            <Route path="/nearby" element={<NearbyPage />} />
 
-                        {/* Nearby Page */}
-                        <Route path="/nearby" element={<NearbyPage />} />
-
-                        {/* Catch-all to redirect to Home Page */}
-                        {/* <Route path="*" element={<MustTryPage />} /> */}
-                    </Routes>
-                    {/* {!isLoading && <MuiNavigation />} */}
-                    {!showSearchRestaurant && <MuiNavigation />}
-                </ToggleColorMode>
-                    )}
-                    {/* </>
-                )} */}
+                            {/* Catch-all to redirect to Home Page */}
+                            {/* <Route path="*" element={
+                                <MustTryPage
+                                    showSearchRestaurant={showSearchRestaurant}
+                                    handleAddRestaurantClick={handleAddRestaurantClick}
+                                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                />} 
+                            /> */}
+                        </Routes>
+                        {!showSearchRestaurant && <MuiNavigation />}
+                    </ToggleColorMode>
+                )}
             </div>
         </BrowserRouter>
     );
