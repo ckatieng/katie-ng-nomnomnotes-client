@@ -53,7 +53,7 @@ function MuiNavigation() {
                 // Use the navigate function to change the route
                 switch (newValue) {
                     case 0:
-                        navigate('/musttry');
+                        navigate('/must-try');
                         break;
                     case 1:
                         navigate('/favourites');

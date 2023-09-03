@@ -62,7 +62,7 @@ function App() {
                             />
 
                             {/* Must-Try Page */}
-                            <Route path="/musttry" element={
+                            <Route path="/must-try" element={
                                 <MustTryPage
                                     showSearchRestaurant={showSearchRestaurant}
                                     handleAddRestaurantClick={handleAddRestaurantClick}
