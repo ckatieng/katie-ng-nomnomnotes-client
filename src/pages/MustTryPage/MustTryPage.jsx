@@ -17,9 +17,9 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     // Must-Try API URL
     const mustTryURL = "http://localhost:5050/must-try";
 
-    // GET request
-    useEffect(() => {
-        // GET array of all favourite items
+    // Function to update the must-try list
+    const updateMustTryList = () => {
+        // Fetch the latest must-try items
         axios.get(mustTryURL)
             .then((response) => {
                 setMustTryItems(response.data);
@@ -29,15 +29,26 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                 console.error("Error fetching must-try items:", error);
                 setIsLoading(false);
             });
-    }, []);
+    }
 
-    
+    // GET request
     useEffect(() => {
+        // Fetch the initial must-try items
+        updateMustTryList();
+
         setIsZoomed(true);
         return () => {
             setIsZoomed(false);
         };
     }, []);
+
+    
+    // useEffect(() => {
+    //     setIsZoomed(true);
+    //     return () => {
+    //         setIsZoomed(false);
+    //     };
+    // }, []);
 
     return (
         <div className="must-try">
@@ -60,7 +71,12 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                 <p>No items in the must-try list.</p> 
                             ) : (
                                 mustTryItems.map((item) => (
-                                    <CustomCheckbox key={item.id} itemName={item.google_places_id} />
+                                    <CustomCheckbox 
+                                        key={item.id} 
+                                        itemId={item.id} 
+                                        itemName={item.google_places_id}
+                                        updateMustTryList={updateMustTryList} 
+                                    />
                                 ))
                             )}
                         </div>

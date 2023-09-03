@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CustomCheckbox.scss"
 import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
 
-function CustomCheckbox({ itemName }) {
+function CustomCheckbox({ itemId, itemName, updateMustTryList }) {
     // States
     const [isNotChecked, setIsNotChecked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,16 +35,12 @@ function CustomCheckbox({ itemName }) {
 
             {/* Checked Restaurant Modal */}
             {isModalOpen && (
-                <div className="custom-checkbox__modal">
-                    <div className="custom-checkbox__modal-content">
-                        <span className="close" onClick={closeModal}>
-                            &times;
-                        </span>
-                        <div className="custom-checkbox__modal-body">
-                            <CheckedRestaurant itemName={itemName} />
-                        </div>
-                    </div>
-                </div>
+                <CheckedRestaurant 
+                    itemId={itemId} 
+                    itemName={itemName} 
+                    closeModal={closeModal}
+                    updateMustTryList={updateMustTryList}
+                />
             )}
         </div>
     );
