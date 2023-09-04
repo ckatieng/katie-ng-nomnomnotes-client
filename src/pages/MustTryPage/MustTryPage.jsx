@@ -67,6 +67,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                         key={item.id} 
                                         itemId={item.id} 
                                         itemName={item.google_places_id}
+                                        googlePlacesId={item.google_places_id}
                                         updateMustTryList={updateMustTryList} 
                                     />
                                 ))

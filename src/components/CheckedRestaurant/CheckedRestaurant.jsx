@@ -5,10 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
 
-function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) {
+function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList }) {
     // States
-    // const [isMovedToFavourites, setIsMovedToFavourites] = useState(false);
-    // const [isMovedToVisited, setIsMovedToVisited] = useState(false);
     const [selectedOption, setSelectedOption] = useState("No");
     const [rating, setRating] = useState(0);
 
@@ -23,12 +21,11 @@ function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) 
             // Send the rating to the server 
             ratingData)
             .then((response) => {
-                // setIsMovedToFavourites(true);
                 closeModal();
                 updateMustTryList();
             })
-            .catch((error) => {
-                console.error("Error moving item to favourites:", error);
+            .catch((err) => {
+                console.error(`Error moving item to favourites: ${err}`);
             });
     }
 
@@ -43,12 +40,29 @@ function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) 
             // Send the rating to the server 
             ratingData)
             .then((response) => {
-                // setIsMovedToVisited(true);
                 closeModal();
                 updateMustTryList();
             })
-            .catch((error) => {
-                console.error("Error moving item to visited:", error);
+            .catch((err) => {
+                console.error(`Error moving item to visited: ${err}`);
+            });
+    }
+
+    const handleRating = (newValue) => {
+        // Only send the rating if it's greater than 0
+        const ratingToSend = newValue > 0 ? newValue : null;
+        console.log("Rating to send:", ratingToSend);
+
+        // Make a POST request to add rating to table
+        axios.post("http://localhost:5050/ratings", { 
+            google_places_id: googlePlacesId,
+            rating: ratingToSend,
+        })
+            .then((response) => {
+                setRating(ratingToSend);
+            })
+            .catch((err) => {
+                console.error(`Error sending rating data: ${err}`);
             });
     }
 
@@ -62,6 +76,7 @@ function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) 
         } else if (selectedOption === 'No') {
             handleMoveToVisited();
         }
+        handleRating();
     }
 
     return(

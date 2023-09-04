@@ -4,6 +4,7 @@ import "./App.scss";
 
 import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
 import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
+import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
 import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
 import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
@@ -84,6 +85,9 @@ function App() {
 
                             {/* Delete Restaurant from FavouritesPage */}
                             {/* <Route path="/favourites/:id/delete" element={<FavouritesPage />} /> */}
+
+                            {/* Top 10 Page */}
+                            <Route path="/top-rated" element={<TopRatedPage />} />
 
                             {/* Visited Page */}
                             <Route path="/visited" element={<VisitedPage />} />

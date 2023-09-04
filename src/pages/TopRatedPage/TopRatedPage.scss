@@ -1,0 +1,14 @@
+.top-rated {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+
+    &__restaurant {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__restaurant-name {
+        padding-right: 50px;
+    }
+}

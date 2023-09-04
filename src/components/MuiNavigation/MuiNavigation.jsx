@@ -4,6 +4,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 // import Paper from '@mui/material/Paper';
 import RamenIcon from '@mui/icons-material/RamenDiningSharp';
 import FavoriteIcon from '@mui/icons-material/FavoriteSharp';
+import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
 import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
@@ -59,9 +60,12 @@ function MuiNavigation() {
                         navigate('/favourites');
                         break;
                     case 2:
-                        navigate('/visited');
+                        navigate('/top-rated');
                         break;
                     case 3:
+                        navigate('/visited');
+                        break;
+                    case 4:
                         navigate('/nearby');
                         break;
                     default:
@@ -71,6 +75,7 @@ function MuiNavigation() {
         >
             <BottomNavigationAction label="Must-Try" icon={<RamenIcon />} />
             <BottomNavigationAction label="Favourites" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Top 10" icon={<StarIcon />} />
             <BottomNavigationAction label="Visited" icon={<HistoryIcon />} />
             <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} />
         </BottomNavigation>
