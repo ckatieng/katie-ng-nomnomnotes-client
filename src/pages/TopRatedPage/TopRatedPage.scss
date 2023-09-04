@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;  
 
-    &__restaurant {
+    &__item {
         display: flex;
         justify-content: space-between;
     }
 
-    &__restaurant-name {
+    &__item-name {
         padding-right: 50px;
     }
 }

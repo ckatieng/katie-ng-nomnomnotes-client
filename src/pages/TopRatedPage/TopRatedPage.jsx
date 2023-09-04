@@ -37,9 +37,9 @@ function FavouritesPage () {
                         <p>No items in the top-rated list.</p> 
                     ) : (
                         topRatedItems.map((item) => (
-                            <li className="top-rated__restaurant" key={item.id}>
-                                <div className="top-rated__restaurant-name">{item.google_places_id}</div>
-                                <div className="top-rated__restaurant-rating">{item.average_rating}</div>
+                            <li className="top-rated__item" key={item.id}>
+                                <div className="top-rated__item-name">{item.google_places_id}</div>
+                                <div className="top-rated__item-rating">{item.average_rating}</div>
                             </li>
                         ))
                     )}

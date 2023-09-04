@@ -2,5 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__item-name {
+        padding-right: 50px;
+    }
     
 }
