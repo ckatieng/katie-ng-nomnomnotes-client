@@ -3,17 +3,27 @@ import { useState } from "react";
 import "./CheckedRestaurant.scss";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import HoverRating from "../HoverRating/HoverRating";
 
 function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) {
     // States
-    const [isMovedToFavourites, setIsMovedToFavourites] = useState(false);
-    const [isMovedToVisited, setIsMovedToVisited] = useState(false);
+    // const [isMovedToFavourites, setIsMovedToFavourites] = useState(false);
+    // const [isMovedToVisited, setIsMovedToVisited] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("No");
+    const [rating, setRating] = useState(0);
 
     const handleMoveToFavourites = () => {
+        const ratingData = {
+            // Only send the rating if it's greater than 0
+            rating: rating > 0 ? rating : null,
+        };
+
         // Make a PUT request to move the item to favourites
-        axios.put(`http://localhost:5050/must-try/${itemId}/move-to-favourites`)
+        axios.put(`http://localhost:5050/must-try/${itemId}/move-to-favourites`, 
+            // Send the rating to the server 
+            ratingData)
             .then((response) => {
-                setIsMovedToFavourites(true);
+                // setIsMovedToFavourites(true);
                 closeModal();
                 updateMustTryList();
             })
@@ -23,16 +33,35 @@ function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) 
     }
 
     const handleMoveToVisited = () => {
+        const ratingData = {
+            // Only send the rating if it's greater than 0
+            rating: rating > 0 ? rating : null,
+        };
+
         // Make a PUT request to move the item to visited
-        axios.put(`http://localhost:5050/must-try/${itemId}/move-to-visited`)
+        axios.put(`http://localhost:5050/must-try/${itemId}/move-to-visited`,
+            // Send the rating to the server 
+            ratingData)
             .then((response) => {
-                setIsMovedToVisited(true);
+                // setIsMovedToVisited(true);
                 closeModal();
                 updateMustTryList();
             })
             .catch((error) => {
                 console.error("Error moving item to visited:", error);
             });
+    }
+
+    const handleOptionSelect = (event) => {
+        setSelectedOption(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (selectedOption === 'Yes') {
+            handleMoveToFavourites();
+        } else if (selectedOption === 'No') {
+            handleMoveToVisited();
+        }
     }
 
     return(
@@ -50,10 +79,34 @@ function CheckedRestaurant({ itemId, itemName, closeModal, updateMustTryList }) 
                 >
                     <CloseIcon />
                 </IconButton>
-                <p>Would you like to rate {itemName}?</p>
-                <p>Would you like to add {itemName} to your favorites?</p>
-                <button type="button" onClick={handleMoveToVisited}>No</button>
-                <button type="button" onClick={handleMoveToFavourites}>Yes</button>
+                <div className="checked-restaurant__rating">
+                    <p>How was {itemName}? (Optional)</p>
+                    <HoverRating handleRatingChange={setRating} />
+                </div>
+                <div className="checked-restaurant__results">
+                    <p>Would you like to add {itemName} to your favorites?</p>
+                    <div>
+                        <label>
+                            <input
+                                type="radio"
+                                value="No"
+                                checked={selectedOption === "No"}
+                                onChange={handleOptionSelect}
+                            />
+                            No
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="Yes"
+                                checked={selectedOption === "Yes"}
+                                onChange={handleOptionSelect}
+                            />
+                            Yes
+                        </label>
+                    </div>
+                    <button type="button" onClick={handleSubmit}>Done</button>
+                </div>
             </div>
         </div>
     );

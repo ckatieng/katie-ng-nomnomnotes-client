@@ -9,15 +9,14 @@ import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
-    const [mustTryItems, setMustTryItems] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isZoomed, setIsZoomed] = useState(false);
-    // const [showSearch, setShowSearch] = useState(false);
+    const [mustTryItems, setMustTryItems] = useState([]); // State for must-try restaurant items
+    const [isLoading, setIsLoading] = useState(true); // State to track loading state
+    const [isZoomed, setIsZoomed] = useState(false); // State to control zoom effect
 
     // Must-Try API URL
     const mustTryURL = "http://localhost:5050/must-try";
 
-    // Function to update the must-try list
+    // Function to update the must-try list from the server
     const updateMustTryList = () => {
         // Fetch the latest must-try items
         axios.get(mustTryURL)
@@ -31,24 +30,17 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
             });
     }
 
-    // GET request
     useEffect(() => {
-        // Fetch the initial must-try items
+        // Fetch the initial must-try items when the component mounts
         updateMustTryList();
-
+        
+        // Set isZoomed to true when the component mounts (for zoom effect)
         setIsZoomed(true);
         return () => {
+            // Cleanup function to set isZoomed to false when the component unmounts
             setIsZoomed(false);
         };
     }, []);
-
-    
-    // useEffect(() => {
-    //     setIsZoomed(true);
-    //     return () => {
-    //         setIsZoomed(false);
-    //     };
-    // }, []);
 
     return (
         <div className="must-try">
@@ -105,11 +97,8 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                     </Zoom>
                 </>
             )}
-        </div>
-        
+        </div> 
     );
 }
 
 export default MustTryPage;
-
-
