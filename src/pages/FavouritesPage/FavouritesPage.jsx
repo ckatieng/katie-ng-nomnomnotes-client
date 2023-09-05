@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./FavouritesPage.scss";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import dessert from "../../assets/images/Dessert.png";
 
 function FavouritesPage () {
     // States
@@ -10,18 +12,28 @@ function FavouritesPage () {
     const [isLoading, setIsLoading] = useState(true);
 
     // Favourites API URL
-    const favouritesURL = "http://localhost:5050/favourites";
+    const favouritesURL = "http://localhost:5050/api/favourites";
 
-    // GET request
     useEffect(() => {
-        // GET array of all favourite items
+        // Send a GET request to fetch favorite items
         axios.get(favouritesURL)
             .then((response) => {
-                setFavouriteItems(response.data);
-                setIsLoading(false);
+                // Map over the favorite items and fetch restaurant names
+                Promise.all(
+                    response.data.map(async (item) => {
+                        // Fetch the restaurant name for each item
+                        const restaurantName = await fetchRestaurantName(item.google_places_id);
+                        // Return an object that includes the item and its restaurant name
+                        return { ...item, restaurantName };
+                    })
+                ).then((itemsWithNames) => {
+                    // Set the state with favorite items that now include restaurant names
+                    setFavouriteItems(itemsWithNames);
+                    setIsLoading(false);
+                });
             })
             .catch((err) => {
-                console.error(`Error fetching favourite items: ${err}`);
+                console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
     }, []);
@@ -50,11 +62,15 @@ function FavouritesPage () {
                 <ul className="favourites__list">
                     {favouriteItems.length === 0 ? (
                         // Display an empty state message when the list is empty
-                        <p>No items in the favourites list.</p> 
+                        <div className="favourites__empty-state">
+                            <img className="favourites__empty-state-img" src={dessert} alt="dessert" />
+                            <h3 className="favourites__empty-state-title">No Favourites Yet!</h3>
+                            <p className="favourites__empty-state-paragraph">Try some new restaurants on your must-try list & see if they are worthy to become a favourite.</p>
+                        </div>
                     ) : (
                         favouriteItems.map((item) => (
                             <li className="favourites__item" key={item.id}>
-                                <div className="favourites__item-name">{item.google_places_id}</div>
+                                <div className="favourites__item-name">{item.restaurantName}</div>
                                 <IconButton onClick={() => deleteItemHandler(item.id)} color="inherit">
                                     <DeleteIcon />
                                 </IconButton>

@@ -28,7 +28,7 @@ function App() {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-         }, 2000);
+         }, 4000);
     }, []);
 
     // Function to handle when "Add Restaurant" button is clicked

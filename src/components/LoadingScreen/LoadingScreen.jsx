@@ -1,9 +1,10 @@
 import './LoadingScreen.scss';
+import logo from "../../assets/logo/NomNomNotes_Logo.png";
 
 function LoadingScreen () {
     return (
         <div className="loading">
-            <h2 className="loading__title">Loading...</h2>
+            <img className="loading__logo" src={logo} alt="NomNom Notes Logo" />
         </div>
     );
 }

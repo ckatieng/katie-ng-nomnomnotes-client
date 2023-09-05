@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./TopRatedPage.scss";
+import burger from "../../assets/images/Burger.png";
 
 function FavouritesPage () {
     // States
@@ -8,18 +10,28 @@ function FavouritesPage () {
     const [isLoading, setIsLoading] = useState(true);
 
     // Top Rated API URL
-    const topRatedURL = "http://localhost:5050/ratings/top-rated";
+    const topRatedURL = "http://localhost:5050/api/ratings/top-rated";
 
-    // GET request
     useEffect(() => {
-        // GET array of 10 top-rated items
+        // Send a GET request to fetch top-rated items
         axios.get(topRatedURL)
             .then((response) => {
-                setTopRatedItems(response.data);
-                setIsLoading(false);
+                // Map over the top-rated items and fetch restaurant names
+                Promise.all(
+                    response.data.map(async (item) => {
+                        // Fetch the restaurant name for each item
+                        const restaurantName = await fetchRestaurantName(item.google_places_id);
+                        // Return an object that includes the item and its restaurant name
+                        return { ...item, restaurantName };
+                    })
+                ).then((itemsWithNames) => {
+                    // Set the state with top-rated items that now include restaurant names
+                    setTopRatedItems(itemsWithNames);
+                    setIsLoading(false);
+                });
             })
-            .catch((error) => {
-                console.error("Error fetching top-rated items:", error);
+            .catch((err) => {
+                console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
     }, []);
@@ -34,11 +46,15 @@ function FavouritesPage () {
                 <ol className="top-rated__list">
                     {topRatedItems.length === 0 ? (
                         // Display an empty state message when the list is empty
-                        <p>No items in the top-rated list.</p> 
+                        <div className="must-try__empty-state">
+                            <img className="must-try__empty-state-img" src={burger} alt="burger" />
+                            <h3 className="must-try__empty-state-title">Top 10 is Empty!</h3>
+                            <p className="must-try__empty-state-paragraph">Explore new restaurants, rate them & help create the top-rated list.</p>
+                        </div>
                     ) : (
                         topRatedItems.map((item) => (
                             <li className="top-rated__item" key={item.id}>
-                                <div className="top-rated__item-name">{item.google_places_id}</div>
+                                <div className="top-rated__item-name">{item.restaurantName}</div>
                                 <div className="top-rated__item-rating">{item.average_rating}</div>
                             </li>
                         ))

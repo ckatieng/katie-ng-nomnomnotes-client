@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from 'react';
+import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import './MustTryPage.scss';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Zoom from '@mui/material/Zoom';
 import SearchRestaurant from '../../components/SearchRestaurant/SearchRestaurant';
 import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
+import paella from "../../assets/images/Paella.png";
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
@@ -14,7 +16,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     const [isZoomed, setIsZoomed] = useState(false); // State to control zoom effect
 
     // Must-Try API URL
-    const mustTryURL = "http://localhost:5050/must-try";
+    const mustTryURL = "http://localhost:5050/api/must-try";
 
     // Function to update the must-try list from the server
     const updateMustTryList = () => {
@@ -24,8 +26,8 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                 setMustTryItems(response.data);
                 setIsLoading(false);
             })
-            .catch((error) => {
-                console.error("Error fetching must-try items:", error);
+            .catch((err) => {
+                console.error(`Error fetching must-try items: ${err}`);
                 setIsLoading(false);
             });
     }
@@ -50,8 +52,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                     handleCancelAddRestaurantClick={handleCancelAddRestaurantClick} />
             ) : (
                 <>
-                    <h2 className="must-try__title">Must-Try List</h2>
-
+                    <h2 className="visited__title">Must-Try List</h2>
                     {/* Must-Try Items (checkboxes) */}
                     {isLoading ? (
                         // Display a loading message while fetching data
@@ -60,7 +61,11 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                         <div className="must-try__checkboxes">
                             {mustTryItems.length === 0 ? (
                                 // Display an empty state message when the list is empty
-                                <p>No items in the must-try list.</p> 
+                                <div className="must-try__empty-state">
+                                    <img className="must-try__empty-state-img" src={paella} alt="paella" />
+                                    <h3 className="must-try__empty-state-title">No Restaurants Yet!</h3>
+                                    <p className="must-try__empty-state-paragraph">Time to discover new restaurants & add them to your must-try list.</p>
+                                </div>
                             ) : (
                                 mustTryItems.map((item) => (
                                     <CustomCheckbox 

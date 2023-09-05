@@ -1,12 +1,16 @@
+@use "../../styles/partials/variables" as *;
+
 .loading {
     display: flex;
     justify-content: center;
+    vertical-align: center;
     width: 100vw;
     height: 100vh;
-    background: plum;
+    background: $primary-colour-light-background;
     overflow: hidden;
 
-    &__title {
-        font-size: 30px;
+    &__logo {
+        height: 250px;
+        margin: auto 0;
     }
 }
