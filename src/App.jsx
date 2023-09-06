@@ -9,6 +9,7 @@ import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
 import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
+import Location from "./components/Location/Location";
 
 import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
 import ToggleColorMode from "./components/ToggleColorMode/ToggleColorMode";
@@ -100,7 +101,8 @@ function App() {
                             {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
 
                             {/* Nearby Page */}
-                            <Route path="/nearby" element={<NearbyPage />} />
+                            {/* <Route path="/nearby" element={<NearbyPage />} /> */}
+                            <Route path="/nearby" element={<Location />} />
 
                             {/* Catch-all to redirect to Home Page */}
                             {/* <Route path="*" element={
