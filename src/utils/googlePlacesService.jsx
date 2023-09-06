@@ -15,12 +15,23 @@ export function fetchGoogleApiKey() {
 }
 
 // Fetch Restaurant Name from the backend
-export function fetchRestaurantName(googlePlacesId) {
-    return axios.get(`http://localhost:5050/api/restaurant/${googlePlacesId}`)
+export function fetchRestaurantName(placeId) {
+    return axios.get(`http://localhost:5050/api/restaurant/${placeId}`)
         .then((response) => {
             return response.data.name;
         })
         .catch((err) => {
             console.error(`Error fetching restaurant name: ${err}`);
+        });
+}
+
+// Fetch Restaurant Details from the backend
+export function fetchRestaurantDetails(placeId) {
+    return axios.get(`http://localhost:5050/api/restaurant/details/${placeId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((err) => {
+            console.error(`Error fetching restaurant details: ${err}`);
         });
 }

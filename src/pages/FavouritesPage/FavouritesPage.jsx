@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./FavouritesPage.scss";
 import IconButton from '@mui/material/IconButton';
@@ -70,8 +71,9 @@ function FavouritesPage () {
                     ) : (
                         favouriteItems.map((item) => (
                             <li className="favourites__item" key={item.id}>
-                                <div className="favourites__item-name">{item.restaurantName}</div>
-                                <IconButton onClick={() => deleteItemHandler(item.id)} color="inherit">
+                                <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
+                                {/* <div className="favourites__item-name">{item.restaurantName}</div> */}
+                                <IconButton className="favourites__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
                                     <DeleteIcon />
                                 </IconButton>
                             </li>

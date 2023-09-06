@@ -7,6 +7,7 @@ import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
 import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
 import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
 import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
+import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 
 import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
@@ -71,8 +72,8 @@ function App() {
                                 />
                             }/>
 
-                            {/* Single Restaurant Details */}
-                            {/* <Route path="/musttry/:id" element={<RestaurantDetails />} /> */}
+                            {/* Restaurant Details */}
+                            <Route path="/restaurant/:placeId" element={<RestaurantDetails />} />
 
                             {/* Delete Restaurant from MustTryPage */}
                             {/* <Route path="/musttry/:id/delete" element={<MustTryPage/>} /> */}
