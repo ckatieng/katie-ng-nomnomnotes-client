@@ -21,8 +21,10 @@ function FavouritesPage () {
                     response.data.map(async (item) => {
                         // Fetch the restaurant name for each item
                         const restaurantName = await fetchRestaurantName(item.google_places_id);
-                        // Return an object that includes the item and its restaurant name
-                        return { ...item, restaurantName };
+                        // Parse the average rating to a number and round it to the first decimal place
+                        const averageRating = parseFloat(item.average_rating).toFixed(1);
+                        // Return an object that includes the item and its restaurant name, and rounded rating
+                        return { ...item, restaurantName, averageRating };
                     })
                 ).then((itemsWithNames) => {
                     // Set the state with top-rated items that now include restaurant names
@@ -55,7 +57,7 @@ function FavouritesPage () {
                         topRatedItems.map((item) => (
                             <li className="top-rated__item" key={item.id}>
                                 <div className="top-rated__item-name">{item.restaurantName}</div>
-                                <div className="top-rated__item-rating">{item.average_rating}</div>
+                                <div className="top-rated__item-rating">{item.averageRating}</div>
                             </li>
                         ))
                     )}
