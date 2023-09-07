@@ -37,6 +37,20 @@ export function fetchRestaurantDetails(placeId) {
         });
 }
 
+// Fetch Saved User Location Details
+export function fetchUserLocation() {
+    // Location URL
+    const locationURL = "http://localhost:5050/api/users/location";
+
+    return axios.get(locationURL)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((err) => {
+            console.error(`Error fetching user's location: ${err}`);
+        });
+}
+
 // Fetch Location Details from the backend
 export function fetchLocationDetails(placeId) {
     return axios.get(`http://localhost:5050/api/google-api/${placeId}`)

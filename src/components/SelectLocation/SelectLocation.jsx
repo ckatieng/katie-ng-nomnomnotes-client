@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { fetchGoogleApiKey, fetchLocationDetails } from "../../utils/googlePlacesService";
 import "./SelectLocation.scss";
@@ -34,6 +35,8 @@ export default function SelectLocation() {
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
     const [options, setOptions] = useState([]);
+    // const [userLocation, setUserLocation] = useState(null); 
+    // const [formattedAddress, setFormattedAddress] = useState({ description: "" });
     const loaded = useRef(false);
 
 
@@ -59,9 +62,39 @@ export default function SelectLocation() {
         });
     }, []);
 
+    // // Fetch and set user's location when the component mounts
+    // useEffect(() => {
+    //      // Location URL
+    //     const locationURL = "http://localhost:5050/api/users/location";
+
+    //     axios.get(locationURL)
+    //         .then((response) => {
+    //             setUserLocation(response.data);
+    //             if (response.data && response.data.formattedAddress) {
+    //                 setFormattedAddress({ description: response.data.formattedAddress });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.error(`Error fetching user's location: ${err}`);
+    //         });
+    // }, []);
+
+    // // Set the user's location as the initial value when it's available
+    // useEffect(() => {
+    //     if (userLocation) {
+    //         setValue(userLocation);
+    //     }
+    // }, [userLocation]);
+
     const fetch = useMemo(() =>
         debounce((request, callback) => {
-            autocompleteService.current.getPlacePredictions(request, callback);
+            // autocompleteService.current.getPlacePredictions(request, callback);
+
+            // Limit results to cities
+            autocompleteService.current.getPlacePredictions({
+                ...request,
+                types: ["(cities)"]
+            }, callback);
         }, 400),
     []);
 
@@ -103,6 +136,7 @@ export default function SelectLocation() {
     }, [value, inputValue, fetch]);
 
     const handleLocationSubmit = () => {
+        console.log(value);
         // Fetch the Google API key
         fetchGoogleApiKey()
             .then((apiKey) => {
@@ -113,10 +147,24 @@ export default function SelectLocation() {
                     fetchLocationDetails(placeId)
                         .then((data) => {
                             if (data) {
-                                const { latitude, longitude } = data;
-                                console.log('Selected Location:', value.description);
-                                console.log('Latitude:', latitude);
-                                console.log('Longitude:', longitude);
+                                const { formattedAddress, latitude, longitude } = data;
+
+                                // Send the updated location data to your backend
+                                const locationData = {
+                                    latitude,
+                                    longitude,
+                                    placeId,
+                                    formattedAddress,
+                                };
+
+                                // Make a POST request to update the user's location
+                                axios.post('http://localhost:5050/api/google-api/set-location', locationData)
+                                    .then((response) => {
+                                        console.log('Location updated successfully:', response.data);
+                                    })
+                                    .catch((error) => {
+                                        console.error('Error updating location:', error);
+                                    });
                             } else {
                                 console.error('Location details not found.');
                             }
