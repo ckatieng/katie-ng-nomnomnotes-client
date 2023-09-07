@@ -53,9 +53,11 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         const ratingToSend = newValue > 0 ? newValue : null;
         console.log("Rating to send:", ratingToSend);
 
+        console.log(googlePlacesId);
+
         // Make a POST request to add rating to table
         axios.post("http://localhost:5050/api/ratings", { 
-            google_places_id: googlePlacesId,
+            googlePlacesId: googlePlacesId,
             rating: ratingToSend,
         })
             .then((response) => {
@@ -76,7 +78,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         } else if (selectedOption === 'No') {
             handleMoveToVisited();
         }
-        handleRating();
+        handleRating(rating);
     }
 
     return(
