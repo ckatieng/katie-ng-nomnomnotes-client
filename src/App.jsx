@@ -6,10 +6,10 @@ import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
 import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
 import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
 import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
-import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
+// import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
-import Location from "./components/Location/Location";
+import Location from "../src/components/Location/Location";
 
 import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
 import ToggleColorMode from "./components/ToggleColorMode/ToggleColorMode";

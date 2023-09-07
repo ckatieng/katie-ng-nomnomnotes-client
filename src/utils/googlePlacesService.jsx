@@ -3,7 +3,7 @@ import axios from "axios";
 // Fetch Google API Key from the backend
 export function fetchGoogleApiKey() {
     // API Key URL
-    const apiKeyURL = "http://localhost:5050/api/google-api-key";
+    const apiKeyURL = "http://localhost:5050/api/google-api";
 
     return axios.get(apiKeyURL)
         .then((response) => {
@@ -11,6 +11,7 @@ export function fetchGoogleApiKey() {
         })
         .catch((err) => {
             console.error(`Error fetching Google API Key: ${err}`);
+            throw err;
         });
 }
 
@@ -33,5 +34,16 @@ export function fetchRestaurantDetails(placeId) {
         })
         .catch((err) => {
             console.error(`Error fetching restaurant details: ${err}`);
+        });
+}
+
+// Fetch Location Details from the backend
+export function fetchLocationDetails(placeId) {
+    return axios.get(`http://localhost:5050/api/google-api/${placeId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((err) => {
+            console.error(`Error fetching location details: ${err}`);
         });
 }
