@@ -7,6 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Zoom from '@mui/material/Zoom';
 import SearchRestaurant from '../../components/SearchRestaurant/SearchRestaurant';
 import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import paella from "../../assets/images/Paella.png";
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
@@ -21,13 +23,35 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     // Function to update the must-try list from the server
     const updateMustTryList = () => {
         // Fetch the latest must-try items
+        // axios.get(mustTryURL)
+        //     .then((response) => {
+        //         setMustTryItems(response.data);
+        //         setIsLoading(false);
+        //     })
+        //     .catch((err) => {
+        //         console.error(`Error fetching must-try items: ${err}`);
+        //         setIsLoading(false);
+        //     });
+
+        // Send a GET request to fetch must-try items
         axios.get(mustTryURL)
             .then((response) => {
-                setMustTryItems(response.data);
-                setIsLoading(false);
+                // Map over the must-try items and fetch restaurant names
+                Promise.all(
+                    response.data.map(async (item) => {
+                        // Fetch the restaurant name for each item
+                        const restaurantName = await fetchRestaurantName(item.google_places_id);
+                        // Return an object that includes the item and its restaurant name
+                        return { ...item, restaurantName };
+                    })
+                ).then((itemsWithNames) => {
+                    // Set the state with must-try items that now include restaurant names
+                    setMustTryItems(itemsWithNames);
+                    setIsLoading(false);
+                });
             })
             .catch((err) => {
-                console.error(`Error fetching must-try items: ${err}`);
+                console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
     }
@@ -44,12 +68,27 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
         };
     }, []);
 
+    // Function to handle when the delete button is clicked
+    const deleteItemHandler = (itemId) => {
+        axios.delete(`${mustTryURL}/${itemId}`)
+            .then((response) => {
+                // Remove the deleted item from the local state
+                setMustTryItems((prevItems) =>
+                    prevItems.filter((item) => item.id !== itemId)
+                );
+            })
+            .catch((err) => {
+                console.error(`Error deleting items: ${err}`);
+            });
+    }
+
     return (
         <div className="must-try">
             {showSearchRestaurant ? (
                 <SearchRestaurant 
                     showSearchRestaurant={showSearchRestaurant} 
-                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick} />
+                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                    updateMustTryList={updateMustTryList} />
             ) : (
                 <>
                     <h2 className="visited__title">Must-Try List</h2>
@@ -68,13 +107,18 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                 </div>
                             ) : (
                                 mustTryItems.map((item) => (
-                                    <CustomCheckbox 
-                                        key={item.id} 
-                                        itemId={item.id} 
-                                        itemName={item.google_places_id}
-                                        googlePlacesId={item.google_places_id}
-                                        updateMustTryList={updateMustTryList} 
-                                    />
+                                    <div className="must-try__item" key={item.id}>
+                                        <CustomCheckbox 
+                                            key={item.id} 
+                                            itemId={item.id} 
+                                            itemName={item.restaurantName}
+                                            googlePlacesId={item.google_places_id}
+                                            updateMustTryList={updateMustTryList} 
+                                        />
+                                        <IconButton className="custom-checkbox__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </div>
                                 ))
                             )}
                         </div>

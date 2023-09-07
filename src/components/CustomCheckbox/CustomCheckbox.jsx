@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./CustomCheckbox.scss"
 import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
 
@@ -30,9 +31,10 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList })
                     onChange={handleCheckboxClick}
                     aria-label={itemName} // Accessibility: Add an aria-label
                 />
-                {itemName}
+                <Link to={`/restaurant/${googlePlacesId}`} className="custom-checkbox__item-name">{itemName}</Link> 
+                
             </label>
-
+            
             {/* Checked Restaurant Modal */}
             {isModalOpen && (
                 <CheckedRestaurant 

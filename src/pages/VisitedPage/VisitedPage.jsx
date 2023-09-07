@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./VisitedPage.scss";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import dimsum from "../../assets/images/Dimsum.png";
 
 function VisitedPage () {
@@ -36,6 +39,20 @@ function VisitedPage () {
             });
     }, []);
 
+    // Function to handle when the delete button is clicked
+    const deleteItemHandler = (itemId) => {
+        axios.delete(`${visitedURL}/${itemId}`)
+            .then((response) => {
+                // Remove the deleted item from the local state
+                setVisitedItems((prevItems) =>
+                    prevItems.filter((item) => item.id !== itemId)
+                );
+            })
+            .catch((err) => {
+                console.error(`Error deleting items: ${err}`);
+            });
+    }
+
     return (
         <div className="visited">
             <h2 className="visited__title">Visited List</h2>
@@ -53,8 +70,11 @@ function VisitedPage () {
                         </div>
                     ) : (
                         visitedItems.map((item) => (
-                            <li key={item.id}>
-                                {item.restaurantName}
+                            <li className="visited__item" key={item.id}>
+                                <Link to={`/restaurant/${item.google_places_id}`} className="visited__item-name">{item.restaurantName}</Link> 
+                                <IconButton className="visited__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
+                                    <DeleteIcon />
+                                </IconButton>
                             </li>
                         ))
                     )}

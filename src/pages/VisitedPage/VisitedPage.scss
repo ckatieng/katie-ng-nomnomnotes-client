@@ -23,4 +23,22 @@
         margin: 0;
         text-align: center;
     }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__item-name {
+        padding-right: 50px;
+    }
+
+    &__item:hover &__delete {
+        visibility: visible;
+    }
+
+    &__delete {
+        visibility: hidden;
+    }
 }

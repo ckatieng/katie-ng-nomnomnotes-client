@@ -1,9 +1,12 @@
 import './SearchRestaurant.scss';
+import AddRestaurant from "../AddRestaurant/AddRestaurant";
 import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-function SearchRestaurant ({ showSearchRestaurant, handleCancelAddRestaurantClick }) {
+import AddItem from "../AddItem/AddItem";
+
+function SearchRestaurant ({ showSearchRestaurant, handleCancelAddRestaurantClick, updateMustTryList }) {
 
     return (
         <Slide direction="up" in={showSearchRestaurant} mountOnEnter unmountOnExit>
@@ -26,6 +29,8 @@ function SearchRestaurant ({ showSearchRestaurant, handleCancelAddRestaurantClic
                         Close
                     </button> */}
                 </div>
+                <AddRestaurant updateMustTryList={updateMustTryList} handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}/>
+                <AddItem />
             </div>
         </Slide>
     );

@@ -23,6 +23,7 @@ export function fetchRestaurantName(placeId) {
         })
         .catch((err) => {
             console.error(`Error fetching restaurant name: ${err}`);
+            throw err;
         });
 }
 

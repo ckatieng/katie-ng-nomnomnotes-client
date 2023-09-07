@@ -104,6 +104,9 @@ function App() {
                             {/* <Route path="/nearby" element={<NearbyPage />} /> */}
                             <Route path="/nearby" element={<Location />} />
 
+                            {/* Location */}
+                            <Route path="/location" element={<Location />} />
+
                             {/* Catch-all to redirect to Home Page */}
                             {/* <Route path="*" element={
                                 <MustTryPage
