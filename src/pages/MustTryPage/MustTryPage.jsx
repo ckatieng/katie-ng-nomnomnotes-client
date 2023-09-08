@@ -8,7 +8,7 @@ import Zoom from '@mui/material/Zoom';
 import SearchRestaurant from '../../components/SearchRestaurant/SearchRestaurant';
 import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Close';
 import paella from "../../assets/images/Paella.png";
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
@@ -91,7 +91,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                     updateMustTryList={updateMustTryList} />
             ) : (
                 <>
-                    <h2 className="visited__title">Must-Try List</h2>
+                    <h2 className="must-try__title">Must-Try List</h2>
                     {/* Must-Try Items (checkboxes) */}
                     {isLoading ? (
                         // Display a loading message while fetching data
@@ -115,9 +115,11 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                             googlePlacesId={item.google_places_id}
                                             updateMustTryList={updateMustTryList} 
                                         />
-                                        <IconButton className="custom-checkbox__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
-                                            <DeleteIcon />
-                                        </IconButton>
+                                        <div className="must-try__delete">
+                                            <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                                <DeleteIcon fontSize="inherit"/>
+                                            </IconButton>
+                                        </div>
                                     </div>
                                 ))
                             )}
@@ -135,9 +137,9 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                 position: 'absolute',
                                 bottom: 70,
                                 right: 30,
-                                backgroundColor: '#EB72FF',
+                                backgroundColor: '#bd8eff',
                                 '&:hover': {
-                                    backgroundColor: '#DD65F0',
+                                    backgroundColor: '#ad86ea',
                                 },
                                 boxShadow: '0px 3px 5px -1px rgba(112, 112, 112, 0.2), 0px 6px 10px 0px rgba(112, 112, 112, 0.14), 0px 1px 18px 0px rgba(112, 112, 112, 0.12)',
                             }}

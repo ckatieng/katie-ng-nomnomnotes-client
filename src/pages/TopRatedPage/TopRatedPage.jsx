@@ -80,15 +80,18 @@ function TopRatedPage () {
                     ) : (
                         topRatedItems.map((item) => (
                             <li className="top-rated__item" key={item.id}>
+                                <div className="top-rated__add">
+                                    <IconButton disableTouchRipple className="top-rated__add-icon" size="small" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
+                                        <AddIcon fontSize="inherit"/>
+                                    </IconButton>
+                                </div>
                                 <div className="top-rated__item-container">
                                     <Link to={`/restaurant/${item.google_places_id}`}>
                                         <div className="top-rated__item-name">{item.restaurantName}</div>
                                     </Link> 
                                     <div className="top-rated__item-rating">{item.averageRating}</div>
                                 </div>
-                                <IconButton className="top-rated__item-add" onClick={() => addItemHandler(item.google_places_id)} color="inherit">
-                                    <AddIcon />
-                                </IconButton>
+                                
                             </li>
                         ))
                     )}

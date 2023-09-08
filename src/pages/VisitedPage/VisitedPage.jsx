@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./VisitedPage.scss";
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Close';
 import dimsum from "../../assets/images/Dimsum.png";
 
 function VisitedPage () {
@@ -72,9 +72,11 @@ function VisitedPage () {
                         visitedItems.map((item) => (
                             <li className="visited__item" key={item.id}>
                                 <Link to={`/restaurant/${item.google_places_id}`} className="visited__item-name">{item.restaurantName}</Link> 
-                                <IconButton className="visited__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
-                                    <DeleteIcon />
-                                </IconButton>
+                                <div className="visited__delete">
+                                    <IconButton disableTouchRipple className="visited__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                        <DeleteIcon fontSize="inherit"/>
+                                    </IconButton>
+                                </div>
                             </li>
                         ))
                     )}

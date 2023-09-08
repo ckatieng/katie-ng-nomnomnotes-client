@@ -1,7 +1,22 @@
+@use "../../styles//partials/mixins" as *;
+@use "../../styles//partials/variables" as *;
+
 .top-rated {
+    @include mobile-padding();
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: center;
+    padding-top: 50px;  
+
+    &__title {
+        @include mobile-text-list-title();
+        color: $primary-title-colour;
+    }
+
+    &__list {
+        padding: 0;
+        width: 100%;
+    }
 
     &__empty-state {
         display: flex;
@@ -24,20 +39,41 @@
         text-align: center;
     }
 
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     &__item-container {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         padding-right: 10px;
     }
 
+    &__item {
+        @include list-item();
+    }
+
     &__item-name {
-        padding-right: 50px;
+        @include mobile-text-list();
+        color: $primary-text-colour;
+
+        @include tablet {
+            @include tablet-text-list();
+        }
+
+        &:hover { 
+            color: $primary-text-hover-colour;
+        }
+    }
+
+    &__item-rating {
+        margin-left: 1.875rem;
+    }
+
+    &__add {
+        margin-right: 0.625rem;
+    }
+
+    &__add-icon {
+        @include icon-hover-animation();
+        // visibility: hidden;
     }
 }

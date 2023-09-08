@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./CustomCheckbox.scss"
+import "./CustomCheckbox.scss";
 import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
 
 function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList }) {
@@ -26,6 +26,7 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList })
         <div className="custom-checkbox">
             <label className="custom-checkbox__label">
                 <input
+                    className="custom-checkbox__checkbox"
                     type="checkbox"
                     checked={isNotChecked}
                     onChange={handleCheckboxClick}

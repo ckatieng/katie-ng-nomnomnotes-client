@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./FavouritesPage.scss";
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Close';
 import dessert from "../../assets/images/Dessert.png";
 
 function FavouritesPage () {
@@ -73,9 +73,11 @@ function FavouritesPage () {
                             <li className="favourites__item" key={item.id}>
                                 <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
                                 {/* <div className="favourites__item-name">{item.restaurantName}</div> */}
-                                <IconButton className="favourites__delete" onClick={() => deleteItemHandler(item.id)} color="inherit">
-                                    <DeleteIcon />
-                                </IconButton>
+                                <div className="favourites__delete">
+                                    <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                        <DeleteIcon fontSize="inherit"/>
+                                    </IconButton>
+                                </div>
                             </li>
                         ))
                     )}

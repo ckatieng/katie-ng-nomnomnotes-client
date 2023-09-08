@@ -13,6 +13,29 @@
     }
 }
 
+/* Mobile Text Styles */
+@mixin mobile-text-list() {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    margin: 0;
+}
+
+@mixin mobile-text-list-title() {
+    font-size: 1.875rem;
+    font-weight: 900;
+    line-height: 2rem;
+    margin: 0;
+}
+
+/* Tablet * Desktop Text Styles */
+@mixin tablet-text-list() {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.75rem;
+    margin: 0;
+}
+
 /* Mobile Padding */
 @mixin mobile-padding() {
     padding-right: 1rem;
@@ -31,4 +54,26 @@
     max-width: 1020px;
     margin-right: auto;
     margin-left: auto;
+}
+
+/* Icon Hover Animation */
+@mixin icon-hover-animation() {
+    transition: transform 0.3s ease !important;
+
+    &:hover {
+        transform: rotate(180deg) !important;
+    }
+}
+
+/* List Item Styles */
+@mixin list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
