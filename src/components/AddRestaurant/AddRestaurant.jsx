@@ -82,7 +82,7 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
     const fetch = useMemo(() =>
         debounce((request, callback) => {
             // Restrict the search to restaurants
-            request.types = ['restaurant'];
+            request.types = ['restaurant', 'cafe', 'bakery'];
 
             // If the user's location is available, include it in the request
             if (locationData) {

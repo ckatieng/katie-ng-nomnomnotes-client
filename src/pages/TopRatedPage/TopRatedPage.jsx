@@ -1,15 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./TopRatedPage.scss";
 import burger from "../../assets/images/Burger.png";
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 
-function FavouritesPage () {
+function TopRatedPage () {
     // States
     const [topRatedItems, setTopRatedItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Top Rated API URL
+    // Top-Rated API URL
     const topRatedURL = "http://localhost:5050/api/ratings/top-rated";
 
     useEffect(() => {
@@ -38,6 +41,27 @@ function FavouritesPage () {
             });
     }, []);
 
+    // Must-Try API URL
+    const mustTryURL = "http://localhost:5050/api/must-try";
+
+    // Function to handle when the add button is clicked
+    const addItemHandler = (googlePlacesId) => {
+        
+        console.log(googlePlacesId);
+
+        // Send a POST request to add the restaurant to the must-try list
+        axios.post(mustTryURL, {google_places_id: googlePlacesId})
+            .then((response) => {
+                console.log("Restaurant added to must-try list:", response.data);
+
+                // Update the must-try list state to include the newly added restaurant
+                // updateMustTryList();
+            })
+            .catch((err) => {
+                console.error(`Error adding must-try item: ${err}`);
+            });
+    }
+
     return (
         <div className="top-rated">
             <h2 className="top-rated__title">Top 10 List</h2>
@@ -56,8 +80,15 @@ function FavouritesPage () {
                     ) : (
                         topRatedItems.map((item) => (
                             <li className="top-rated__item" key={item.id}>
-                                <div className="top-rated__item-name">{item.restaurantName}</div>
-                                <div className="top-rated__item-rating">{item.averageRating}</div>
+                                <div className="top-rated__item-container">
+                                    <Link to={`/restaurant/${item.google_places_id}`}>
+                                        <div className="top-rated__item-name">{item.restaurantName}</div>
+                                    </Link> 
+                                    <div className="top-rated__item-rating">{item.averageRating}</div>
+                                </div>
+                                <IconButton className="top-rated__item-add" onClick={() => addItemHandler(item.google_places_id)} color="inherit">
+                                    <AddIcon />
+                                </IconButton>
                             </li>
                         ))
                     )}
@@ -67,4 +98,4 @@ function FavouritesPage () {
     );
 }
 
-export default FavouritesPage;
+export default TopRatedPage;

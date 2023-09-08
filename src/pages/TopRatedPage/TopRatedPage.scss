@@ -27,6 +27,14 @@
     &__item {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    &__item-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: 10px;
     }
 
     &__item-name {

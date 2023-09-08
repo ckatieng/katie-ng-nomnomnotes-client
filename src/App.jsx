@@ -6,7 +6,7 @@ import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
 import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
 import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
 import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
-// import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
+import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
@@ -101,8 +101,7 @@ function App() {
                             {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
 
                             {/* Nearby Page */}
-                            {/* <Route path="/nearby" element={<NearbyPage />} /> */}
-                            <Route path="/nearby" element={<Location />} />
+                            <Route path="/nearby" element={<NearbyPage />} />
 
                             {/* Location */}
                             <Route path="/location" element={<Location />} />
