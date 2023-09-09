@@ -10,9 +10,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import { debounce } from "@mui/material/utils";
-
 import Button from '../Button/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
 
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+}
 
 function loadScript(src, position, id, callback) {
     if (!position) {
@@ -38,6 +42,10 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
     const [options, setOptions] = useState([]);
     const [locationData, setLocationData] = useState(null);
     const loaded = useRef(false);
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
 
     // Fetch the API key when the component mounts
@@ -163,6 +171,9 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
             })
             .catch((err) => {
                 console.error(`Error adding must-try item: ${err}`);
+                // Show an error message in the Snackbar
+                setSnackbarMessage("It's already in your list!");
+                setSnackbarOpen(true);
             });
        
     };
@@ -258,6 +269,15 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
             <div className="add-restaurant__add">
                 <Button variant="primary" text="Add Restaurant" onClick={handleAddRestaurant}/>
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000} 
+                onClose={() => setSnackbarOpen(false)}
+                TransitionComponent={Slide}
+                message={snackbarMessage}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                style={{ marginBottom: '60px' }}
+            />
         </div>
     );
 }

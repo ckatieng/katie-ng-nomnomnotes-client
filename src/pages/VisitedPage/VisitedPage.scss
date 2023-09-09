@@ -11,13 +11,12 @@
     &__title {
         @include mobile-text-list-title();
         color: $primary-title-colour;
+        text-align: center;
     }
 
     &__list {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         max-width: 550px;
         width: 100%;
         height: 70vh;
@@ -32,6 +31,7 @@
 
     &__empty-state-img {
         height: 150px;
+        margin-top: 9.375rem;
     }
 
     &__empty-state-title {

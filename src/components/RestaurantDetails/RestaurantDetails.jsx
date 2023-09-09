@@ -7,6 +7,12 @@ import { fetchRestaurantDetails } from "../../utils/googlePlacesService";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
+
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+}
 
 function RestaurantDetails() {
     // Access the google_places_id parameter from the URL
@@ -21,6 +27,10 @@ function RestaurantDetails() {
 
     // State to store restaurant details
     const [restaurantDetails, setRestaurantDetails] = useState(null);
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
   
     useEffect(() => {
         // Fetch restaurant details when the component mounts
@@ -52,11 +62,22 @@ function RestaurantDetails() {
             .then((response) => {
                 console.log("Restaurant added to must-try list:", response.data);
 
-                // Close the restaurant details and redirect back to the previous page
-                handleCloseClick();
+                // Show a success message in the Snackbar
+                setSnackbarMessage('Successfully added to your must-try list!');
+                setSnackbarOpen(true);
+
+                // Delay the navigation
+                setTimeout(() => {
+                    // Close the restaurant details and redirect back to the previous page
+                    handleCloseClick();
+                }, 2300);
             })
             .catch((err) => {
                 console.error(`Error adding must-try item: ${err}`);
+
+                // Show an error message in the Snackbar
+                setSnackbarMessage("It's already in your list!");
+                setSnackbarOpen(true);
             });
     }
 
@@ -82,6 +103,15 @@ function RestaurantDetails() {
                     <IconButton disableTouchRipple className="restaurant-details__add-icon" size="medium" onClick={() => addItemHandler(placeId)} style={{ color:'#73649b' }}>
                         <AddIcon fontSize="inherit"/>
                     </IconButton>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={2000} 
+                        onClose={() => setSnackbarOpen(false)}
+                        TransitionComponent={Slide}
+                        message={snackbarMessage}
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                        style={{ marginBottom: '60px' }}
+                    />
                 </div>
             </div>
             <p className="restaurant-details__info"><strong>Rating: </strong>{restaurantDetails.rating}</p>

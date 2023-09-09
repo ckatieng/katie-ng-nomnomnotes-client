@@ -6,11 +6,21 @@ import "./TopRatedPage.scss";
 import paella from "../../assets/images/Paella.png";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
+
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+}
 
 function TopRatedPage () {
     // States
     const [topRatedItems, setTopRatedItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     // Top-Rated API URL
     const topRatedURL = "http://localhost:5050/api/ratings/top-rated";
@@ -52,11 +62,18 @@ function TopRatedPage () {
             .then((response) => {
                 console.log("Restaurant added to must-try list:", response.data);
 
+                // Show a success message in the Snackbar
+                setSnackbarMessage('Successfully added to your must-try list!');
+                setSnackbarOpen(true);
+
                 // Update the must-try list state to include the newly added restaurant
                 // updateMustTryList();
             })
             .catch((err) => {
                 console.error(`Error adding must-try item: ${err}`);
+                // Show an error message in the Snackbar
+                setSnackbarMessage("It's already in your list!");
+                setSnackbarOpen(true);
             });
     }
 
@@ -91,9 +108,17 @@ function TopRatedPage () {
                                         </Link> 
                                         <div className="top-rated__item-rating">{item.averageRating}</div>
                                     </div>
-                                    
                                 </li>
                             ))}
+                            <Snackbar
+                                open={snackbarOpen}
+                                autoHideDuration={2000} 
+                                onClose={() => setSnackbarOpen(false)}
+                                TransitionComponent={Slide}
+                                message={snackbarMessage}
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                style={{ marginBottom: '60px' }}
+                            />
                         </>
                     )}
                 </ol>

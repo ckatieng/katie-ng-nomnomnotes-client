@@ -5,10 +5,6 @@ import SelectLocation from "../SelectLocation/SelectLocation";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-
-
-
-
 function Location() {
     const navigate = useNavigate();
 

@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;  
-    justify-content: center;
     padding-top: 3.125rem;  
 
     @include desktop {
@@ -22,8 +21,6 @@
     &__checkboxes {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         max-width: 550px;
         width: 100%;
         height: 70vh;
@@ -38,6 +35,7 @@
 
     &__empty-state-img {
         height: 150px;
+        margin-top: 9.375rem;
     }
 
     &__empty-state-title {

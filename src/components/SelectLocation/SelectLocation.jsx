@@ -12,8 +12,12 @@ import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import { debounce } from "@mui/material/utils";
 import Button from '../Button/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
 
-
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+}
 
 function loadScript(src, position, id, callback) {
     if (!position) {
@@ -39,6 +43,11 @@ export default function SelectLocation() {
     const [options, setOptions] = useState([]);
     // const [userLocation, setUserLocation] = useState(null); 
     // const [formattedAddress, setFormattedAddress] = useState({ description: "" });
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
     const loaded = useRef(false);
     const navigate = useNavigate();
 
@@ -164,14 +173,22 @@ export default function SelectLocation() {
                                 axios.post('http://localhost:5050/api/google-api/set-location', locationData)
                                     .then((response) => {
                                         console.log('Location updated successfully:', response.data);
-                                        // After the delay of 2 seconds
+
+                                        // Show a success message in the Snackbar
+                                        setSnackbarMessage('Your new location is set!');
+                                        setSnackbarOpen(true);
+
+                                        // After the delay
                                         setTimeout(() => {
                                             // navigate to the home page
                                             navigate('/');
-                                        }, 2000);
+                                        }, 2300);
                                     })
                                     .catch((error) => {
                                         console.error('Error updating location:', error);
+                                        // Show an error message in the Snackbar
+                                        setSnackbarMessage("Error updating your location");
+                                        setSnackbarOpen(true);
                                     });
                             } else {
                                 console.error('Location details not found.');
@@ -182,6 +199,9 @@ export default function SelectLocation() {
                         });
                 } else {
                     console.log('No location selected.');
+                    // Show an error message in the Snackbar
+                    setSnackbarMessage("No location selected yet");
+                    setSnackbarOpen(true);
                 }
             })
             .catch((error) => {
@@ -280,6 +300,15 @@ export default function SelectLocation() {
             <div className="select-location__set">
                 <Button variant="primary" text="Set Location" onClick={handleLocationSubmit}/>
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000} 
+                onClose={() => setSnackbarOpen(false)}
+                TransitionComponent={Slide}
+                message={snackbarMessage}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                style={{ marginBottom: '60px' }}
+            />
         </div>
     );
 }
