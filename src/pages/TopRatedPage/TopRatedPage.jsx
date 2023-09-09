@@ -47,8 +47,6 @@ function TopRatedPage () {
     // Function to handle when the add button is clicked
     const addItemHandler = (googlePlacesId) => {
         
-        console.log(googlePlacesId);
-
         // Send a POST request to add the restaurant to the must-try list
         axios.post(mustTryURL, {google_places_id: googlePlacesId})
             .then((response) => {
@@ -81,7 +79,7 @@ function TopRatedPage () {
                         topRatedItems.map((item) => (
                             <li className="top-rated__item" key={item.id}>
                                 <div className="top-rated__add">
-                                    <IconButton disableTouchRipple className="top-rated__add-icon" size="small" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
+                                    <IconButton disableTouchRipple className="top-rated__add-icon" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
                                         <AddIcon fontSize="inherit"/>
                                     </IconButton>
                                 </div>

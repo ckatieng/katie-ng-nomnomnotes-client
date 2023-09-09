@@ -4,6 +4,7 @@ import "./CheckedRestaurant.scss";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
+import Button from '../Button/Button';
 
 function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList }) {
     // States
@@ -122,7 +123,10 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                             Yes
                         </label>
                     </div>
-                    <button type="button" onClick={handleSubmit}>Done</button>
+                    <div className="checked-restaurant__done">
+                        <Button variant="primary" text="Submit" onClick={handleSubmit} />
+                    </div>
+                    {/* <button type="button" onClick={handleSubmit}>Done</button> */}
                 </div>
             </div>
         </div>

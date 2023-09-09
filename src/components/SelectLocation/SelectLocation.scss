@@ -2,5 +2,14 @@
 @use "../../styles//partials/variables" as *;
 
 .select-location {
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    &__set {
+        margin-top: 50px;
+    }
 }

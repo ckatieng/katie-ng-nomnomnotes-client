@@ -12,8 +12,9 @@ import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
 
 import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
-import ToggleColorMode from "./components/ToggleColorMode/ToggleColorMode";
+import AppBarToggleColour from "./components/AppBarToggleColour/AppBarToggleColour";
 import { CssBaseline } from "@mui/material";
+// import TopAppBar from "./components/TopAppBar/TopAppBar";
 
 /*
  * App.jsx
@@ -53,11 +54,11 @@ function App() {
             <div className="App">
                 {isLoading && <LoadingScreen />}
                 {!isLoading && (
-                    <ToggleColorMode 
+                    <AppBarToggleColour
                         showSearchRestaurant={showSearchRestaurant} 
                         mode={mode} 
                         setMode={setMode}>
-                            
+
                         <CssBaseline />
                         <Routes>
                             {/* Home Page */}
@@ -125,7 +126,7 @@ function App() {
                             /> */}
                         </Routes>
                         {!showSearchRestaurant && <MuiNavigation mode={mode} />}
-                    </ToggleColorMode>
+                    </AppBarToggleColour>
                 )}
             </div>
         </BrowserRouter>

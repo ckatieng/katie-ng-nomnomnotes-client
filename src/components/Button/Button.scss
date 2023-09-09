@@ -1,0 +1,52 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.button {
+    @include mobile-text-button();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 1.2rem;
+    border-radius: 1.25rem;
+    // border-radius: 0.625rem;
+    border-style: none;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    @include tablet {
+        @include tablet-text-button();
+        width: auto;
+        height: 36px;
+    }
+
+    &__primary {
+        color: white;
+        background-color: $primary-hover-colour;
+
+        &:hover {
+            background-color: #9a7dd3;
+        }
+    }
+
+    &__secondary {
+        color: $primary-text-hover-colour;
+        background-color: transparent;
+        border: 1.5px solid $primary-text-hover-colour;
+
+        &:hover {
+            color: $primary-logo-text-colour;
+            border-color: $primary-logo-text-colour;
+        }
+    }
+
+    &__icon {
+        width: 16px;
+        margin-right: 0.25rem;
+        
+        @include tablet {
+            width: 18px;
+        }
+    }  
+}

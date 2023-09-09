@@ -1,0 +1,14 @@
+.app-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    &__menu {
+        min-height: 500px !important;
+    }
+
+    Link:active {
+        color: blue;
+    }
+}

@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import { debounce } from "@mui/material/utils";
 
+import Button from '../Button/Button';
 
 
 function loadScript(src, position, id, callback) {
@@ -63,9 +64,6 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
 
     // Fetch the user's location details
     useEffect(() => {
-        // No need to fetch location details if value is null
-        // if (!value) return; 
-
          // Location URL
         const locationURL = "http://localhost:5050/api/users/location";
 
@@ -96,26 +94,6 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
                 request.radius = 2900;
                 
             }
-
-            // if (locationData && locationData.latitude && locationData.longitude) {
-            //     // Calculate the bounding box for your desired radius
-            //     const radiusInMeters = 3000; // Adjust the radius as needed
-            //     const latLng = new window.google.maps.LatLng(
-            //         locationData.latitude,
-            //         locationData.longitude
-            //     );
-    
-            //     const north = latLng.lat() + (radiusInMeters / 111300);
-            //     const south = latLng.lat() - (radiusInMeters / 111300);
-            //     const east = latLng.lng() + (radiusInMeters / (111300 * Math.cos(latLng.lat() * (Math.PI / 180))));
-            //     const west = latLng.lng() - (radiusInMeters / (111300 * Math.cos(latLng.lat() * (Math.PI / 180))));
-    
-            //     // Set the bounds parameter for predictions
-            //     request.bounds = new window.google.maps.LatLngBounds(
-            //         new window.google.maps.LatLng(south, west),
-            //         new window.google.maps.LatLng(north, east)
-            //     );
-            // }
 
             autocompleteService.current.getPlacePredictions(request, callback);
         }, 400),
@@ -212,7 +190,31 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
                     setInputValue(newInputValue);
                 }}
                 renderInput={(params) => (
-                    <TextField {...params} label="Add a location" fullWidth />
+                    <TextField 
+                        {...params} 
+                        label="Where to eat?" 
+                        sx={{
+                            width: 300,
+                            // Input hover outline
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "#8e7cd1",
+                            },
+                            // Focused hover outline
+                            "& .MuiOutlinedInput-root": {
+                                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "#8e7cd1",
+                                },
+                            },
+                            // Label color
+                            "& .MuiInputLabel-root": {
+                                color: "#8174c1", 
+                            },
+                            // Small label color
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                                color: "#8174c1", 
+                            },
+                        }}
+                        fullWidth />
                 )}
                 renderOption={(props, option) => {
                     const matches =
@@ -253,7 +255,9 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
                     );
                 }}
             />
-            <button onClick={handleAddRestaurant}>Add Restaurant</button>
+            <div className="add-restaurant__add">
+                <Button variant="primary" text="Add Restaurant" onClick={handleAddRestaurant}/>
+            </div>
         </div>
     );
 }

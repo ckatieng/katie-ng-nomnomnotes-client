@@ -2,12 +2,19 @@
 @use '../../styles/partials/mixins' as *;
 
 .add-restaurant {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // margin: 0;
-    // width: 100vw;
-    // height: 100vh;
-    // background-color: rgba(235,114,255,0.5);
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__add {
+        margin-top: 50px;
+    }
+}
+
+/* Change the icon color */
+.MuiAutocomplete-option .MuiSvgIcon-root {
+    color: $primary-text-hover-colour;
 }

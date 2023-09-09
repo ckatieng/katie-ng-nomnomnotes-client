@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef, useMemo } from "react";
+import { useNavigate } from 'react-router-dom';
 import { fetchGoogleApiKey, fetchLocationDetails } from "../../utils/googlePlacesService";
 import "./SelectLocation.scss";
 import Box from "@mui/material/Box";
@@ -10,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import { debounce } from "@mui/material/utils";
+import Button from '../Button/Button';
 
 
 
@@ -38,6 +40,7 @@ export default function SelectLocation() {
     // const [userLocation, setUserLocation] = useState(null); 
     // const [formattedAddress, setFormattedAddress] = useState({ description: "" });
     const loaded = useRef(false);
+    const navigate = useNavigate();
 
 
     // Fetch the API key when the component mounts
@@ -161,6 +164,11 @@ export default function SelectLocation() {
                                 axios.post('http://localhost:5050/api/google-api/set-location', locationData)
                                     .then((response) => {
                                         console.log('Location updated successfully:', response.data);
+                                        // After the delay of 2 seconds
+                                        setTimeout(() => {
+                                            // navigate to the home page
+                                            navigate('/');
+                                        }, 2000);
                                     })
                                     .catch((error) => {
                                         console.error('Error updating location:', error);
@@ -204,7 +212,31 @@ export default function SelectLocation() {
                     setInputValue(newInputValue);
                 }}
                 renderInput={(params) => (
-                    <TextField {...params} label="Add a location" fullWidth />
+                    <TextField 
+                        {...params} 
+                        label="Add a location" 
+                        sx={{
+                            width: 300,
+                            // Input hover outline
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "#8e7cd1", // Set your desired hover outline color here
+                            },
+                            // Focused hover outline
+                            "& .MuiOutlinedInput-root": {
+                                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "#8e7cd1",
+                                },
+                            },
+                            // Label color
+                            "& .MuiInputLabel-root": {
+                                color: "#8174c1", 
+                            },
+                            // Small label color
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                                color: "#8174c1", 
+                            },
+                        }}
+                        fullWidth />
                 )}
                 renderOption={(props, option) => {
                     const matches =
@@ -245,7 +277,9 @@ export default function SelectLocation() {
                     );
                 }}
             />
-            <button onClick={handleLocationSubmit}>Set Location</button>
+            <div className="select-location__set">
+                <Button variant="primary" text="Set Location" onClick={handleLocationSubmit}/>
+            </div>
         </div>
     );
 }

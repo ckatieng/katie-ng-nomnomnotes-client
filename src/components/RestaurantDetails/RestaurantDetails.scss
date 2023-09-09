@@ -1,0 +1,58 @@
+@use "../../styles//partials/mixins" as *;
+@use "../../styles//partials/variables" as *;
+
+.restaurant-details {
+    @include mobile-padding();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    max-width: 550px;
+
+    @include tablet {
+        @include desktop-margin();
+    }
+
+    &__restaurant {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__name {
+        @include mobile-text-list-title();
+        margin: 3.125rem 1.25rem 1.875rem 0;
+    }
+
+    &__info {
+        @include mobile-text-body();
+        margin-bottom: 20px;
+
+        @include tablet {
+            @include tablet-text-body();
+            margin-bottom: 30px;
+        }
+    }
+
+    &__hours {
+        @include mobile-text-body();
+
+        @include tablet {
+            @include tablet-text-body();
+        }
+    }
+
+    &__list {
+        margin: 0;
+    }
+
+    &__add {
+        // margin: 0.9375rem 0 0.9375rem;
+    }
+
+    &__add-icon {
+        @include icon-hover-animation();
+    }
+}

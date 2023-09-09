@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-// import Paper from '@mui/material/Paper';
 import RamenIcon from '@mui/icons-material/RamenDiningSharp';
 import FavoriteIcon from '@mui/icons-material/FavoriteSharp';
 import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
-import PlaceIcon from '@mui/icons-material/PlaceSharp';
+// import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
 function MuiNavigation({ mode }) {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
     return (
-        // <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
             sx={{ 
                 position: 'fixed', 
                 bottom: 0, 
                 left: 0, 
                 right: 0,
-                backgroundColor: mode === 'dark' ? '#121212' : '#eaeef4',
+                backgroundColor: mode === 'dark' ? '#121212' : '#eaecef',
                 // backgroundColor: 'rgb(243, 246, 252)',
                 // height: '70px',
                 // p: '20px 0',
@@ -37,15 +35,15 @@ function MuiNavigation({ mode }) {
                 },
                 // navigation icons
                 '& .MuiSvgIcon-root': {
-                    color: mode === 'dark' ? '#989c9e' : '#c0c6cc',   
+                    color: mode === 'dark' ? '#989c9e' : '#818589',   
                 },
                 // selected navigation icon
                 '& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root': {
-                    color: '#a275f9',
+                    color: mode === 'dark' ? '#b292ff' : '#a275f9',
                 },
                 // selection effect
                 '& .MuiBottomNavigationAction-root.Mui-selected': {
-                    color: '#a275f9',
+                    color: mode === 'dark' ? '#b292ff' : '#a275f9',
                 },
             }}
             showLabels
@@ -67,9 +65,9 @@ function MuiNavigation({ mode }) {
                     case 3:
                         navigate('/visited');
                         break;
-                    case 4:
-                        navigate('/nearby');
-                        break;
+                    // case 4:
+                    //     navigate('/nearby');
+                    //     break;
                     default:
                         break;
                 }
@@ -79,9 +77,8 @@ function MuiNavigation({ mode }) {
             <BottomNavigationAction label="Favourites" icon={<FavoriteIcon />} />
             <BottomNavigationAction label="Top 10" icon={<StarIcon />} />
             <BottomNavigationAction label="Visited" icon={<HistoryIcon />} />
-            <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} />
+            {/* <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} /> */}
         </BottomNavigation>
-        // </Paper>
     );
 }
 
