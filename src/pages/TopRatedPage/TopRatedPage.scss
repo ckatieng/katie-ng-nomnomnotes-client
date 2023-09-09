@@ -14,9 +14,14 @@
     }
 
     &__list {
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         max-width: 550px;
         width: 100%;
+        height: 70vh;
+        padding: 0;
     }
 
     &__empty-state {
@@ -27,17 +32,18 @@
     }
 
     &__empty-state-img {
-        height: 130px;
-        margin: auto 0;
+        height: 150px;
     }
 
     &__empty-state-title {
-        margin: 0 0 6px;
+        @include mobile-text-title();
+        margin: 0.5rem 0 0.75rem;
     }
 
     &__empty-state-paragraph {
-        margin: 0;
+        @include mobile-text-body-larger();
         text-align: center;
+        max-width: 330px;
     }
 
     &__item-container {
@@ -75,6 +81,5 @@
 
     &__add-icon {
         @include icon-hover-animation();
-        // visibility: hidden;
     }
 }

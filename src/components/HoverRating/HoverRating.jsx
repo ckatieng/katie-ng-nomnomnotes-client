@@ -28,9 +28,10 @@ function HoverRating({ handleRatingChange }) {
     return(
         <Box
             sx={{
-            width: 200,
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
+            justifyContent:'center',
         }}
         >
             <Rating
@@ -50,7 +51,22 @@ function HoverRating({ handleRatingChange }) {
                 onChangeActive={(event, newHover) => {
                     setHover(newHover);
                 }}
-                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                emptyIcon={<StarIcon 
+                    style={{ 
+                        opacity: 0.55,
+                        fontSize: 40,
+                        
+                    }} 
+                />
+                }
+                icon={
+                    <StarIcon
+                      style={{
+                        fontSize: 40, // Adjust the star size as needed
+                        color: "#ad86ea", // Set the hover star color to purple
+                      }}
+                    />
+                }
             />
             {value !== null && (
                 <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>

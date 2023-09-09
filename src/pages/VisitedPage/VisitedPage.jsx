@@ -55,7 +55,6 @@ function VisitedPage () {
 
     return (
         <div className="visited">
-            <h2 className="visited__title">Visited List</h2>
             {isLoading ? (
                 // Display a loading message while fetching data
                 <p>Loading...</p> 
@@ -69,16 +68,19 @@ function VisitedPage () {
                             <p className="visited__empty-state-paragraph">This list displays the restaurants you've visited, but did not favourite to help track your history.</p>
                         </div>
                     ) : (
-                        visitedItems.map((item) => (
-                            <li className="visited__item" key={item.id}>
-                                <Link to={`/restaurant/${item.google_places_id}`} className="visited__item-name">{item.restaurantName}</Link> 
-                                <div className="visited__delete">
-                                    <IconButton disableTouchRipple className="visited__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
-                                        <DeleteIcon fontSize="inherit"/>
-                                    </IconButton>
-                                </div>
-                            </li>
-                        ))
+                        <>
+                            <h2 className="visited__title">Visited List</h2>
+                            {visitedItems.map((item) => (
+                                <li className="visited__item" key={item.id}>
+                                    <Link to={`/restaurant/${item.google_places_id}`} className="visited__item-name">{item.restaurantName}</Link> 
+                                    <div className="visited__delete">
+                                        <IconButton disableTouchRipple className="visited__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                            <DeleteIcon fontSize="inherit"/>
+                                        </IconButton>
+                                    </div>
+                                </li>
+                            ))}
+                        </>
                     )}
                 </ul>
             )}

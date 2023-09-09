@@ -9,7 +9,7 @@ import SearchRestaurant from '../../components/SearchRestaurant/SearchRestaurant
 import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
-import paella from "../../assets/images/Paella.png";
+import burger from "../../assets/images/Burger.png";
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
@@ -91,39 +91,46 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                     updateMustTryList={updateMustTryList} />
             ) : (
                 <>
-                    <h2 className="must-try__title">Must-Try List</h2>
-                    {/* Must-Try Items (checkboxes) */}
                     {isLoading ? (
                         // Display a loading message while fetching data
                         <p>Loading...</p> 
                     ) : (
-                        <div className="must-try__checkboxes">
-                            {mustTryItems.length === 0 ? (
-                                // Display an empty state message when the list is empty
-                                <div className="must-try__empty-state">
-                                    <img className="must-try__empty-state-img" src={paella} alt="paella" />
-                                    <h3 className="must-try__empty-state-title">No Restaurants Yet!</h3>
-                                    <p className="must-try__empty-state-paragraph">Time to discover new restaurants & add them to your must-try list.</p>
-                                </div>
-                            ) : (
-                                mustTryItems.map((item) => (
-                                    <div className="must-try__item" key={item.id}>
-                                        <CustomCheckbox 
-                                            key={item.id} 
-                                            itemId={item.id} 
-                                            itemName={item.restaurantName}
-                                            googlePlacesId={item.google_places_id}
-                                            updateMustTryList={updateMustTryList} 
-                                        />
-                                        <div className="must-try__delete">
-                                            <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
-                                                <DeleteIcon fontSize="inherit"/>
-                                            </IconButton>
-                                        </div>
+                        <>
+                            
+                            {/* Must-Try Items (checkboxes) */}
+                            <div className="must-try__checkboxes">
+                                {mustTryItems.length === 0 ? (
+                                    // Display an empty state message when the list is empty
+                                    <div className="must-try__empty-state">
+                                        <img className="must-try__empty-state-img" src={burger} alt="burger" />
+                                        <h3 className="must-try__empty-state-title">No Restaurants Yet!</h3>
+                                        <p className="must-try__empty-state-paragraph">
+                                            Time to discover new restaurants & add them to your must-try list.
+                                        </p>
                                     </div>
-                                ))
-                            )}
-                        </div>
+                                ) : (
+                                    <>
+                                    <h2 className="must-try__title">Must-Try List</h2>
+                                    {mustTryItems.map((item) => (
+                                        <div className="must-try__item" key={item.id}>
+                                            <CustomCheckbox 
+                                                key={item.id} 
+                                                itemId={item.id} 
+                                                itemName={item.restaurantName}
+                                                googlePlacesId={item.google_places_id}
+                                                updateMustTryList={updateMustTryList} 
+                                            />
+                                            <div className="must-try__delete">
+                                                <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                                    <DeleteIcon fontSize="inherit"/>
+                                                </IconButton>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    </>
+                                )}
+                            </div>
+                        </>
                     )}
 
                     {/* Floating Add Button */}

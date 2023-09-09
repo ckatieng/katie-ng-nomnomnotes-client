@@ -98,11 +98,11 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                     <CloseIcon />
                 </IconButton>
                 <div className="checked-restaurant__rating">
-                    <p>How was {itemName}? (Optional)</p>
+                    <p className="checked-restaurant__paragraph">How was {itemName}? (Optional)</p>
                     <HoverRating handleRatingChange={setRating} />
                 </div>
                 <div className="checked-restaurant__results">
-                    <p>Would you like to add {itemName} to your favorites?</p>
+                    <p className="checked-restaurant__paragraph">Would you like to add {itemName} to your favorites?</p>
                     <div>
                         <label>
                             <input
@@ -123,11 +123,11 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                             Yes
                         </label>
                     </div>
-                    <div className="checked-restaurant__done">
-                        <Button variant="primary" text="Submit" onClick={handleSubmit} />
-                    </div>
-                    {/* <button type="button" onClick={handleSubmit}>Done</button> */}
                 </div>
+                <div className="checked-restaurant__done">
+                    <Button variant="primary" text="Submit" onClick={handleSubmit} />
+                </div>
+                    {/* <button type="button" onClick={handleSubmit}>Done</button> */}
             </div>
         </div>
     );

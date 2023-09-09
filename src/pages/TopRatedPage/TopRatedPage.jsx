@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchRestaurantName } from "../../utils/googlePlacesService";
 import "./TopRatedPage.scss";
-import burger from "../../assets/images/Burger.png";
+import paella from "../../assets/images/Paella.png";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -62,7 +62,7 @@ function TopRatedPage () {
 
     return (
         <div className="top-rated">
-            <h2 className="top-rated__title">Top 10 List</h2>
+            
             {isLoading ? (
                 // Display a loading message while fetching data
                 <p>Loading...</p> 
@@ -71,27 +71,30 @@ function TopRatedPage () {
                     {topRatedItems.length === 0 ? (
                         // Display an empty state message when the list is empty
                         <div className="must-try__empty-state">
-                            <img className="must-try__empty-state-img" src={burger} alt="burger" />
+                            <img className="must-try__empty-state-img" src={paella} alt="paella" />
                             <h3 className="must-try__empty-state-title">Top 10 is Empty!</h3>
                             <p className="must-try__empty-state-paragraph">Explore new restaurants, rate them & help create the top-rated list.</p>
                         </div>
                     ) : (
-                        topRatedItems.map((item) => (
-                            <li className="top-rated__item" key={item.id}>
-                                <div className="top-rated__add">
-                                    <IconButton disableTouchRipple className="top-rated__add-icon" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
-                                        <AddIcon fontSize="inherit"/>
-                                    </IconButton>
-                                </div>
-                                <div className="top-rated__item-container">
-                                    <Link to={`/restaurant/${item.google_places_id}`}>
-                                        <div className="top-rated__item-name">{item.restaurantName}</div>
-                                    </Link> 
-                                    <div className="top-rated__item-rating">{item.averageRating}</div>
-                                </div>
-                                
-                            </li>
-                        ))
+                        <>
+                            <h2 className="top-rated__title">Top 10 List</h2>
+                            {topRatedItems.map((item) => (
+                                <li className="top-rated__item" key={item.id}>
+                                    <div className="top-rated__add">
+                                        <IconButton disableTouchRipple className="top-rated__add-icon" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
+                                            <AddIcon fontSize="inherit"/>
+                                        </IconButton>
+                                    </div>
+                                    <div className="top-rated__item-container">
+                                        <Link to={`/restaurant/${item.google_places_id}`}>
+                                            <div className="top-rated__item-name">{item.restaurantName}</div>
+                                        </Link> 
+                                        <div className="top-rated__item-rating">{item.averageRating}</div>
+                                    </div>
+                                    
+                                </li>
+                            ))}
+                        </>
                     )}
                 </ol>
             )}

@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;  
+    justify-content: center;
     padding-top: 3.125rem;  
 
     @include desktop {
@@ -15,11 +16,17 @@
     &__title {
         @include mobile-text-list-title();
         color: $primary-title-colour;
+        text-align: center;
     }
 
     &__checkboxes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         max-width: 550px;
         width: 100%;
+        height: 70vh;
     }
 
     &__empty-state {
@@ -30,17 +37,18 @@
     }
 
     &__empty-state-img {
-        height: 170px;
-        margin: auto 0;
+        height: 150px;
     }
 
     &__empty-state-title {
-        margin: 0 0 6px;
+        @include mobile-text-title();
+        margin: 0.5rem 0 0.75rem;
     }
 
     &__empty-state-paragraph {
-        margin: 0;
+        @include mobile-text-body-larger();
         text-align: center;
+        max-width: 300px;
     }
 
     &__item {

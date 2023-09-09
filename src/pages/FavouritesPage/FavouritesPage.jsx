@@ -55,33 +55,40 @@ function FavouritesPage () {
 
     return (
         <div className="favourites">
-            <h2 className="favourites__title">Favourites List</h2>
+            
             {isLoading ? (
                 // Display a loading message while fetching data
                 <p>Loading...</p> 
             ) : (
-                <ul className="favourites__list">
-                    {favouriteItems.length === 0 ? (
-                        // Display an empty state message when the list is empty
-                        <div className="favourites__empty-state">
-                            <img className="favourites__empty-state-img" src={dessert} alt="dessert" />
-                            <h3 className="favourites__empty-state-title">No Favourites Yet!</h3>
-                            <p className="favourites__empty-state-paragraph">Try some new restaurants on your must-try list & see if they are worthy to become a favourite.</p>
-                        </div>
-                    ) : (
-                        favouriteItems.map((item) => (
-                            <li className="favourites__item" key={item.id}>
-                                <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
-                                {/* <div className="favourites__item-name">{item.restaurantName}</div> */}
-                                <div className="favourites__delete">
-                                    <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
-                                        <DeleteIcon fontSize="inherit"/>
-                                    </IconButton>
-                                </div>
-                            </li>
-                        ))
-                    )}
-                </ul>
+                <>
+                    <ul className="favourites__list">
+                        {favouriteItems.length === 0 ? (
+                            // Display an empty state message when the list is empty
+                            <div className="favourites__empty-state">
+                                <img className="favourites__empty-state-img" src={dessert} alt="dessert" />
+                                <h3 className="favourites__empty-state-title">No Favourites Yet!</h3>
+                                <p className="favourites__empty-state-paragraph">
+                                    Try restaurants from your list & see if they are worthy to become a favourite.
+                                </p>
+                            </div>
+                        ) : (
+                            <>
+                                <h2 className="favourites__title">Favourites List</h2>
+                                {favouriteItems.map((item) => (
+                                    <li className="favourites__item" key={item.id}>
+                                        <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
+                                        {/* <div className="favourites__item-name">{item.restaurantName}</div> */}
+                                        <div className="favourites__delete">
+                                            <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
+                                                <DeleteIcon fontSize="inherit"/>
+                                            </IconButton>
+                                        </div>
+                                    </li>
+                                ))}
+                            </>
+                        )}
+                    </ul>
+                </>
             )}
         </div>
     );

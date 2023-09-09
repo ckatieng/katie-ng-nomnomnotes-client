@@ -22,18 +22,49 @@
         background-color: white;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        // justify-content: space-between;
 
         @include tablet {
-            justify-content: center;
+            // justify-content: center;
             height: auto;
             width: auto;
             padding: 2.5rem 4rem;
             margin: 0 3.25rem 20%;
+            border-radius: 0.9375rem;
         }
 
         @include desktop {
             margin: 0 24% 20%;
         }
+    }
+
+    &__rating {
+        margin-bottom: 6.25rem;
+
+        @include tablet {
+            margin-bottom: 3.125rem;
+        }
+    }
+
+    &__results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.875rem;
+    }
+
+    &__paragraph {
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 1.75rem;
+        padding-bottom: 1.25rem;
+        text-align: center;
+    }
+
+    &__done {
+        display: flex;
+        justify-content: flex-end;
     }
 }
