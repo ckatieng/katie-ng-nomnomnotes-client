@@ -8,12 +8,17 @@
     align-items: center;  
     padding-top: 3.125rem;  
 
+    @include desktop {
+        @include desktop-margin();
+    }
+
     &__title {
         @include mobile-text-list-title();
         color: $primary-title-colour;
     }
 
     &__checkboxes {
+        max-width: 550px;
         width: 100%;
     }
 

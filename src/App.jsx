@@ -25,9 +25,14 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
     // State to track whether "Add Restaurant" button is clicked
     const [showSearchRestaurant, setShowSearchRestaurant] = useState(false);
+    // State to track light/dark mode
+    const [mode, setMode] = useState('light');
 
-    // Simulate content loading using useEffect
+    
     useEffect(() => {
+        document.title = 'NomNom Notes';
+
+        // Simulate content loading using useEffect
         setTimeout(() => {
             setIsLoading(false);
          }, 4000);
@@ -48,7 +53,11 @@ function App() {
             <div className="App">
                 {isLoading && <LoadingScreen />}
                 {!isLoading && (
-                    <ToggleColorMode showSearchRestaurant={showSearchRestaurant}>
+                    <ToggleColorMode 
+                        showSearchRestaurant={showSearchRestaurant} 
+                        mode={mode} 
+                        setMode={setMode}>
+                            
                         <CssBaseline />
                         <Routes>
                             {/* Home Page */}
@@ -115,7 +124,7 @@ function App() {
                                 />} 
                             /> */}
                         </Routes>
-                        {!showSearchRestaurant && <MuiNavigation />}
+                        {!showSearchRestaurant && <MuiNavigation mode={mode} />}
                     </ToggleColorMode>
                 )}
             </div>

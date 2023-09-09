@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
 import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
-function MuiNavigation() {
+function MuiNavigation({ mode }) {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ function MuiNavigation() {
                 bottom: 0, 
                 left: 0, 
                 right: 0,
+                backgroundColor: mode === 'dark' ? '#121212' : '#eaeef4',
                 // backgroundColor: 'rgb(243, 246, 252)',
                 // height: '70px',
                 // p: '20px 0',
@@ -27,23 +28,24 @@ function MuiNavigation() {
                 '& .MuiBottomNavigationAction-label': {
                     fontWeight: '600',
                     fontSize: '11px',
+                    color: mode === 'dark' ? '#74787a' : '#818589', 
                 },
                 // selected navigation label
                 '& .MuiBottomNavigationAction-label.Mui-selected': {
                     fontSize: '11px',
-                    // color: '#EB72FF',
+                    color: '#a275f9',
                 },
                 // navigation icons
-                // '& .MuiSvgIcon-root': {
-                //     color: 'purple', 
-                // },
+                '& .MuiSvgIcon-root': {
+                    color: mode === 'dark' ? '#989c9e' : '#c0c6cc',   
+                },
                 // selected navigation icon
                 '& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root': {
-                    // color: '#FFFFFF', 
+                    color: '#a275f9',
                 },
                 // selection effect
                 '& .MuiBottomNavigationAction-root.Mui-selected': {
-                    color: '#EB72FF',
+                    color: '#a275f9',
                 },
             }}
             showLabels

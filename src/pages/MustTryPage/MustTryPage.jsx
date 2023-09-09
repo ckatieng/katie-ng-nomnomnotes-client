@@ -135,8 +135,8 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                             onClick={handleAddRestaurantClick}
                             sx={{
                                 position: 'absolute',
-                                bottom: 70,
-                                right: 30,
+                                bottom: 80,
+                                right: 25,
                                 backgroundColor: '#bd8eff',
                                 '&:hover': {
                                     backgroundColor: '#ad86ea',

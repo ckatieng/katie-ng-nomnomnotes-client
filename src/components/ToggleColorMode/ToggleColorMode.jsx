@@ -1,11 +1,10 @@
 
 import { useState, useMemo, createContext} from 'react';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Box from '@mui/material/Box';
-// import { amber, deepOrange, grey } from '@mui/material/colors';
 
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
@@ -19,44 +18,45 @@ import Location from "../Location/Location";
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function ToggleColorMode({ children, showSearchRestaurant }) {
-    const theme = useTheme();
-    const [mode, setMode] = useState('light');
-  
+function ToggleColorMode({ children, showSearchRestaurant, mode, setMode }) {  
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
                 setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
             },
-        }),[]
+        }),[setMode]
     );
   
     const getDesignTokens = (mode) => ({
         palette: {
             mode,
-            // ...(mode === 'light'
-            //     ? {
-            //         // palette values for light mode
-            //         primary: #F3F6FC,
-            //         divider: amber[200],
-            //         text: {
-            //             primary: grey[900],
-            //             secondary: grey[800],
-            //         },
-            //         }
-            //     : {
-            //         // palette values for dark mode
-            //         primary: deepOrange,
-            //         divider: deepOrange[700],
-            //         background: {
-            //             default: deepOrange[900],
-            //             paper: deepOrange[900],
-            //         },
-            //         text: {
-            //             primary: '#fff',
-            //             secondary: grey[500],
-            //         },
-            //     }),
+            ...(mode === 'light'
+                ? {
+                    // palette values for light mode
+                    // primary: '#F3F6FC',
+                    // divider: 'rgba(0,0,0,0.05)',
+                    // text: {
+                    //     // primary: '#73649b',
+                    //     // secondary: grey[800],
+                    // },
+                    background: {
+                        default: '#f3f6fc',
+                        // paper: lightModeBackgroundColor, 
+                    },
+                    }
+                : {
+                    // palette values for dark mode
+                    // primary: deepOrange,
+                    // divider: 'rgba(255,255,255,0.4)',
+                    background: {
+                        default: '#212121',
+                        // paper: deepOrange[900],
+                    },
+                    // text: {
+                    //     // primary: '#bc9df9',
+                    //     // secondary: grey[500],
+                    // },
+                }),
         },
         typography: {
             fontFamily: 'Montserrat, sans-serif',

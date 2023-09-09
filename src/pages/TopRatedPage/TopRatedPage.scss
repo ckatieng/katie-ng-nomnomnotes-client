@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;  
+    padding-top: 3.125rem;  
 
     &__title {
         @include mobile-text-list-title();
@@ -15,6 +15,7 @@
 
     &__list {
         padding: 0;
+        max-width: 550px;
         width: 100%;
     }
 
