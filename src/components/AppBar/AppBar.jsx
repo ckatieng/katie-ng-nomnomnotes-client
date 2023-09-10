@@ -1,6 +1,7 @@
 
 import { useState, useMemo, createContext} from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './AppBar.scss';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -19,7 +20,7 @@ import IosShareIcon from '@mui/icons-material/IosShare';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function AppBarToggleColour({ children, showSearchRestaurant, mode, setMode }) {  
+function AppBar({ children, showSearchRestaurant, mode, setMode }) {  
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
@@ -166,12 +167,10 @@ function AppBarToggleColour({ children, showSearchRestaurant, mode, setMode }) {
                                     </MenuItem> */}
                                     <MenuItem onClick={handleLocation}>
                                         <Link className="app-bar__link" to="/location">
-                                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                <ListItemIcon>
-                                                    <PlaceIcon fontSize="small" />
-                                                </ListItemIcon>
-                                                Location
-                                            </div>
+                                            <ListItemIcon>
+                                                <PlaceIcon fontSize="small" />
+                                            </ListItemIcon>
+                                            Location
                                         </Link>
                                     </MenuItem>
                                     <MenuItem onClick={handleClose}>
@@ -193,4 +192,4 @@ function AppBarToggleColour({ children, showSearchRestaurant, mode, setMode }) {
     );
   }
   
-  export default AppBarToggleColour;
+  export default AppBar;

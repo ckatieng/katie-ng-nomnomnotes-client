@@ -12,7 +12,7 @@ import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
 
 import MobileNavigation from "./components/MobileNavigation/MobileNavigation";
-import AppBarToggleColour from "./components/AppBarToggleColour/AppBarToggleColour";
+import AppBar from "./components/AppBar/AppBar";
 import { CssBaseline } from "@mui/material";
 
 /*
@@ -53,7 +53,7 @@ function App() {
             <div className="App">
                 {isLoading && <LoadingScreen />}
                 {!isLoading && (
-                    <AppBarToggleColour
+                    <AppBar
                         showSearchRestaurant={showSearchRestaurant} 
                         mode={mode} 
                         setMode={setMode}>
@@ -111,7 +111,7 @@ function App() {
                             />
                         </Routes>
                         {!showSearchRestaurant && <MobileNavigation mode={mode} />}
-                    </AppBarToggleColour>
+                    </AppBar>
                 )}
             </div>
         </BrowserRouter>
