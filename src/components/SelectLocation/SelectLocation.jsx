@@ -15,10 +15,6 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 
-function SlideTransition(props) {
-    return <Slide {...props} direction="up" />;
-}
-
 function loadScript(src, position, id, callback) {
     if (!position) {
         return;

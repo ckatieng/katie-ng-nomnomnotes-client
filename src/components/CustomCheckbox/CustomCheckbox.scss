@@ -2,16 +2,14 @@
 @use "../../styles//partials/variables" as *;
 
 .custom-checkbox {
-    // &__label {
-    //     // color: blue;
-    // }
-
-    // &__checkbox {
-    //     // background: transparent;
-    //     // border: 2px solid #e0cdf9;
-    //     // border-radius: 30px !important;
-    //     // width: 1rem;
-    // }
+    &__checkbox {
+        // color: blue;
+        // background: transparent;
+        // border: 2px solid #e0cdf9;
+        // border-radius: 30px !important;
+        // width: 1rem;
+    }
+    
     &__item-name {
         @include mobile-text-list();
         color: $primary-text-colour;
@@ -25,14 +23,4 @@
             color: $primary-text-hover-colour;
         }
     }
-}
-
-input[type="checkbox"] {
-    color: blue !important;
-    border-radius: 30px !important;
-}
-
-input[type="checkbox"]:checked {
-    color: blue !important;
-    border-radius: 30px !important;
 }

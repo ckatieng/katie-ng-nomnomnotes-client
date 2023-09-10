@@ -2,11 +2,10 @@
 @use "../../styles//partials/variables" as *;
 
 .top-rated {
-    @include mobile-padding();
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 3.125rem;  
+    padding: 3.125rem 1rem 6.25rem; 
 
     &__title {
         @include mobile-text-list-title();
@@ -19,7 +18,6 @@
         flex-direction: column;
         max-width: 550px;
         width: 100%;
-        height: 70vh;
         padding: 0;
     }
 

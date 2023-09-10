@@ -9,10 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
-
-function SlideTransition(props) {
-    return <Slide {...props} direction="up" />;
-}
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 function RestaurantDetails() {
     // Access the google_places_id parameter from the URL
@@ -45,8 +42,8 @@ function RestaurantDetails() {
     }, [placeId]); // Fetch details when the placeId parameter changes
 
     if (!restaurantDetails) {
-        // Render a loading message or spinner while fetching data
-        return <div>Loading...</div>;
+        // Render loading while fetching data
+        return <LoadingSpinner />
     }
 
     // Must-Try API URL

@@ -12,10 +12,6 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
-function SlideTransition(props) {
-    return <Slide {...props} direction="up" />;
-}
-
 function TopRatedPage () {
     // States
     const [topRatedItems, setTopRatedItems] = useState([]);

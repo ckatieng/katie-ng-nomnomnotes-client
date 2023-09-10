@@ -142,7 +142,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                             aria-label="add"
                             onClick={handleAddRestaurantClick}
                             sx={{
-                                position: 'absolute',
+                                position: 'fixed',
                                 bottom: 80,
                                 right: 25,
                                 backgroundColor: '#bd8eff',
