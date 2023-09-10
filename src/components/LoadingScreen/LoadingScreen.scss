@@ -6,7 +6,9 @@
     vertical-align: center;
     width: 100vw;
     height: 100vh;
-    background: $primary-colour-light-background;
+    // background: $primary-colour-light-background;
+    background: linear-gradient(to bottom, #e7d2ff, #bd8eff);
+
     overflow: hidden;
 
     &__logo {

@@ -72,7 +72,15 @@
     }
 
     &__item-rating {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         margin-left: 1.875rem;
+    }
+
+    &__star-icon {
+        margin-left: 10px;
+        color: $primary-text-colour;
     }
 
     &__add {

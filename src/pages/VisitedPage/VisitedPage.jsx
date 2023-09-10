@@ -6,6 +6,7 @@ import "./VisitedPage.scss";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
 import dimsum from "../../assets/images/Dimsum.png";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function VisitedPage () {
     // States
@@ -56,8 +57,8 @@ function VisitedPage () {
     return (
         <div className="visited">
             {isLoading ? (
-                // Display a loading message while fetching data
-                <p>Loading...</p> 
+                // Display loading while fetching data
+                <LoadingSpinner />
             ) : (
                 <ul className="visited__list">
                     {visitedItems.length === 0 ? (

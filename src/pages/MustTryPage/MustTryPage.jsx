@@ -10,6 +10,7 @@ import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
 import burger from "../../assets/images/Burger.png";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
@@ -92,8 +93,8 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
             ) : (
                 <>
                     {isLoading ? (
-                        // Display a loading message while fetching data
-                        <p>Loading...</p> 
+                        // Display loading while fetching data
+                        <LoadingSpinner />
                     ) : (
                         <>
                             

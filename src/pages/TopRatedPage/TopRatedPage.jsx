@@ -6,8 +6,11 @@ import "./TopRatedPage.scss";
 import paella from "../../assets/images/Paella.png";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
@@ -81,8 +84,8 @@ function TopRatedPage () {
         <div className="top-rated">
             
             {isLoading ? (
-                // Display a loading message while fetching data
-                <p>Loading...</p> 
+                // Display loading while fetching data
+                <LoadingSpinner />
             ) : (
                 <ol className="top-rated__list">
                     {topRatedItems.length === 0 ? (
@@ -106,7 +109,9 @@ function TopRatedPage () {
                                         <Link to={`/restaurant/${item.google_places_id}`}>
                                             <div className="top-rated__item-name">{item.restaurantName}</div>
                                         </Link> 
-                                        <div className="top-rated__item-rating">{item.averageRating}</div>
+                                        <div className="top-rated__item-rating">{item.averageRating}  
+                                             <div className="top-rated__star-icon"><FontAwesomeIcon icon={faStar}/></div>
+                                        </div>
                                     </div>
                                 </li>
                             ))}

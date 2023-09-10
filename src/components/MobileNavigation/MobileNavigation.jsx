@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './MobileNavigation.scss';
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import RamenIcon from '@mui/icons-material/RamenDiningSharp';
-import FavoriteIcon from '@mui/icons-material/FavoriteSharp';
-import StarIcon from '@mui/icons-material/Star';
-import HistoryIcon from '@mui/icons-material/History';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 // import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
-function MuiNavigation({ mode }) {
+function MobileNavigation({ mode }) {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -19,9 +21,6 @@ function MuiNavigation({ mode }) {
                 left: 0, 
                 right: 0,
                 backgroundColor: mode === 'dark' ? '#121212' : '#eaecef',
-                // backgroundColor: 'rgb(243, 246, 252)',
-                // height: '70px',
-                // p: '20px 0',
                 // navigation labels
                 '& .MuiBottomNavigationAction-label': {
                     fontWeight: '600',
@@ -35,7 +34,7 @@ function MuiNavigation({ mode }) {
                 },
                 // navigation icons
                 '& .MuiSvgIcon-root': {
-                    color: mode === 'dark' ? '#989c9e' : '#818589',   
+                    color: mode === 'dark' ? '#989c9e' : '#686868',   
                 },
                 // selected navigation icon
                 '& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root': {
@@ -74,12 +73,12 @@ function MuiNavigation({ mode }) {
             }}
         >
             <BottomNavigationAction label="Must-Try" icon={<RamenIcon />} />
-            <BottomNavigationAction label="Favourites" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Top 10" icon={<StarIcon />} />
-            <BottomNavigationAction label="Visited" icon={<HistoryIcon />} />
+            <BottomNavigationAction label="Favourites" icon={<FontAwesomeIcon icon={faHeart} className="mobile-navigation__heart"/>} />
+            <BottomNavigationAction label="Top 10" icon={<FontAwesomeIcon icon={faStar} className="mobile-navigation__icon"/>} />
+            <BottomNavigationAction label="Visited" icon={<FontAwesomeIcon icon={faClockRotateLeft} className="mobile-navigation__icon"/>} />
             {/* <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} /> */}
         </BottomNavigation>
     );
 }
 
-export default MuiNavigation;
+export default MobileNavigation;

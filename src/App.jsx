@@ -11,10 +11,9 @@ import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails"
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
 
-import MuiNavigation from "./components/MuiNavigation/MuiNavigation";
+import MobileNavigation from "./components/MobileNavigation/MobileNavigation";
 import AppBarToggleColour from "./components/AppBarToggleColour/AppBarToggleColour";
 import { CssBaseline } from "@mui/material";
-// import TopAppBar from "./components/TopAppBar/TopAppBar";
 
 /*
  * App.jsx
@@ -86,29 +85,15 @@ function App() {
                             {/* Restaurant Details */}
                             <Route path="/restaurant/:placeId" element={<RestaurantDetails />} />
 
-                            {/* Delete Restaurant from MustTryPage */}
-                            {/* <Route path="/musttry/:id/delete" element={<MustTryPage/>} /> */}
-
                             {/* Favourites Page */}
                             <Route path="/favourites" element={<FavouritesPage />} />
 
-                            {/* Single Restaurant Details */}
-                            {/* <Route path="/favourites/:id" element={<RestaurantDetails />} /> */}
-
-                            {/* Delete Restaurant from FavouritesPage */}
-                            {/* <Route path="/favourites/:id/delete" element={<FavouritesPage />} /> */}
 
                             {/* Top 10 Page */}
                             <Route path="/top-rated" element={<TopRatedPage />} />
 
                             {/* Visited Page */}
                             <Route path="/visited" element={<VisitedPage />} />
-
-                            {/* Single Restaurant Details */}
-                            {/* <Route path="/visited/:id" element={<RestaurantDetails />} /> */}
-
-                            {/* Delete Restaurant from VisitedPage */}
-                            {/* <Route path="/visited/:id/delete" element={<VisitedPage />} /> */}
 
                             {/* Nearby Page */}
                             <Route path="/nearby" element={<NearbyPage />} />
@@ -117,15 +102,15 @@ function App() {
                             <Route path="/location" element={<Location />} />
 
                             {/* Catch-all to redirect to Home Page */}
-                            {/* <Route path="*" element={
+                            <Route path="*" element={
                                 <MustTryPage
                                     showSearchRestaurant={showSearchRestaurant}
                                     handleAddRestaurantClick={handleAddRestaurantClick}
                                     handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
                                 />} 
-                            /> */}
+                            />
                         </Routes>
-                        {!showSearchRestaurant && <MuiNavigation mode={mode} />}
+                        {!showSearchRestaurant && <MobileNavigation mode={mode} />}
                     </AppBarToggleColour>
                 )}
             </div>

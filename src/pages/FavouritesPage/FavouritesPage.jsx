@@ -6,6 +6,7 @@ import "./FavouritesPage.scss";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
 import dessert from "../../assets/images/Dessert.png";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function FavouritesPage () {
     // States
@@ -57,8 +58,8 @@ function FavouritesPage () {
         <div className="favourites">
             
             {isLoading ? (
-                // Display a loading message while fetching data
-                <p>Loading...</p> 
+                // Display loading while fetching data
+                <LoadingSpinner />
             ) : (
                 <>
                     <ul className="favourites__list">

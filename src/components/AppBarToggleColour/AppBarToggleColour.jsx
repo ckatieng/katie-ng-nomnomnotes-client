@@ -37,8 +37,8 @@ function AppBarToggleColour({ children, showSearchRestaurant, mode, setMode }) {
                     // primary: deepPurple[500],
                     // divider: 'rgba(0,0,0,0.05)',
                     // text: {
-                    //     primary: '#73649b',
-                    //     secondary: grey[800],
+                    //     primary: '#a275f9',
+                    //     secondary: '#ad86ea',
                     // },
                     background: {
                         default: '#f3f6fc',
@@ -54,8 +54,8 @@ function AppBarToggleColour({ children, showSearchRestaurant, mode, setMode }) {
                         // paper: deepOrange[900],
                     },
                     // text: {
-                    //     primary: grey[500],
-                    //     secondary: grey[500],
+                    //     primary: '#bd8eff',
+                    //     secondary: 'white',
                     // },
                 }),
         },
