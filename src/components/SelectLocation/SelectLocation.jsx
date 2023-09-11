@@ -15,6 +15,13 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 
+/*
+ * SelectLocation Component
+ * - Allows users to select and set their location
+ * - Fetches and displays location suggestions from Google Places API
+ */
+
+// Function to load the Google Maps script dynamically
 function loadScript(src, position, id, callback) {
     if (!position) {
         return;
@@ -31,14 +38,13 @@ function loadScript(src, position, id, callback) {
     position.appendChild(script);
 }
 
+// Reference for the Autocomplete service
 const autocompleteService = { current: null };
 
 export default function SelectLocation() {
-    const [value, setValue] = useState(null);
-    const [inputValue, setInputValue] = useState("");
-    const [options, setOptions] = useState([]);
-    // const [userLocation, setUserLocation] = useState(null); 
-    // const [formattedAddress, setFormattedAddress] = useState({ description: "" });
+    const [value, setValue] = useState(null); // Selected location
+    const [inputValue, setInputValue] = useState(""); // Input value for location search
+    const [options, setOptions] = useState([]); // Location suggestions
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -46,7 +52,6 @@ export default function SelectLocation() {
 
     const loaded = useRef(false);
     const navigate = useNavigate();
-
 
     // Fetch the API key when the component mounts
     useEffect(() => {
@@ -61,7 +66,6 @@ export default function SelectLocation() {
                         "google-maps"
                     );
                 }
-
                 loaded.current = true;
             }
         })
@@ -70,34 +74,9 @@ export default function SelectLocation() {
         });
     }, []);
 
-    // // Fetch and set user's location when the component mounts
-    // useEffect(() => {
-    //      // Location URL
-    //     const locationURL = "http://localhost:5050/api/users/location";
-
-    //     axios.get(locationURL)
-    //         .then((response) => {
-    //             setUserLocation(response.data);
-    //             if (response.data && response.data.formattedAddress) {
-    //                 setFormattedAddress({ description: response.data.formattedAddress });
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.error(`Error fetching user's location: ${err}`);
-    //         });
-    // }, []);
-
-    // // Set the user's location as the initial value when it's available
-    // useEffect(() => {
-    //     if (userLocation) {
-    //         setValue(userLocation);
-    //     }
-    // }, [userLocation]);
-
+    // Debounce the fetch function
     const fetch = useMemo(() =>
         debounce((request, callback) => {
-            // autocompleteService.current.getPlacePredictions(request, callback);
-
             // Limit results to cities
             autocompleteService.current.getPlacePredictions({
                 ...request,
@@ -106,6 +85,7 @@ export default function SelectLocation() {
         }, 400),
     []);
 
+    // Fetch location suggestions when the input value changes
     useEffect(() => {
         let active = true;
 
@@ -116,7 +96,6 @@ export default function SelectLocation() {
         if (!autocompleteService.current) {
             return undefined;
         }
-
         if (inputValue === "") {
             setOptions(value ? [value] : []);
             return undefined;
@@ -129,11 +108,9 @@ export default function SelectLocation() {
                 if (value) {
                 newOptions = [value];
                 }
-
                 if (results) {
                 newOptions = [...newOptions, ...results];
                 }
-
                 setOptions(newOptions);
             }
         });
@@ -143,6 +120,7 @@ export default function SelectLocation() {
         };
     }, [value, inputValue, fetch]);
 
+    // Handle location submission
     const handleLocationSubmit = () => {
         console.log(value);
         // Fetch the Google API key
@@ -235,7 +213,7 @@ export default function SelectLocation() {
                             width: 300,
                             // Input hover outline
                             "&:hover .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "#8e7cd1", // Set your desired hover outline color here
+                                borderColor: "#8e7cd1",
                             },
                             // Focused hover outline
                             "& .MuiOutlinedInput-root": {

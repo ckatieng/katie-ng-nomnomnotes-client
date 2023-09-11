@@ -64,9 +64,6 @@ function TopRatedPage () {
                 // Show a success message in the Snackbar
                 setSnackbarMessage('Successfully added to your must-try list!');
                 setSnackbarOpen(true);
-
-                // Update the must-try list state to include the newly added restaurant
-                // updateMustTryList();
             })
             .catch((err) => {
                 console.error(`Error adding must-try item: ${err}`);

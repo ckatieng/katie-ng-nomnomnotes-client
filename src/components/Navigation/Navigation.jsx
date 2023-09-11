@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './MobileNavigation.scss';
+import './Navigation.scss';
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import RamenIcon from '@mui/icons-material/RamenDiningSharp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,16 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 // import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
-function MobileNavigation({ mode }) {
+/*
+ * Navigation Component
+ * - Provides a bottom navigation bar with icons and labels for different routes
+ * - Allows users to navigate between different pages of the app
+ *
+ * Props:
+ * 'mode' prop: the current color mode ('dark' or 'light') for the theme
+ */
+
+function Navigation({ mode }) {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
@@ -73,12 +82,12 @@ function MobileNavigation({ mode }) {
             }}
         >
             <BottomNavigationAction label="Must-Try" icon={<RamenIcon />} />
-            <BottomNavigationAction label="Favourites" icon={<FontAwesomeIcon icon={faHeart} className="mobile-navigation__heart"/>} />
-            <BottomNavigationAction label="Top 10" icon={<FontAwesomeIcon icon={faStar} className="mobile-navigation__icon"/>} />
-            <BottomNavigationAction label="Visited" icon={<FontAwesomeIcon icon={faClockRotateLeft} className="mobile-navigation__icon"/>} />
+            <BottomNavigationAction label="Favourites" icon={<FontAwesomeIcon icon={faHeart} className="bottom-navigation__heart"/>} />
+            <BottomNavigationAction label="Top 10" icon={<FontAwesomeIcon icon={faStar} className="bottom-navigation__icon"/>} />
+            <BottomNavigationAction label="Visited" icon={<FontAwesomeIcon icon={faClockRotateLeft} className="bottom-navigation__icon"/>} />
             {/* <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} /> */}
         </BottomNavigation>
     );
 }
 
-export default MobileNavigation;
+export default Navigation;

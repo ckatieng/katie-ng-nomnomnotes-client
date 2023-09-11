@@ -17,9 +17,18 @@ const labels = {
     5: 'Excellent+',
   };
 
+// Function to get the label text based on the rating value
 function getLabelText(value) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
+
+/*
+ * HoverRating Component
+ * - Provides a star rating system that allows users to select their rating
+ *
+ * Props:
+ * 'handleRatingChange' prop: a function to handle changes in the rating
+ */
 
 function HoverRating({ handleRatingChange }) {
     const [value, setValue] = useState(null);
@@ -54,7 +63,7 @@ function HoverRating({ handleRatingChange }) {
                 emptyIcon={<StarIcon 
                     style={{ 
                         opacity: 0.55,
-                        fontSize: 40,
+                        fontSize: 40, // Adjust star size
                         
                     }} 
                 />
@@ -62,8 +71,8 @@ function HoverRating({ handleRatingChange }) {
                 icon={
                     <StarIcon
                       style={{
-                        fontSize: 40, // Adjust the star size as needed
-                        color: "#ad86ea", // Set the hover star color to purple
+                        fontSize: 40, // Adjust star size
+                        color: "#ad86ea", // Set the hover star color
                       }}
                     />
                 }

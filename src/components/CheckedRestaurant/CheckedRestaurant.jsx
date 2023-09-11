@@ -6,11 +6,24 @@ import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
 import Button from '../Button/Button';
 
+/*
+ * CheckedRestaurant Component
+ * - Allows users to rate and move a restaurant to their favorites or visited list
+ *
+ * Props:
+ * 'itemId' prop: unique identifier for the checked restaurant
+ * 'itemName' prop: name of the checked restaurant
+ * 'googlePlacesId' prop: unique identifier for the restaurant on Google Places
+ * 'closeModal' prop: a function to close the modal
+ * 'updateMustTryList' prop: a function to update the list of must-try restaurants
+ */
+
 function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList }) {
     // States
     const [selectedOption, setSelectedOption] = useState("No");
     const [rating, setRating] = useState(0);
 
+     // Function to move the restaurant to favorites
     const handleMoveToFavourites = () => {
         const ratingData = {
             // Only send the rating if it's greater than 0
@@ -30,6 +43,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
             });
     }
 
+    // Function to move the restaurant to visited
     const handleMoveToVisited = () => {
         const ratingData = {
             // Only send the rating if it's greater than 0
@@ -37,9 +51,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         };
 
         // Make a PUT request to move the item to visited
-        axios.put(`http://localhost:5050/api/must-try/${itemId}/move-to-visited`,
-            // Send the rating to the server 
-            ratingData)
+        axios.put(`http://localhost:5050/api/must-try/${itemId}/move-to-visited`, ratingData)
             .then((response) => {
                 closeModal();
                 updateMustTryList();
@@ -49,12 +61,10 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
             });
     }
 
+    // Function to handle user rating
     const handleRating = (newValue) => {
         // Only send the rating if it's greater than 0
         const ratingToSend = newValue > 0 ? newValue : null;
-        console.log("Rating to send:", ratingToSend);
-
-        console.log(googlePlacesId);
 
         // Make a POST request to add rating to table
         axios.post("http://localhost:5050/api/ratings", { 
@@ -69,10 +79,12 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
             });
     }
 
+    // Function to handle radio button selection (yes or no)
     const handleOptionSelect = (event) => {
         setSelectedOption(event.target.value);
     };
 
+    // Function to handle form submission
     const handleSubmit = () => {
         if (selectedOption === 'Yes') {
             handleMoveToFavourites();
@@ -127,7 +139,6 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                 <div className="checked-restaurant__done">
                     <Button variant="primary" text="Submit" onClick={handleSubmit} />
                 </div>
-                    {/* <button type="button" onClick={handleSubmit}>Done</button> */}
             </div>
         </div>
     );

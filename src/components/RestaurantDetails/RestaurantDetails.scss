@@ -47,11 +47,7 @@
     &__list {
         margin: 0;
     }
-
-    &__add {
-        // margin: 0.9375rem 0 0.9375rem;
-    }
-
+    
     &__add-icon {
         @include icon-hover-animation();
     }

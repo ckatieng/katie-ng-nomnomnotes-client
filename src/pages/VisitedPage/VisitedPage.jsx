@@ -8,6 +8,12 @@ import DeleteIcon from '@mui/icons-material/Close';
 import dimsum from "../../assets/images/Dimsum.png";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+/*
+ * VisitedPage Component
+ * - Displays a list of visited restaurants
+ * - Allows users to delete items from their visited list
+ */
+
 function VisitedPage () {
     // States
     const [visitedItems, setVisitedItems] = useState([]);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import './AddItem.scss';
 import { fetchGoogleApiKey } from "../../utils/googlePlacesService";
 
 function AddItem() {
@@ -42,7 +43,7 @@ function AddItem() {
   const fetchPredictions = (input) => {
     if (apiKey) {
       const service = new window.google.maps.places.AutocompleteService();
-      // Specify types to filter predictions (restaurant, cafe, bakery)
+      // Filter predictions (restaurant, cafe, bakery)
       const types = ['restaurant', 'cafe', 'bakery'];
       service.getPlacePredictions({ input, types }, (results) => {
         // Handle predictions here

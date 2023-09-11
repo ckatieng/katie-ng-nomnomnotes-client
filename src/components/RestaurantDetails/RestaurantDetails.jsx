@@ -11,6 +11,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
+/*
+ * RestaurantDetails Component
+ * - Displays detailed information about a restaurant
+ * - Allows users to add the restaurant to their must-try list
+ */
+
 function RestaurantDetails() {
     // Access the google_places_id parameter from the URL
     const { placeId } = useParams();
@@ -51,9 +57,6 @@ function RestaurantDetails() {
 
     // Function to handle when the add button is clicked
     const addItemHandler = (placeId) => {
-        
-        console.log(placeId);
-
         // Send a POST request to add the restaurant to the must-try list
         axios.post(mustTryURL, {google_places_id: placeId})
             .then((response) => {

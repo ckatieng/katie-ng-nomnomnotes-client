@@ -14,10 +14,18 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 
-function SlideTransition(props) {
-    return <Slide {...props} direction="up" />;
-}
+/* 
+ * AddRestaurant Component
+ * - Represents a component for adding a restaurant to the must-try list
+ * - Uses Google Maps Places Autocomplete to search for restaurants based on user input
+ * - Communicates with backend API to add selected restaurants to the must-try list
+ *
+ * Props:
+ * 'updateMustTryList' prop: a function to update the list of must-try restaurants
+ * 'handleCancelAddRestaurantClick' prop: a function to handle canceling the restaurant addition
+ */
 
+// Load Google Maps script
 function loadScript(src, position, id, callback) {
     if (!position) {
         return;
@@ -34,9 +42,10 @@ function loadScript(src, position, id, callback) {
     position.appendChild(script);
 }
 
+// Reference to the autocomplete service
 const autocompleteService = { current: null };
 
-export default function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
+function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
     const [options, setOptions] = useState([]);
@@ -85,6 +94,7 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
             });
     }, []);
 
+    // Debounced function to fetch autocomplete suggestions
     const fetch = useMemo(() =>
         debounce((request, callback) => {
             // Restrict the search to restaurants
@@ -96,13 +106,11 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
                     locationData.latitude, 
                     locationData.longitude
                 );
-                // radius in meters
+                // Radius in meters
                 console.log(locationData.latitude)
                 console.log(locationData.longitude)
                 request.radius = 2900;
-                
             }
-
             autocompleteService.current.getPlacePredictions(request, callback);
         }, 400),
     [locationData]);
@@ -117,7 +125,6 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
         if (!autocompleteService.current) {
             return undefined;
         }
-
         if (inputValue === "") {
             setOptions(value ? [value] : []);
             return undefined;
@@ -144,6 +151,7 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
         };
     }, [value, inputValue, fetch]);
 
+    // Function to handle adding a restaurant
     const handleAddRestaurant = () => {
         console.log(value);
 
@@ -281,3 +289,5 @@ export default function AddRestaurant({ updateMustTryList, handleCancelAddRestau
         </div>
     );
 }
+
+export default AddRestaurant;

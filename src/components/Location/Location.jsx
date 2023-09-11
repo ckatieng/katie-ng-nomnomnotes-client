@@ -5,9 +5,16 @@ import SelectLocation from "../SelectLocation/SelectLocation";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+/*
+ * Location Component
+ * - Provides a user interface for setting the location
+ * - Includes a close button to navigate back to the previous page
+ */
+
 function Location() {
     const navigate = useNavigate();
 
+    // Callback function to handle the close button click
     const handleCloseClick = useCallback(() => {
         // Use the navigate function to go back to the previous page
         navigate(-1);

@@ -12,6 +12,18 @@ import DeleteIcon from '@mui/icons-material/Close';
 import burger from "../../assets/images/Burger.png";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+/*
+ * MustTryPage Component
+ * - Displays a list of must-try restaurants
+ * - Allows users to add new restaurants and delete existing ones
+ * - Allows marking restaurants as checked
+ * 
+ * Props:
+ * 'showSearchRestaurant' prop: Boolean to show/hide the restaurant search component
+ * 'handleAddRestaurantClick' prop: Function to handle adding a new restaurant
+ * 'handleCancelAddRestaurantClick' prop: Function to handle canceling the addition of a new restaurant
+ */
+
 function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
     const [mustTryItems, setMustTryItems] = useState([]); // State for must-try restaurant items
@@ -23,17 +35,6 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
 
     // Function to update the must-try list from the server
     const updateMustTryList = () => {
-        // Fetch the latest must-try items
-        // axios.get(mustTryURL)
-        //     .then((response) => {
-        //         setMustTryItems(response.data);
-        //         setIsLoading(false);
-        //     })
-        //     .catch((err) => {
-        //         console.error(`Error fetching must-try items: ${err}`);
-        //         setIsLoading(false);
-        //     });
-
         // Send a GET request to fetch must-try items
         axios.get(mustTryURL)
             .then((response) => {
@@ -61,7 +62,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
         // Fetch the initial must-try items when the component mounts
         updateMustTryList();
         
-        // Set isZoomed to true when the component mounts (for zoom effect)
+        // Set isZoomed to true when the component mounts for zoom effect
         setIsZoomed(true);
         return () => {
             // Cleanup function to set isZoomed to false when the component unmounts
@@ -97,7 +98,6 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                         <LoadingSpinner />
                     ) : (
                         <>
-                            
                             {/* Must-Try Items (checkboxes) */}
                             <div className="must-try__checkboxes">
                                 {mustTryItems.length === 0 ? (

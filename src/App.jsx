@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.scss";
-
 import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
 import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
 import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
@@ -10,24 +9,23 @@ import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
-
-import MobileNavigation from "./components/MobileNavigation/MobileNavigation";
+import Navigation from "./components/Navigation/Navigation";
 import AppBar from "./components/AppBar/AppBar";
 import { CssBaseline } from "@mui/material";
 
 /*
  * App.jsx
  * - Represents the main component of the application
- * - Contains navigation and defines routes for different pages
+ * - Contains loading screen, navigation and defines routes for different pages
  */
 
 function App() {
+    // State to track loading state
     const [isLoading, setIsLoading] = useState(true);
     // State to track whether "Add Restaurant" button is clicked
     const [showSearchRestaurant, setShowSearchRestaurant] = useState(false);
     // State to track light/dark mode
     const [mode, setMode] = useState('light');
-
     
     useEffect(() => {
         document.title = 'NomNom Notes';
@@ -110,7 +108,7 @@ function App() {
                                 />} 
                             />
                         </Routes>
-                        {!showSearchRestaurant && <MobileNavigation mode={mode} />}
+                        {!showSearchRestaurant && <Navigation mode={mode} />}
                     </AppBar>
                 )}
             </div>

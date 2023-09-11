@@ -8,6 +8,12 @@ import DeleteIcon from '@mui/icons-material/Close';
 import dessert from "../../assets/images/Dessert.png";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+/*
+ * FavouritesPage Component
+ * - Displays a list of user's favorite items
+ * - Allows users to delete items from their favorites
+ */
+
 function FavouritesPage () {
     // States
     const [favouriteItems, setFavouriteItems] = useState([]);
@@ -56,7 +62,6 @@ function FavouritesPage () {
 
     return (
         <div className="favourites">
-            
             {isLoading ? (
                 // Display loading while fetching data
                 <LoadingSpinner />
@@ -78,7 +83,6 @@ function FavouritesPage () {
                                 {favouriteItems.map((item) => (
                                     <li className="favourites__item" key={item.id}>
                                         <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
-                                        {/* <div className="favourites__item-name">{item.restaurantName}</div> */}
                                         <div className="favourites__delete">
                                             <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
                                                 <DeleteIcon fontSize="inherit"/>
