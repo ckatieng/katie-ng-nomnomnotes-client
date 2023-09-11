@@ -19,6 +19,7 @@ import Slide from '@mui/material/Slide';
  * SelectLocation Component
  * - Allows users to select and set their location
  * - Fetches and displays location suggestions from Google Places API
+ * - After location is succesfully set, it navigates back to home (MustTryPage)
  */
 
 // Function to load the Google Maps script dynamically
@@ -133,7 +134,7 @@ export default function SelectLocation() {
                     fetchLocationDetails(placeId)
                         .then((data) => {
                             if (data) {
-                                const { formattedAddress, latitude, longitude } = data;
+                                const { formattedAddress, latitude, longitude, country, province } = data;
 
                                 // Send the updated location data to your backend
                                 const locationData = {
@@ -141,6 +142,8 @@ export default function SelectLocation() {
                                     longitude,
                                     placeId,
                                     formattedAddress,
+                                    country,
+                                    province,
                                 };
 
                                 // Make a POST request to update the user's location

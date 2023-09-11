@@ -86,8 +86,8 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
 
         axios.get(locationURL)
             .then((response) => {
-                const { formattedAddress, latitude, longitude } = response.data;
-                setLocationData({ formattedAddress, latitude, longitude });
+                const { formattedAddress, latitude, longitude, country, province } = response.data;
+                setLocationData({ formattedAddress, latitude, longitude, country, province });
             })
             .catch((err) => {
                 console.error(`Error fetching location details: ${err}`);
@@ -106,10 +106,14 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                     locationData.latitude, 
                     locationData.longitude
                 );
+
+                // Set the country restriction
+                request.componentRestrictions = {
+                    country: locationData.country,
+                };
+
                 // Radius in meters
-                console.log(locationData.latitude)
-                console.log(locationData.longitude)
-                request.radius = 2900;
+                request.radius = 20000;
             }
             autocompleteService.current.getPlacePredictions(request, callback);
         }, 400),

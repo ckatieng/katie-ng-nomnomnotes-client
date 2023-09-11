@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 /*
  * Location Component
  * - Provides a user interface for setting the location
- * - Includes a close button to navigate back to the previous page
+ * - Includes a close button to navigate back to the previous page (MustTryPage)
  */
 
 function Location() {
