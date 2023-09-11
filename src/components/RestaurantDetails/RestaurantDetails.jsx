@@ -124,17 +124,6 @@ function RestaurantDetails() {
                         <li key={index} className="restaurant-details__hours">{hour}</li>
                     ))}
                 </ul>
-
-            {/* <h3>Reviews:</h3>
-            <ul className="restaurant-details__info">
-                {restaurantDetails.reviews.map((review, index) => (
-                    <li key={index}>
-                        <p>Author: {review.author_name}</p>
-                        <p>Rating: {review.rating}</p>
-                        <p>Text: {review.text}</p>
-                    </li>
-                ))}
-            </ul> */}
             </div>
         </div>
     );

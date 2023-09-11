@@ -2,14 +2,6 @@
 @use "../../styles//partials/variables" as *;
 
 .custom-checkbox {
-    &__checkbox {
-        // color: blue;
-        // background: transparent;
-        // border: 2px solid #e0cdf9;
-        // border-radius: 30px !important;
-        // width: 1rem;
-    }
-    
     &__item-name {
         @include mobile-text-list();
         color: $primary-text-colour;

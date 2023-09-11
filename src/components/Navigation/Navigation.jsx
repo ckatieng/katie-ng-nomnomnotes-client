@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-// import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
 /*
  * Navigation Component
@@ -73,9 +72,6 @@ function Navigation({ mode }) {
                     case 3:
                         navigate('/visited');
                         break;
-                    // case 4:
-                    //     navigate('/nearby');
-                    //     break;
                     default:
                         break;
                 }
@@ -85,7 +81,6 @@ function Navigation({ mode }) {
             <BottomNavigationAction label="Favourites" icon={<FontAwesomeIcon icon={faHeart} className="bottom-navigation__heart"/>} />
             <BottomNavigationAction label="Top 10" icon={<FontAwesomeIcon icon={faStar} className="bottom-navigation__icon"/>} />
             <BottomNavigationAction label="Visited" icon={<FontAwesomeIcon icon={faClockRotateLeft} className="bottom-navigation__icon"/>} />
-            {/* <BottomNavigationAction label="Nearby" icon={<PlaceIcon />} /> */}
         </BottomNavigation>
     );
 }

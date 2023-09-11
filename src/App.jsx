@@ -5,7 +5,6 @@ import MustTryPage from "../src/pages/MustTryPage/MustTryPage";
 import FavouritesPage from "../src/pages/FavouritesPage/FavouritesPage";
 import TopRatedPage from "../src/pages/TopRatedPage/TopRatedPage";
 import VisitedPage from "../src/pages/VisitedPage/VisitedPage";
-import NearbyPage from "../src/pages/NearbyPage/NearbyPage";
 import RestaurantDetails from "./components/RestaurantDetails/RestaurantDetails";
 import LoadingScreen from "../src/components/LoadingScreen/LoadingScreen";
 import Location from "../src/components/Location/Location";
@@ -86,15 +85,11 @@ function App() {
                             {/* Favourites Page */}
                             <Route path="/favourites" element={<FavouritesPage />} />
 
-
                             {/* Top 10 Page */}
                             <Route path="/top-rated" element={<TopRatedPage />} />
 
                             {/* Visited Page */}
                             <Route path="/visited" element={<VisitedPage />} />
-
-                            {/* Nearby Page */}
-                            <Route path="/nearby" element={<NearbyPage />} />
 
                             {/* Location */}
                             <Route path="/location" element={<Location />} />
