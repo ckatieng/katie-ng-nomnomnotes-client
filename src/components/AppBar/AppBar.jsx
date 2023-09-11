@@ -15,7 +15,6 @@ import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Location from "../Location/Location";
 import PlaceIcon from '@mui/icons-material/PlaceSharp';
-// import IosShareIcon from '@mui/icons-material/IosShare';
 
 // Create a context for controlling color mode
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -47,28 +46,14 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
             mode,
             ...(mode === 'light'
                 ? {
-                    // Palette values for light mode
-                    // primary: deepPurple[500],
-                    // divider: 'rgba(0,0,0,0.05)',
-                    // text: {
-                    //     primary: '#a275f9',
-                    //     secondary: '#ad86ea',
-                    // },
                     background: {
                         default: '#f3f6fc',
                     },
                     }
                 : {
-                    // Palette values for dark mode
-                    // primary: deepPurple[500],
-                    // divider: 'rgba(255,255,255,0.4)',
                     background: {
                         default: '#212121',
                     },
-                    // text: {
-                    //     primary: '#bd8eff',
-                    //     secondary: 'white',
-                    // },
                 }),
         },
         typography: {
@@ -111,16 +96,10 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                             }}
                         >
                             <div>
-                                {/* {mode} mode */}
                                 <IconButton onClick={colorMode.toggleColorMode} color="inherit">
                                     {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                                 </IconButton>
                             </div>
-                            {/* <div>
-                                <IconButton color="inherit">
-                                    <IosShareIcon />
-                                </IconButton>
-                            </div> */}
                             <div>
                                 <Fragment>
                                     <IconButton
