@@ -4,7 +4,8 @@ NomNom Notes is an application carefully designed for food lovers in mind to kee
 
 Elevate your dining experiences with NomNom Notes, your ultimate restaurant companion, as remembering where to dine should be as enjoyable as the meal itself.
 
-Note: To use NomNom Notes, you need to set up and connect it to the [server repository](https://github.com/ckatieng/katie-ng-nomnomnotes-server.git).
+Note: To use NomNom Notes, you'll need to set up and connect it to the [server repository](https://github.com/ckatieng/katie-ng-nomnomnotes-server.git).
+
 
 ## Features
 
@@ -18,35 +19,37 @@ Keep all your restaurant options in one place and never forget a great dining sp
 
 **Review & Rate:** 
 
-After visiting a restaurant, simply check it off your list and decide if it's worthy to become a favourite or is a pass. Even if it's a pass, you'll still have access to the restaurants that you have visited but feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
+After visiting a restaurant, simply check it off your list and decide whether it's worthy to become a favourite or is a pass. Even if it's a pass, you'll still have access to the restaurants that you have visited but feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
+
 
 ## How to Use
 
 Clone the client repository:
 
 ```bash
-$ git clone git@github.com:ckatieng/katie-ng-nomnomnotes-client.git
+git clone git@github.com:ckatieng/katie-ng-nomnomnotes-client.git
 ```
 
 Go to the client project directory:
 
 ```bash
-$ cd katie-ng-nomnomnotes-client
+cd katie-ng-nomnomnotes-client
 ```
 
 Install client dependencies:
 
 ```bash
-$ npm install
+npm install
 ```
 
 Start the client:
 
 ```bash
-$ npm start
+npm start
 ```
 
 Note: To use NomNom Notes, it's essential to run both the server and client sides simultaneously. Make sure to run the server side before the client side.
+
 
 ## Tech Stack
 
@@ -56,16 +59,18 @@ Note: To use NomNom Notes, it's essential to run both the server and client side
 
 **Database:** MySQL
 
+
 ## Credits
 
 Graphics: 
 - [https://elements.envato.com/food-icons-5FDDJXG](https://elements.envato.com/food-icons-5FDDJXG)
 
+
 ## Thank You
 
 Thank you for taking the time to checkout NomNom Notes! Feel free to reach out if you have any questions or comments.
 
+
 ---
 LinkedIn [@katiecng](https://www.linkedin.com/in/katiecng/)
-
 GitHub [@ckatieng](https://github.com/ckatieng)
