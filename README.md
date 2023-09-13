@@ -8,14 +8,17 @@ Note: To use NomNom Notes, you need to set up and connect it to the [server repo
 
 ## Features
 
-**Discover:** 
-Did you just hear about an amazing restaurant from a friend? Or did you see a new restaurant on social media? On NomNom Notes, you can explore the most updated database of restaurants and easily add them to your personal "Must-Try" checklist. If you're unsure, view more details about the restaurant and decide for yourself whether it should make your list. Haven't heard of any restaurants recently? Take a look at the "Top 10" list that are rated right within the app for new discoveries. 
+**Discover & Add:** 
 
-**Organize:** 
-Keep all your restaurant options in one place and never forget a great dining spot again. The favourite list ensures you have access to the ones you will want to visit again or is worthy enough to share with others.
+Did you just hear about an amazing restaurant from a friend? Or did you discover a new restaurant on social media? On NomNom Notes, you can explore the most updated database of restaurants and easily add them to your personal "Must-Try" checklist. If you're unsure, view more details about the restaurant and decide for yourself whether it should make your list. Haven't heard of any restaurants recently? Take a look at the "Top 10" list that are rated right within the app for new discoveries. 
 
-**Review:** 
-After visiting a restaurant, simply check it off your list and decide if it's worthy to become a favourite or is a pass. Even if it's a pass, you still have access to the restaurants that you have visited but if you want to forget about it, feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
+**Organize & Track:** 
+
+Keep all your restaurant options in one place and never forget a great dining spot again. The favourite list ensures you have access to the ones you will want to visit again or may be worthy enough to share with others.
+
+**Review & Rate:** 
+
+After visiting a restaurant, simply check it off your list and decide if it's worthy to become a favourite or is a pass. Even if it's a pass, you'll still have access to the restaurants that you have visited but feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
 
 ## How to Use
 
@@ -47,14 +50,11 @@ Note: To use NomNom Notes, it's essential to run both the server and client side
 
 ## Tech Stack
 
-Client:
-- React, JavaScript, SCSS (BEM), Material UI, Axios, Google Maps API
+**Client:** React, JavaScript, SCSS (BEM), Material UI, Axios, Google Maps API
 
-Server: 
-- Node.js, Express, Knex.js, JavaScript, Axios, Google Maps API
+**Server:** Node.js, Express, Knex.js, JavaScript, Axios, Google Maps API
 
-Database: 
-- MySQL
+**Database:** MySQL
 
 ## Credits
 
@@ -67,4 +67,5 @@ Thank you for taking the time to checkout NomNom Notes! Feel free to reach out i
 
 ---
 LinkedIn [@katiecng](https://www.linkedin.com/in/katiecng/)
+
 GitHub [@ckatieng](https://github.com/ckatieng)
