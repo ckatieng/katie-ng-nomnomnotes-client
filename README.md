@@ -1,71 +1,70 @@
-# Getting Started with Create React App
+# NomNom Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+NomNom Notes is an application carefully designed for food lovers in mind to keep track of all the restaurants you want to try in one place. Search and add restaurants to a personal must-try checklist so that when it comes time to eat out, you never forget which restaurants you want to visit again. After experiencing a restaurant, simply check it off your list and decide whether it's worthy to become a favourite or is a pass.
 
-## Available Scripts
+Elevate your dining experiences with NomNom Notes, your ultimate restaurant companion, as remembering where to dine should be as enjoyable as the meal itself.
 
-In the project directory, you can run:
+Note: To use NomNom Notes, you need to set up and connect it to the [server repository](https://github.com/ckatieng/katie-ng-nomnomnotes-server.git).
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Discover:** 
+Did you just hear about an amazing restaurant from a friend? Or did you see a new restaurant on social media? On NomNom Notes, you can explore the most updated database of restaurants and easily add them to your personal "Must-Try" checklist. If you're unsure, view more details about the restaurant and decide for yourself whether it should make your list. Haven't heard of any restaurants recently? Take a look at the "Top 10" list that are rated right within the app for new discoveries. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Organize:** 
+Keep all your restaurant options in one place and never forget a great dining spot again. The favourite list ensures you have access to the ones you will want to visit again or is worthy enough to share with others.
 
-### `npm test`
+**Review:** 
+After visiting a restaurant, simply check it off your list and decide if it's worthy to become a favourite or is a pass. Even if it's a pass, you still have access to the restaurants that you have visited but if you want to forget about it, feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Use
 
-### `npm run build`
+Clone the client repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ git clone git@github.com:ckatieng/katie-ng-nomnomnotes-client.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to the client project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+$ cd katie-ng-nomnomnotes-client
+```
 
-### `npm run eject`
+Install client dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+$ npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the client:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+$ npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Note: To use NomNom Notes, it's essential to run both the server and client sides simultaneously. Make sure to run the server side before the client side.
 
-## Learn More
+## Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Client:
+- React, JavaScript, SCSS (BEM), Material UI, Axios, Google Maps API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Server: 
+- Node.js, Express, Knex.js, JavaScript, Axios, Google Maps API
 
-### Code Splitting
+Database: 
+- MySQL
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Credits
 
-### Analyzing the Bundle Size
+Graphics: 
+- [https://elements.envato.com/food-icons-5FDDJXG](https://elements.envato.com/food-icons-5FDDJXG)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Thank You
 
-### Making a Progressive Web App
+Thank you for taking the time to checkout NomNom Notes! Feel free to reach out if you have any questions or comments.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+---
+LinkedIn [@katiecng](https://www.linkedin.com/in/katiecng/)
+GitHub [@ckatieng](https://github.com/ckatieng)
