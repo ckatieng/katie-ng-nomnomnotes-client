@@ -89,10 +89,8 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                             display: 'flex',
                             width: '100%',
                             alignItems: 'center',
-                            justifyContent: 'flex-start',
+                            justifyContent: 'space-between',
                             borderRadius: 1,
-                            pt: '15px',
-                            pl: '10px',
                             }}
                         >
                             <div>
@@ -126,8 +124,6 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                                             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                             mt: 1.5,
                                             minWidth: 200,
-                                            pt: 0.75,
-                                            pb: 0.75,
                                             '& .MuiAvatar-root': {
                                             width: 32,
                                             height: 32,
