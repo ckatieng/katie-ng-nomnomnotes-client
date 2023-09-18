@@ -2,17 +2,22 @@
 @use "../../styles//partials/variables" as *;
 
 .restaurant-details {
-    @include mobile-padding();
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    text-align: left;
-    max-width: 550px;
 
-    @include tablet {
-        @include desktop-margin();
+    &__container {
+        padding: 0 1rem 6.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+        text-align: left;
+        max-width: 550px;
+        overflow-x: hidden;
+        
+        @include tablet {
+            @include desktop-margin();
+        }   
     }
 
     &__restaurant {
@@ -23,7 +28,7 @@
 
     &__name {
         @include mobile-text-list-title();
-        margin: 3.125rem 1.25rem 1.875rem 0;
+        margin: 3.125rem 1rem 1.875rem 0;
     }
 
     &__info {
@@ -38,14 +43,93 @@
 
     &__hours {
         @include mobile-text-body();
+        margin-bottom: 0;
 
         @include tablet {
             @include tablet-text-body();
         }
     }
 
+    &__hour {
+        @include mobile-text-body();
+
+        @include tablet {
+            @include tablet-text-body();
+        }
+
+        &:last-child {
+            margin-bottom: 20px;
+
+            @include tablet {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
     &__list {
         margin: 0;
+    }
+
+    &__reviews {
+        @include mobile-text-body();
+        padding-bottom: 0.5rem;
+
+        @include tablet {
+            @include tablet-text-body();
+        }
+    }
+
+    &__review-name {
+        @include mobile-text-body();
+        margin: 0;
+        font-weight: 600;
+
+        @include tablet {
+            @include tablet-text-body();
+        }
+    }
+
+    &__review-details {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        @include mobile-text-body();
+
+        @include tablet {
+            @include tablet-text-body();
+        }
+    }
+
+    &__review-rating {
+        margin: 0 1rem 0.5rem 0;
+        font-weight: 500;
+    }
+
+    &__review-time {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.75rem;
+    }
+
+    &__photo-container {
+        display: flex;
+        margin: 0 0 1.875rem;
+        width: 100vw;
+        max-height: 350px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    &__photos {
+        display: flex;
+        align-items: flex-start;
+        margin: 0 1rem 1rem 0;
+    }
+
+    &__photo {
+        max-width: auto;
+        max-height: 220px;
+        margin-right: 1rem;
+        border-radius: 0.75rem;
     }
     
     &__add-icon {
