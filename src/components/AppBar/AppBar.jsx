@@ -89,7 +89,7 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                             display: 'flex',
                             width: '100%',
                             alignItems: 'center',
-                            justifyContent: 'space-between',
+                            justifyContent: 'flex-start',
                             borderRadius: 1,
                             }}
                         >
@@ -104,7 +104,7 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                                         color="inherit"
                                         onClick={handleClick}
                                         size="small"
-                                        sx={{ ml: 2 }}
+                                        sx={{ ml: 0.5 }}
                                         aria-controls={open ? 'account-menu' : undefined}
                                         aria-haspopup="true"
                                         aria-expanded={open ? 'true' : undefined}

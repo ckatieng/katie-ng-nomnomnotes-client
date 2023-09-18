@@ -21,6 +21,7 @@
     }
 
     &__restaurant {
+        @include mobile-padding();
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,25 +29,55 @@
 
     &__name {
         @include mobile-text-list-title();
-        margin: 3.125rem 1rem 1.875rem 0;
+        margin: 3.125rem 1rem 1.875rem;
+        width: auto;
+        max-width: 300px;
+        text-align: center;
+
+        @include tablet {
+            margin-left: 2.5rem;
+        }
     }
 
     &__info {
         @include mobile-text-body();
-        margin-bottom: 20px;
+        margin-bottom: 0.25rem;
 
         @include tablet {
             @include tablet-text-body();
-            margin-bottom: 30px;
+            margin-bottom: 0.5rem;
         }
+    }
+
+    &__photo-container {
+        display: flex;
+        margin: 0 0 1.875rem;
+        width: 100vw;
+        max-height: 350px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    &__photos {
+        display: flex;
+        align-items: flex-start;
+        margin: 1rem 1rem 1rem 0;
+    }
+
+    &__photo {
+        max-width: auto;
+        max-height: 220px;
+        margin-right: 1rem;
+        border-radius: 0.75rem;
     }
 
     &__hours {
         @include mobile-text-body();
-        margin-bottom: 0;
+        margin: 1.25rem 0 0;
 
         @include tablet {
             @include tablet-text-body();
+            margin-top: 1.5rem;
         }
     }
 
@@ -58,10 +89,10 @@
         }
 
         &:last-child {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
 
             @include tablet {
-                margin-bottom: 30px;
+                margin-bottom: 1.875rem;
             }
         }
     }
@@ -79,13 +110,17 @@
         }
     }
 
+    &__review {
+        margin-bottom: 1.75rem;
+    }
+
     &__review-name {
-        @include mobile-text-body();
-        margin: 0;
+        font-size: 1rem;
         font-weight: 600;
+        margin: 0;
 
         @include tablet {
-            @include tablet-text-body();
+            font-size: 1.125rem;
         }
     }
 
@@ -107,29 +142,24 @@
 
     &__review-time {
         margin: 0 0 0.5rem 0;
-        font-size: 0.75rem;
+        padding: 0 0.5rem;
+        border-radius: 8px;
+        font-size: 10px;
+        line-height: 1.1rem;
+        background-color: $primary-colour-light-background;
+        color: #000000;
     }
 
-    &__photo-container {
-        display: flex;
-        margin: 0 0 1.875rem;
-        width: 100vw;
-        max-height: 350px;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
+    &__review-text {
+        @include mobile-text-body();
+        line-height: 1.2rem;
+        margin-bottom: 1.25rem;
 
-    &__photos {
-        display: flex;
-        align-items: flex-start;
-        margin: 0 1rem 1rem 0;
-    }
-
-    &__photo {
-        max-width: auto;
-        max-height: 220px;
-        margin-right: 1rem;
-        border-radius: 0.75rem;
+        @include tablet {
+            @include tablet-text-body();
+            line-height: 1.5rem;
+            margin-bottom: 1.875rem;
+        }
     }
     
     &__add-icon {

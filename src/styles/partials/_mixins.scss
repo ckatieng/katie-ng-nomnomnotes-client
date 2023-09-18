@@ -92,8 +92,8 @@
 
 /* Desktop Margins */
 @mixin desktop-margin() {
-    min-width: 1020px;
-    max-width: 1020px;
+    min-width: 700px;
+    max-width: 700px;
     margin-right: auto;
     margin-left: auto;
 }
