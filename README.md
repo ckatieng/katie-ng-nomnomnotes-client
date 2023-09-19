@@ -23,7 +23,7 @@ After visiting a restaurant, simply check it off your list and decide whether it
 
 **Dark Mode:**
 
-Prefer a dark interface? Enable dark mode for a more comfortable viewing experience in low-light environments and enjoy the ease of switching based on your mode or preference!
+Prefer a dark interface? Enable dark mode for a more comfortable viewing experience in low-light environments and enjoy the ease of switching based on your mood or preference!
 
 
 ## How to Use
