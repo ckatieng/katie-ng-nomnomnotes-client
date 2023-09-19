@@ -14,7 +14,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
  * - Allows users to delete items from their favorites
  */
 
-function FavouritesPage () {
+function FavouritesPage ({ mode }) {
     // States
     const [favouriteItems, setFavouriteItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -81,7 +81,7 @@ function FavouritesPage () {
                             <>
                                 <h2 className="favourites__title">Favourites List</h2>
                                 {favouriteItems.map((item) => (
-                                    <li className="favourites__item" key={item.id}>
+                                    <li className={`favourite__item ${mode === 'dark' ? 'favourite__dark-mode' : ''}`} key={item.id}>
                                         <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
                                         <div className="favourites__delete">
                                             <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>

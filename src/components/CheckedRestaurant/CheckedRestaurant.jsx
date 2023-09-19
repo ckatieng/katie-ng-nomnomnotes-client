@@ -18,7 +18,7 @@ import Button from '../Button/Button';
  * 'updateMustTryList' prop: a function to update the list of must-try restaurants
  */
 
-function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList }) {
+function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList, mode }) {
     // States
     const [selectedOption, setSelectedOption] = useState("No");
     const [rating, setRating] = useState(0);
@@ -96,7 +96,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
 
     return(
         <div className="checked-restaurant">
-            <div className="checked-restaurant__container">
+            <div className={`checked-restaurant__container ${mode === 'dark' ? 'checked-restaurant__dark-mode' : ''}`}>
                 <IconButton
                     aria-label="close"
                     onClick={closeModal}

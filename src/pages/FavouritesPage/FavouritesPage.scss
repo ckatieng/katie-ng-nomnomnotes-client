@@ -48,6 +48,10 @@
         @include list-item();
     }
 
+    &__dark-mode {
+        @include list-item-dark-mode();
+    }
+
     &__item-name {
         @include mobile-text-list();
         color: $primary-text-colour;

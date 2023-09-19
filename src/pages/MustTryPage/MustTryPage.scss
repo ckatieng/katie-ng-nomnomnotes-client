@@ -51,6 +51,10 @@
         @include list-item();
     }
 
+    &__dark-mode {
+        @include list-item-dark-mode();
+    }
+
     &__item:hover &__delete-icon {
         visibility: visible;
     }

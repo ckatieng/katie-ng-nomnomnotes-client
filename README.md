@@ -60,6 +60,14 @@ Note: To use NomNom Notes, it's essential to run both the server and client side
 **Database:** MySQL
 
 
+## Roadmap
+
+- **Shareable Lists:** Implement the ability for users to share restaurant lists with friends via a unique URL, enabling real-time updates and the option for friends to add the restaurants to their own lists
+- **User Authentication:** Integrate Passport.js to provide user authentication features like login and signup
+- **Location-Based Services:** Add a map feature that allows users to find nearby restaurants on their lists based on their current location to enhance user experience and convenience
+- **Mobile App Development:** Expand the application by developing a mobile application using React Native to provide a richer mobile experience
+
+
 ## Credits
 
 Graphics: 

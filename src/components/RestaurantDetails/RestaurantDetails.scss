@@ -29,13 +29,15 @@
 
     &__name {
         @include mobile-text-list-title();
-        margin: 3.125rem 1rem 1.875rem;
+        font-size: 1.5625rem;
+        line-height: 1.75rem;
+        margin: 3.125rem 1rem 1.875rem 2.75rem;
         width: auto;
         max-width: 300px;
         text-align: center;
 
         @include tablet {
-            margin-left: 2.5rem;
+            max-width: 400px;
         }
     }
 

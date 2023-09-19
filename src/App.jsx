@@ -66,6 +66,7 @@ function App() {
                                         showSearchRestaurant={showSearchRestaurant}
                                         handleAddRestaurantClick={handleAddRestaurantClick}
                                         handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                        mode={mode}
                                     />
                                 )}
                             />
@@ -76,6 +77,7 @@ function App() {
                                     showSearchRestaurant={showSearchRestaurant}
                                     handleAddRestaurantClick={handleAddRestaurantClick}
                                     handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                    mode={mode}
                                 />
                             }/>
 
@@ -100,6 +102,7 @@ function App() {
                                     showSearchRestaurant={showSearchRestaurant}
                                     handleAddRestaurantClick={handleAddRestaurantClick}
                                     handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                    mode={mode}
                                 />} 
                             />
                         </Routes>

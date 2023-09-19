@@ -24,7 +24,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
  * 'handleCancelAddRestaurantClick' prop: Function to handle canceling the addition of a new restaurant
  */
 
-function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
+function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick, mode }) {
     // States
     const [mustTryItems, setMustTryItems] = useState([]); // State for must-try restaurant items
     const [isLoading, setIsLoading] = useState(true); // State to track loading state
@@ -113,13 +113,14 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                     <>
                                     <h2 className="must-try__title">Must-Try List</h2>
                                     {mustTryItems.map((item) => (
-                                        <div className="must-try__item" key={item.id}>
+                                        <div className={`must-try__item ${mode === 'dark' ? 'must-try__dark-mode' : ''}`} key={item.id}>
                                             <CustomCheckbox 
                                                 key={item.id} 
                                                 itemId={item.id} 
                                                 itemName={item.restaurantName}
                                                 googlePlacesId={item.google_places_id}
-                                                updateMustTryList={updateMustTryList} 
+                                                updateMustTryList={updateMustTryList}
+                                                mode={mode} 
                                             />
                                             <div className="must-try__delete">
                                                 <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>

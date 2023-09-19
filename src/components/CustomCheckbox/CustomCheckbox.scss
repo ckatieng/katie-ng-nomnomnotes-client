@@ -15,4 +15,8 @@
             color: $primary-text-hover-colour;
         }
     }
+
+    &__dark-mode {
+        color: $primary-colour-light-background;
+    }
 }

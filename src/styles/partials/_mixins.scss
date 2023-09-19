@@ -119,3 +119,7 @@
         border-bottom: none;
     }
 }
+
+@mixin list-item-dark-mode {
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+}

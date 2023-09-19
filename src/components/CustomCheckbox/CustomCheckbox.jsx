@@ -14,7 +14,7 @@ import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
  * 'updateMustTryList' prop: a function to update the list of must-try restaurants
  */
 
-function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList }) {
+function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, mode }) {
     // States
     const [isNotChecked, setIsNotChecked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +45,7 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList })
                     onChange={handleCheckboxClick}
                     aria-label={itemName} // Accessibility: Add an aria-label
                 />
-                <Link to={`/restaurant/${googlePlacesId}`} className="custom-checkbox__item-name">{itemName}</Link> 
+                <Link to={`/restaurant/${googlePlacesId}`} className={`custom-checkbox__item-name ${mode === 'dark' ? 'custom-checkbox__dark-mode' : ''}`}>{itemName}</Link> 
                 
             </label>
             
@@ -57,6 +57,7 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList })
                     googlePlacesId={googlePlacesId}
                     closeModal={closeModal}
                     updateMustTryList={updateMustTryList}
+                    mode={mode}
                 />
             )}
         </div>
