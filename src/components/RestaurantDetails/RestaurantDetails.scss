@@ -49,6 +49,11 @@
         }
     }
 
+    &__star-icon {
+        margin-left: 0.25rem;
+        color: $primary-text-colour;
+    }
+
     &__photo-container {
         display: flex;
         margin: 0 0 1.875rem;
@@ -61,7 +66,7 @@
     &__photos {
         display: flex;
         align-items: flex-start;
-        margin: 1rem 1rem 1rem 0;
+        margin: 1rem 1.75rem 1rem 0;
     }
 
     &__photo {

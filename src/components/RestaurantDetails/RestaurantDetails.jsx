@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,6 +9,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 /*
  * RestaurantDetails Component
@@ -121,13 +122,25 @@ function RestaurantDetails() {
                     </div>
                 </div>
                 
-                <p className="restaurant-details__info"><strong>Rating: </strong>{restaurantDetails.rating}</p>
-                <p className="restaurant-details__info"><strong>Price Level: </strong>{renderPriceLevel(restaurantDetails.priceLevel)}</p>
+                {/* Rating */}
+                {restaurantDetails.rating && (
+                    <p className="restaurant-details__info">
+                        <strong>Rating: </strong>{restaurantDetails.rating}
+                        <FontAwesomeIcon className="restaurant-details__star-icon" icon={faStar}/>
+                    </p>
+                )}
+
+                {/* Price Level */}
+                {restaurantDetails.priceLevel && (
+                    <p className="restaurant-details__info">
+                        <strong>Price Level: </strong>{renderPriceLevel(restaurantDetails.priceLevel)}
+                    </p>
+                )}
 
                 {/* Photos */}
                 <div className="restaurant-details__photo-container">
                     <div className="restaurant-details__photos">
-                        {restaurantDetails.photos.map((photo, index) => (
+                        {restaurantDetails.photos?.map((photo, index) => (
                             <img
                                 key={index}
                                 src={photo.photo_url}
@@ -138,12 +151,31 @@ function RestaurantDetails() {
                     </div>
                 </div>
 
-                <p className="restaurant-details__info"><strong>Address: </strong>{restaurantDetails.address}</p>
-                <p className="restaurant-details__info"><strong>Phone: </strong>{restaurantDetails.phone}</p>
-                <p className="restaurant-details__info"><strong>Website: </strong>{restaurantDetails.website}</p>
+                {/* Address */}
+                {restaurantDetails.address && (
+                    <p className="restaurant-details__info">
+                        <strong>Address: </strong>{restaurantDetails.address}
+                    </p>
+                )}
+
+                {/* Phone */}
+                {restaurantDetails.phone && (
+                    <p className="restaurant-details__info">
+                        <strong>Phone: </strong>{restaurantDetails.phone}
+                    </p>
+                )}
+
+                {/* Website */}
+                {restaurantDetails.website && (
+                    <p className="restaurant-details__info">
+                        <strong>Website: </strong>{restaurantDetails.website}
+                    </p>
+                )}
+
+                {/* Hours */}
                 <p className="restaurant-details__hours"><strong>Hours: </strong></p>
                     <ul className="restaurant-details__list">
-                        {restaurantDetails.hours.map((hour, index) => (
+                        {restaurantDetails.hours?.map((hour, index) => (
                             <li key={index} className="restaurant-details__hour">{hour}</li>
                         ))}
                     </ul>

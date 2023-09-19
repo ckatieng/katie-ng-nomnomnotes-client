@@ -12,6 +12,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+/*
+ * TopRatedPage Component
+ * - Displays a list of top-rated restaurants (Top 10)
+ * - Allows adding restaurants to the must-try list
+ */
+
 function TopRatedPage () {
     // States
     const [topRatedItems, setTopRatedItems] = useState([]);
