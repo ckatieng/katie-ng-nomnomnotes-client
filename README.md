@@ -21,6 +21,10 @@ Keep all your restaurant options in one place and never forget a great dining sp
 
 After visiting a restaurant, simply check it off your list and decide whether it's worthy to become a favourite or is a pass. Even if it's a pass, you'll still have access to the restaurants that you have visited but feel free to delete and remove it altogether. You also have the option to provide a rating after your dining experience and influence the "Top 10" list.
 
+**Dark Mode:**
+
+Prefer a dark interface? Enable dark mode for a more comfortable viewing experience in low-light environments and enjoy the ease of switching based on your mode or preference!
+
 
 ## How to Use
 
@@ -63,8 +67,11 @@ Note: To use NomNom Notes, it's essential to run both the server and client side
 ## Roadmap
 
 - **Shareable Lists:** Implement the ability for users to share restaurant lists with friends via a unique URL, enabling real-time updates and the option for friends to add the restaurants to their own lists
+
 - **User Authentication:** Integrate Passport.js to provide user authentication features like login and signup
+
 - **Location-Based Services:** Add a map feature that allows users to find nearby restaurants on their lists based on their current location to enhance user experience and convenience
+
 - **Mobile App Development:** Expand the application by developing a mobile application using React Native to provide a richer mobile experience
 
 
