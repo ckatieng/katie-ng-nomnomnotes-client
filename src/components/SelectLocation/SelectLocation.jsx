@@ -14,6 +14,7 @@ import { debounce } from "@mui/material/utils";
 import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
+import config from '../../utils/config';
 
 /*
  * SelectLocation Component
@@ -147,7 +148,7 @@ export default function SelectLocation() {
                                 };
 
                                 // Make a POST request to update the user's location
-                                axios.post('http://localhost:5050/api/google-api/set-location', locationData)
+                                axios.post(`${config.serverUrl}/api/google-api/set-location`, locationData)
                                     .then((response) => {
                                         console.log('Location updated successfully:', response.data);
 

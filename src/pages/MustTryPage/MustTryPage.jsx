@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { fetchRestaurantName } from "../../utils/googlePlacesService";
+import { fetchRestaurantName } from '../../utils/googlePlacesService';
 import './MustTryPage.scss';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -10,7 +10,8 @@ import CustomCheckbox from '../../components/CustomCheckbox/CustomCheckbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
 import burger from "../../assets/images/Burger.png";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import config from '../../utils/config';
 
 /*
  * MustTryPage Component
@@ -31,12 +32,12 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     const [isZoomed, setIsZoomed] = useState(false); // State to control zoom effect
 
     // Must-Try API URL
-    const mustTryURL = "http://localhost:5050/api/must-try";
+    const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
     // Function to update the must-try list from the server
     const updateMustTryList = () => {
         // Send a GET request to fetch must-try items
-        axios.get(mustTryURL)
+        axios.get(mustTryUrl)
             .then((response) => {
                 // Map over the must-try items and fetch restaurant names
                 Promise.all(
@@ -72,7 +73,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
 
     // Function to handle when the delete button is clicked
     const deleteItemHandler = (itemId) => {
-        axios.delete(`${mustTryURL}/${itemId}`)
+        axios.delete(`${mustTryUrl}/${itemId}`)
             .then((response) => {
                 // Remove the deleted item from the local state
                 setMustTryItems((prevItems) =>
@@ -113,7 +114,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                     <>
                                     <h2 className="must-try__title">Must-Try List</h2>
                                     {mustTryItems.map((item) => (
-                                        <div className={`must-try__item ${mode === 'dark' ? 'must-try__dark-mode' : ''}`} key={item.id}>
+                                        <div className={`must-try__item ${mode === 'dark' ? 'must-try__item-dark-mode' : ''}`} key={item.id}>
                                             <CustomCheckbox 
                                                 key={item.id} 
                                                 itemId={item.id} 

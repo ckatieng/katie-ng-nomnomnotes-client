@@ -51,7 +51,7 @@
         @include list-item();
     }
 
-    &__dark-mode {
+    &__item-dark-mode {
         @include list-item-dark-mode();
     }
 

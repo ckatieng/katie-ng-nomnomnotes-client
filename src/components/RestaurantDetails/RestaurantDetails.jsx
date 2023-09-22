@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import "./RestaurantDetails.scss";
+import axios from 'axios';
+import { useEffect, useState, useCallback } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './RestaurantDetails.scss';
 import { fetchRestaurantDetails } from "../../utils/googlePlacesService";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,7 +10,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import config from '../../utils/config';
 
 /*
  * RestaurantDetails Component
@@ -54,12 +55,12 @@ function RestaurantDetails() {
     }
 
     // Must-Try API URL
-    const mustTryURL = "http://localhost:5050/api/must-try";
+    const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
     // Function to handle when the add button is clicked
     const addItemHandler = (placeId) => {
         // Send a POST request to add the restaurant to the must-try list
-        axios.post(mustTryURL, {google_places_id: placeId})
+        axios.post(mustTryUrl, {google_places_id: placeId})
             .then((response) => {
                 console.log("Restaurant added to must-try list:", response.data);
 

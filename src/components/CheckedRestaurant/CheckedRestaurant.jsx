@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
 import Button from '../Button/Button';
+import config from '../../utils/config';
 
 /*
  * CheckedRestaurant Component
@@ -31,7 +32,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         };
 
         // Make a PUT request to move the item to favourites
-        axios.put(`http://localhost:5050/api/must-try/${itemId}/move-to-favourites`, 
+        axios.put(`${config.serverUrl}/api/must-try/${itemId}/move-to-favourites`, 
             // Send the rating to the server 
             ratingData)
             .then((response) => {
@@ -51,7 +52,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         };
 
         // Make a PUT request to move the item to visited
-        axios.put(`http://localhost:5050/api/must-try/${itemId}/move-to-visited`, ratingData)
+        axios.put(`${config.serverUrl}/api/must-try/${itemId}/move-to-visited`, ratingData)
             .then((response) => {
                 closeModal();
                 updateMustTryList();
@@ -67,7 +68,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
         const ratingToSend = newValue > 0 ? newValue : null;
 
         // Make a POST request to add rating to table
-        axios.post("http://localhost:5050/api/ratings", { 
+        axios.post(`${config.serverUrl}/api/ratings`, { 
             googlePlacesId: googlePlacesId,
             rating: ratingToSend,
         })

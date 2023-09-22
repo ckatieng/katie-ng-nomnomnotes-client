@@ -11,6 +11,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import config from '../../utils/config';
 
 /*
  * TopRatedPage Component
@@ -28,11 +29,11 @@ function TopRatedPage () {
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     // Top-Rated API URL
-    const topRatedURL = "http://localhost:5050/api/ratings/top-rated";
+    const topRatedUrl = `${config.serverUrl}/api/ratings/top-rated`;
 
     useEffect(() => {
         // Send a GET request to fetch top-rated items
-        axios.get(topRatedURL)
+        axios.get(topRatedUrl)
             .then((response) => {
                 // Map over the top-rated items and fetch restaurant names
                 Promise.all(
@@ -57,13 +58,13 @@ function TopRatedPage () {
     }, []);
 
     // Must-Try API URL
-    const mustTryURL = "http://localhost:5050/api/must-try";
+    const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
     // Function to handle when the add button is clicked
     const addItemHandler = (googlePlacesId) => {
         
         // Send a POST request to add the restaurant to the must-try list
-        axios.post(mustTryURL, {google_places_id: googlePlacesId})
+        axios.post(mustTryUrl, {google_places_id: googlePlacesId})
             .then((response) => {
                 console.log("Restaurant added to must-try list:", response.data);
 

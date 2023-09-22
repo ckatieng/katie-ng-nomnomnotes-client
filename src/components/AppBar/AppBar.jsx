@@ -17,7 +17,7 @@ import Location from "../Location/Location";
 import PlaceIcon from '@mui/icons-material/PlaceSharp';
 
 // Create a context for controlling color mode
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 /*
  * AppBar Component

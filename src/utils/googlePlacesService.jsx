@@ -1,11 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
+import config from './config';
 
 // Fetch Google API Key from the backend
 export function fetchGoogleApiKey() {
     // API Key URL
-    const apiKeyURL = "http://localhost:5050/api/google-api";
+    const apiKeyUrl = `${config.serverUrl}/api/google-api`;
 
-    return axios.get(apiKeyURL)
+    return axios.get(apiKeyUrl)
         .then((response) => {
             return response.data.apiKey;
         })
@@ -17,7 +18,7 @@ export function fetchGoogleApiKey() {
 
 // Fetch Restaurant Name from the backend
 export function fetchRestaurantName(placeId) {
-    return axios.get(`http://localhost:5050/api/restaurant/${placeId}`)
+    return axios.get(`${config.serverUrl}/api/restaurant/${placeId}`)
         .then((response) => {
             return response.data.name;
         })
@@ -29,7 +30,7 @@ export function fetchRestaurantName(placeId) {
 
 // Fetch Restaurant Details from the backend
 export function fetchRestaurantDetails(placeId) {
-    return axios.get(`http://localhost:5050/api/restaurant/details/${placeId}`)
+    return axios.get(`${config.serverUrl}/api/restaurant/details/${placeId}`)
         .then((response) => {
             return response.data;
         })
@@ -41,9 +42,9 @@ export function fetchRestaurantDetails(placeId) {
 // Fetch Saved User Location Details
 export function fetchUserLocation() {
     // Location URL
-    const locationURL = "http://localhost:5050/api/users/location";
+    const locationUrl = `${config.serverUrl}/api/users/location`;
 
-    return axios.get(locationURL)
+    return axios.get(locationUrl)
         .then((response) => {
             return response.data;
         })
@@ -54,7 +55,7 @@ export function fetchUserLocation() {
 
 // Fetch Location Details from the backend
 export function fetchLocationDetails(placeId) {
-    return axios.get(`http://localhost:5050/api/google-api/${placeId}`)
+    return axios.get(`${config.serverUrl}/api/google-api/${placeId}`)
         .then((response) => {
             return response.data;
         })
