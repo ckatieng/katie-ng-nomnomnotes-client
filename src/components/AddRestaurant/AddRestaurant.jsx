@@ -13,6 +13,7 @@ import { debounce } from "@mui/material/utils";
 import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
+import config from'../../utils/config';
 
 /* 
  * AddRestaurant Component
@@ -81,10 +82,10 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
 
     // Fetch the user's location details
     useEffect(() => {
-         // Location URL
-        const locationURL = "http://localhost:5050/api/users/location";
+         // Location Url
+        const locationUrl = `${config.serverUrl}/api/users/location`;
 
-        axios.get(locationURL)
+        axios.get(locationUrl)
             .then((response) => {
                 const { formattedAddress, latitude, longitude, country, province } = response.data;
                 setLocationData({ formattedAddress, latitude, longitude, country, province });
@@ -169,10 +170,10 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
         const google_places_id = value.place_id;
 
         // Must-try URL
-        const mustTryURL = "http://localhost:5050/api/must-try";
+        const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
         // Send a POST request to add the restaurant to the must-try list
-        axios.post(mustTryURL, { google_places_id })
+        axios.post(mustTryUrl, { google_places_id })
             .then((response) => {
                 console.log("Restaurant added to must-try list:", response.data);
 

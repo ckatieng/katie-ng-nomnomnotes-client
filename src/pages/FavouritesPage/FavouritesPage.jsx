@@ -10,6 +10,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import config from '../../utils/config';
 
 /*
  * FavouritesPage Component
@@ -25,11 +26,11 @@ function FavouritesPage ({ mode }) {
     const [isLoading, setIsLoading] = useState(true);
 
     // Favourites API URL
-    const favouritesURL = "http://localhost:5050/api/favourites";
+    const favouritesUrl = `${config.serverUrl}/api/favourites`;
 
     useEffect(() => {
         // Send a GET request to fetch favorite items
-        axios.get(favouritesURL)
+        axios.get(favouritesUrl)
             .then((response) => {
                 // Map over the favorite items and fetch restaurant names
                 Promise.all(
@@ -49,11 +50,11 @@ function FavouritesPage ({ mode }) {
                 console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
-    }, []);
+    }, [favouritesUrl]);
 
     // Function to handle when the delete button is clicked
     const deleteItemHandler = (itemId) => {
-        axios.delete(`${favouritesURL}/${itemId}`)
+        axios.delete(`${favouritesUrl}/${itemId}`)
             .then((response) => {
                 // Remove the deleted item from the local state
                 setFavouriteItems((prevItems) =>

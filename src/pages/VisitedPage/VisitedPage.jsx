@@ -1,12 +1,13 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { fetchRestaurantName } from "../../utils/googlePlacesService";
-import "./VisitedPage.scss";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { fetchRestaurantName } from '../../utils/googlePlacesService';
+import './VisitedPage.scss';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Close';
-import dimsum from "../../assets/images/Dimsum.png";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import dimsum from '../../assets/images/Dimsum.png';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import config from '../../utils/config';
 
 /*
  * VisitedPage Component
@@ -20,11 +21,11 @@ function VisitedPage () {
     const [isLoading, setIsLoading] = useState(true);
 
     // Visited API URL
-    const visitedURL = "http://localhost:5050/api/visited";
+    const visitedUrl = `${config.serverUrl}/api/visited`;
 
     useEffect(() => {
         // Send a GET request to fetch visited items
-        axios.get(visitedURL)
+        axios.get(visitedUrl)
             .then((response) => {
                 // Map over the visited items and fetch restaurant names
                 Promise.all(
@@ -48,7 +49,7 @@ function VisitedPage () {
 
     // Function to handle when the delete button is clicked
     const deleteItemHandler = (itemId) => {
-        axios.delete(`${visitedURL}/${itemId}`)
+        axios.delete(`${visitedUrl}/${itemId}`)
             .then((response) => {
                 // Remove the deleted item from the local state
                 setVisitedItems((prevItems) =>
