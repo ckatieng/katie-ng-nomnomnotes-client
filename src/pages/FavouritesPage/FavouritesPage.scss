@@ -5,12 +5,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;  
-    padding: 3.125rem 1rem 6.25rem; 
+    // padding: 3.125rem 1rem 6.25rem; 
+    padding: 0rem 1rem 6.25rem; 
 
     &__title {
         @include mobile-text-list-title();
         color: $primary-title-colour;
         text-align: center;
+        padding-top: 0.65rem;
     }
 
     &__list {
@@ -44,13 +46,22 @@
         max-width: 330px;
     }
 
+    &__share-icon {
+        color: #ccc;
+        margin-right: 2px;
+
+        &:hover {
+            color: #bbb;
+        }
+    }
+
     &__item {
         @include list-item();
     }
 
-    &__dark-mode {
-        @include list-item-dark-mode();
-    }
+    // &__dark-mode {
+    //     @include list-item-dark-mode();
+    // }
 
     &__item-name {
         @include mobile-text-list();

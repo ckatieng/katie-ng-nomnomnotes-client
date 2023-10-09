@@ -1,5 +1,6 @@
 
 import { useState, useMemo, createContext} from 'react';
+import { useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './AppBar.scss';
 import IconButton from '@mui/material/IconButton';
@@ -31,6 +32,8 @@ const ColorModeContext = createContext({ toggleColorMode: () => {} });
  */
 
 function AppBar({ children, showSearchRestaurant, mode, setMode }) {  
+    const location = useLocation();
+
     // Create a context for controlling color mode
     const colorMode = useMemo(
         () => ({
@@ -76,7 +79,6 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
     const handleLocation = () => {
         <Location />
     }
-
   
     return (
         // Provide the color mode context and apply the theme
@@ -88,8 +90,8 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                             sx={{
                             display: 'flex',
                             width: '100%',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-between',
                             borderRadius: 1,
                             }}
                         >
@@ -98,7 +100,8 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                                     {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                                 </IconButton>
                             </div>
-                            <div>
+                                
+                            <div style={{ display: location.pathname === '/must-try' || location.pathname === '/favourites' || location.pathname === '/top-rated' || location.pathname === '/visited' ? 'block' : 'none' }}>
                                 <Fragment>
                                     <IconButton
                                         color="inherit"
@@ -108,6 +111,10 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                                         aria-controls={open ? 'account-menu' : undefined}
                                         aria-haspopup="true"
                                         aria-expanded={open ? 'true' : undefined}
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                        }}
                                     >
                                         <MoreVertIcon />
                                     </IconButton>

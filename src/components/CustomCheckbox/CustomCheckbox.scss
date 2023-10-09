@@ -2,6 +2,44 @@
 @use "../../styles//partials/variables" as *;
 
 .custom-checkbox {
+    &__label {
+        display: flex;
+        align-items: center;
+        position: relative;    
+    }
+
+    &__checkbox {
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid $primary-checkbox-colour;
+        border-radius: 30px; 
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transition: box-shadow 0.3s, background-color 0.3s;
+        position: relative;
+
+        &:checked {
+            background-color: $primary-checkbox-colour;
+            animation: pop 0.3s ease;
+
+            & + .custom-checkbox__item-name {
+                text-decoration: line-through;
+                color: rgba(79,41,119, 0.25);
+            }
+        }
+
+        &:hover {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    @keyframes pop {
+        0% { opacity: 0; transform: scale(0.8); }
+        75% { opacity: 1; transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
     &__item-name {
         @include mobile-text-list();
         color: $primary-text-colour;
@@ -16,7 +54,18 @@
         }
     }
 
-    &__dark-mode {
+    &__item-name-dark-mode {
         color: $primary-colour-light-background;
+    }
+
+    &__checkbox-dark-mode {
+        color: $primary-colour-light-background;
+
+        &:checked {
+            & + .custom-checkbox__item-name-dark-mode {
+                text-decoration: line-through;
+                color: rgba(231,210,255, 0.4);
+            }
+        }
     }
 }

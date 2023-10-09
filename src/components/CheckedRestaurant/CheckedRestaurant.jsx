@@ -5,6 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
 import Button from '../Button/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
 
 /*
  * CheckedRestaurant Component
@@ -20,8 +22,12 @@ import Button from '../Button/Button';
 
 function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList, mode }) {
     // States
-    const [selectedOption, setSelectedOption] = useState("No");
+    const [selectedOption, setSelectedOption] = useState("");
     const [rating, setRating] = useState(0);
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
      // Function to move the restaurant to favorites
     const handleMoveToFavourites = () => {
@@ -86,12 +92,21 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
 
     // Function to handle form submission
     const handleSubmit = () => {
-        if (selectedOption === 'Yes') {
-            handleMoveToFavourites();
-        } else if (selectedOption === 'No') {
-            handleMoveToVisited();
+        // Check if either 'Yes' or 'No' is selected
+        if (selectedOption === 'Yes' || selectedOption === 'No') {
+            // Perform the submission logic only if one is selected
+            if (selectedOption === 'Yes') {
+                handleMoveToFavourites();
+            } else if (selectedOption === 'No') {
+                handleMoveToVisited();
+            }
+            handleRating(rating);
+        } else {
+            console.error('Please select an option.');
+            // Show an error message in the Snackbar
+            setSnackbarMessage("Please select No or Yes.");
+            setSnackbarOpen(true);
         }
-        handleRating(rating);
     }
 
     return(
@@ -115,31 +130,50 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                 </div>
                 <div className="checked-restaurant__results">
                     <p className="checked-restaurant__paragraph">Would you like to add {itemName} to your favorites?</p>
-                    <div>
-                        <label>
+                    <div className="checked-restaurant__radio">
+                        <div className="checked-restaurant__radio-button">
                             <input
+                                className="checked-restaurant__radio-input"
                                 type="radio"
+                                id="radio-no"
                                 value="No"
                                 checked={selectedOption === "No"}
                                 onChange={handleOptionSelect}
                             />
-                            No
-                        </label>
-                        <label>
+                            <label className="checked-restaurant__radio-label" htmlFor="radio-no">
+                                No
+                            </label>
+                        </div>
+
+                        <div className="checked-restaurant__radio-button">
                             <input
+                                className="checked-restaurant__radio-input"
                                 type="radio"
+                                id="radio-yes"
                                 value="Yes"
                                 checked={selectedOption === "Yes"}
                                 onChange={handleOptionSelect}
                             />
-                            Yes
-                        </label>
+                            <label className="checked-restaurant__radio-label" htmlFor="radio-yes">
+                                Yes
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div className="checked-restaurant__done">
                     <Button variant="primary" text="Submit" onClick={handleSubmit} />
                 </div>
             </div>
+
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000} 
+                onClose={() => setSnackbarOpen(false)}
+                TransitionComponent={Slide}
+                message={snackbarMessage}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                style={{ marginBottom: '60px' }}
+            />
         </div>
     );
 }

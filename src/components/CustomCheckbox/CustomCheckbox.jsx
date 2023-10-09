@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./CustomCheckbox.scss";
 import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
@@ -16,37 +16,51 @@ import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
 
 function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, mode }) {
     // States
-    const [isNotChecked, setIsNotChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Effect to handle modal opening when the checkbox state changes
+    useEffect(() => {
+        let timer;
+        if (isChecked) {
+            timer = setTimeout(() => {
+                setIsModalOpen(true);
+            }, 500);
+        }
+
+        return () => {
+            // Clear the timer if the checkbox is unchecked before the delay completes
+            clearTimeout(timer);
+        };
+    }, [isChecked]);
 
     // Function to handle checkbox click
     const handleCheckboxClick = () => {
-        setIsNotChecked(!isNotChecked);
-
-        // Open the modal when the checkbox is clicked
-        if (!isNotChecked) {
-            setIsModalOpen(true);
-        }
+        setIsChecked(!isChecked);
     };
     
     // Function to close the modal
     const closeModal = () => {
         setIsModalOpen(false);
-        setIsNotChecked(false);
+        setIsChecked(false);
     }
 
     return(
         <div className="custom-checkbox">
             <label className="custom-checkbox__label">
                 <input
-                    className="custom-checkbox__checkbox"
+                    className={`custom-checkbox__checkbox ${mode === 'dark' ? 'custom-checkbox__checkbox-dark-mode' : ''}`}
                     type="checkbox"
-                    checked={isNotChecked}
+                    checked={isChecked}
                     onChange={handleCheckboxClick}
                     aria-label={itemName} // Accessibility: Add an aria-label
                 />
-                <Link to={`/restaurant/${googlePlacesId}`} className={`custom-checkbox__item-name ${mode === 'dark' ? 'custom-checkbox__dark-mode' : ''}`}>{itemName}</Link> 
-                
+                <Link 
+                    to={`/restaurant/${googlePlacesId}`} 
+                    className={`custom-checkbox__item-name ${mode === 'dark' ? 'custom-checkbox__item-name-dark-mode' : ''}`}
+                >
+                    {itemName}
+                </Link>  
             </label>
             
             {/* Checked Restaurant Modal */}
