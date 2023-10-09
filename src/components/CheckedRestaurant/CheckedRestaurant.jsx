@@ -5,12 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HoverRating from "../HoverRating/HoverRating";
 import Button from '../Button/Button';
-<<<<<<< HEAD
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
-=======
 import config from '../../utils/config';
->>>>>>> develop
 
 /*
  * CheckedRestaurant Component
