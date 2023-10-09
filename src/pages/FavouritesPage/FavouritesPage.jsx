@@ -68,7 +68,7 @@ function FavouritesPage ({ mode }) {
     // Function to handle when the share icon is clicked
     const handleShareClick = () => {
         // Get the user's ID
-        // const userId = getUserID();
+        const userId = req.user.id;
 
         // Create a unique shareable link with the user's ID
         // const shareableLink = `${window.location.origin}${location.pathname}?userId=${userId}`;
