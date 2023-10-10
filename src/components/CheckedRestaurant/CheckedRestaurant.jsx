@@ -126,36 +126,36 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                     <CloseIcon />
                 </IconButton>
                 <div className="checked-restaurant__rating">
-                    <p className="checked-restaurant__paragraph">How was {itemName}? (Optional)</p>
+                    <p className="checked-restaurant__paragraph">How was <span style={{ fontWeight: 'bold' }}>{itemName}</span>? (Optional)</p>
                     <HoverRating handleRatingChange={setRating} />
                 </div>
                 <div className="checked-restaurant__results">
-                    <p className="checked-restaurant__paragraph">Would you like to add {itemName} to your favorites?</p>
+                    <p className="checked-restaurant__paragraph">Would you like to add <span style={{ fontWeight: 'bold' }}>{itemName}</span> to your favorites?</p>
                     <div className="checked-restaurant__radio">
                         <div className="checked-restaurant__radio-button">
                             <input
-                                className="checked-restaurant__radio-input"
+                                className={`checked-restaurant__radio-input ${mode === 'dark' ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
                                 type="radio"
                                 id="radio-no"
                                 value="No"
                                 checked={selectedOption === "No"}
                                 onChange={handleOptionSelect}
                             />
-                            <label className="checked-restaurant__radio-label" htmlFor="radio-no">
+                            <label className={`checked-restaurant__radio-label ${mode === 'dark' ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-no">
                                 No
                             </label>
                         </div>
 
                         <div className="checked-restaurant__radio-button">
                             <input
-                                className="checked-restaurant__radio-input"
+                                className={`checked-restaurant__radio-input ${mode === 'dark' ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
                                 type="radio"
                                 id="radio-yes"
                                 value="Yes"
                                 checked={selectedOption === "Yes"}
                                 onChange={handleOptionSelect}
                             />
-                            <label className="checked-restaurant__radio-label" htmlFor="radio-yes">
+                            <label className={`checked-restaurant__radio-label ${mode === 'dark' ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-yes">
                                 Yes
                             </label>
                         </div>

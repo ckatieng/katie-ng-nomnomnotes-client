@@ -18,8 +18,8 @@
         position: relative;
         height: 100%;
         width: 100%;
-        padding: 1rem 1rem 1.5rem;
-        background-color: #e7daf7;
+        padding: 1rem 3rem 1.5rem;
+        background-color: #ffffff;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -42,7 +42,7 @@
     }
 
     &__rating {
-        margin-bottom: 6.25rem;
+        margin-bottom: 3.25rem;
 
         @include tablet {
             margin-bottom: 3.125rem;
@@ -54,7 +54,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 1.875rem;
+        margin-bottom: 4.5rem;
     }
 
     &__paragraph {
@@ -64,7 +64,6 @@
         padding-bottom: 1.25rem;
         text-align: center;
     }
-
  
     &__radio {
         display: flex;
@@ -75,24 +74,40 @@
     }
     
     &__radio-label {
-        // display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        // background-color: #4CAF50;
-        color: purple;
+        padding: 0.5rem 1.875rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: $primary-text-colour;
         cursor: pointer;
-        border: 1px solid grey;
-        border-radius: 5px;
-        margin-right: 10px; /* Add margin between buttons */
+        border: 1px solid $primary-text-colour;
+        border-radius: 1.875rem;
+        margin-right: 0.625rem;
 
         &:hover {
-            background-color: #45a049;
+            background-color: #fafafa;
+            border: 1px solid $primary-hover-colour;
+        }
+
+        &-dark-mode {
+            border: 1px solid $primary-colour;
+            color: $primary-colour;
+
+            &:hover {
+                background-color: #3e3e3e;
+                border: 1px solid $primary-colour-light-background;
+                color: $primary-colour-light-background;
+            }
         }
     }
     
     &__radio-input:checked + &__radio-label {
-        // background-color: #008CBA;
-        border: 2px solid purple;
+        background-color: #f2e9ff;
+        border: 1px solid $primary-hover-colour;
+    }
+
+    &__radio-input-dark-mode:checked + &__radio-label-dark-mode {
+        color: #ffffff;
+        background-color: #503e6c;
     }
 
     &__done {

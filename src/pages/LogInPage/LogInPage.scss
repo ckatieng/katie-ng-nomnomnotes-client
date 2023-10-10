@@ -1,0 +1,71 @@
+@use "../../styles//partials/mixins" as *;
+@use "../../styles//partials/variables" as *;
+
+.login {
+    height: 100vh;
+    padding-top: 130px;
+    background-color: $primary-colour-light-background;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 3rem;
+    }
+
+    &__logo {
+        width: 200px;
+        margin-bottom: 30px;
+    }
+
+    &__input {
+        font-family: Montserrat, sans-serif;
+        background-color: transparent;
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 30px;
+        padding: 13px 16px;
+        width: 100%;
+        margin: 6px;
+        color: #6e5e93;
+        outline: none;
+
+        &:focus {
+            border: 2px solid #bba6dd;
+        }
+
+        &::placeholder {
+            color: #9686b0;
+        }
+
+        &::-ms-clear {
+            display: none;
+            visibility: none ;
+        }
+        
+    }
+
+    &__button {
+        margin: 30px 0 40px;
+        width: 100%;
+    }
+
+    &__paragraph {
+        font-size: 12px;
+        margin-right: 4px;
+        color: $primary-logo-text-colour;
+    }
+
+    &__link {
+        font-size: 12px;
+        font-weight: 600;
+        color: #8d72c4;
+        cursor: pointer;
+    }
+
+    &__signup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

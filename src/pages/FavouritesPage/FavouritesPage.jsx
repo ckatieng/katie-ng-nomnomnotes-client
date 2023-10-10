@@ -10,6 +10,8 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Box from '@mui/material/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
 import config from '../../utils/config';
 
 /*
@@ -24,6 +26,10 @@ function FavouritesPage ({ mode }) {
     // States
     const [favouriteItems, setFavouriteItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    // State to control Snackbar open state and message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     // Favourites API URL
     const favouritesUrl = `${config.serverUrl}/api/favourites`;
@@ -68,20 +74,28 @@ function FavouritesPage ({ mode }) {
 
     // Function to handle when the share icon is clicked
     const handleShareClick = () => {
-        // Get the user's ID
-        const userId = req.user.id;
+        // Fetch the user info
+        axios.get(`${config.serverUrl}/api/users`)
+            .then((response) => {
+                // Extract user ID from the response data
+                const userId = response.data.id;
 
-        // Create a unique shareable link with the user's ID
-        // const shareableLink = `${window.location.origin}${location.pathname}?userId=${userId}`;
-        const shareableLink = `${window.location.origin}${location.pathname}`;
+                // Create a unique shareable link with the user's ID
+                const shareableLink = `${window.location.origin}${location.pathname}?userId=${userId}`;
 
-        // Copy the shareable link to clipboard
-        navigator.clipboard.writeText(shareableLink)
-            .then(() => {
-                alert("Link copied to clipboard!");
+                // Copy the shareable link to clipboard
+                navigator.clipboard.writeText(shareableLink)
+                    .then(() => {
+                        // Show a success message in the Snackbar
+                        setSnackbarMessage('Link copied to clipboard.');
+                        setSnackbarOpen(true);
+                    })
+                    .catch((err) => {
+                        console.error("Failed to copy link: ", err);
+                    });
             })
-            .catch((err) => {
-                console.error("Failed to copy link: ", err);
+            .catch((error) => {
+                console.error("Error fetching user info: ", error);
             });
     }
 
@@ -137,6 +151,16 @@ function FavouritesPage ({ mode }) {
                                         </div>
                                     </li>
                                 ))}
+
+                                <Snackbar
+                                    open={snackbarOpen}
+                                    autoHideDuration={2000} 
+                                    onClose={() => setSnackbarOpen(false)}
+                                    TransitionComponent={Slide}
+                                    message={snackbarMessage}
+                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                    style={{ marginBottom: '60px' }}
+                                />
                             </>
                         )}
                     </ul>

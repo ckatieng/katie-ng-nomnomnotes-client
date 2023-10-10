@@ -85,7 +85,7 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={updatedTheme}>
                 {!showSearchRestaurant && (
-                    <div className="app-bar">
+                    <div className="app-bar" style={{ display: location.pathname === '/' || location.pathname === '/must-try' || location.pathname === '/favourites' || location.pathname === '/top-rated' || location.pathname === '/visited' ? 'block' : 'none' }}>
                         <Box
                             sx={{
                             display: 'flex',
@@ -101,7 +101,7 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
                                 </IconButton>
                             </div>
                                 
-                            <div style={{ display: location.pathname === '/must-try' || location.pathname === '/favourites' || location.pathname === '/top-rated' || location.pathname === '/visited' ? 'block' : 'none' }}>
+                            <div style={{ display: location.pathname === '/' || location.pathname === '/must-try' || location.pathname === '/favourites' || location.pathname === '/top-rated' || location.pathname === '/visited' ? 'block' : 'none' }}>
                                 <Fragment>
                                     <IconButton
                                         color="inherit"

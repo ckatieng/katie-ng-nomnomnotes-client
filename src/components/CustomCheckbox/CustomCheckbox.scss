@@ -60,12 +60,17 @@
 
     &__checkbox-dark-mode {
         color: $primary-colour-light-background;
+        border: 1px solid $primary-checkbox-colour;
 
         &:checked {
             & + .custom-checkbox__item-name-dark-mode {
                 text-decoration: line-through;
                 color: rgba(231,210,255, 0.4);
             }
+        }
+
+        &:hover {
+            box-shadow: 0 0 7px rgba(255, 255, 255, 0.5);
         }
     }
 }

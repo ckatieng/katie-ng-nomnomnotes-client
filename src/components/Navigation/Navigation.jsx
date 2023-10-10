@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Navigation.scss';
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import RamenIcon from '@mui/icons-material/RamenDiningSharp';
@@ -20,8 +20,11 @@ import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 function Navigation({ mode }) {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
+        <div style={{ display: location.pathname === '/' || location.pathname === '/must-try' || location.pathname === '/favourites' || location.pathname === '/top-rated' || location.pathname === '/visited' ? 'block' : 'none' }}>
+        
         <BottomNavigation
             sx={{ 
                 position: 'fixed', 
@@ -82,6 +85,8 @@ function Navigation({ mode }) {
             <BottomNavigationAction label="Top 10" icon={<FontAwesomeIcon icon={faStar} className="bottom-navigation__icon"/>} />
             <BottomNavigationAction label="Visited" icon={<FontAwesomeIcon icon={faClockRotateLeft} className="bottom-navigation__icon"/>} />
         </BottomNavigation>
+
+        </div>
     );
 }
 

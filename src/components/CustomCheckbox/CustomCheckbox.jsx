@@ -14,7 +14,7 @@ import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
  * 'updateMustTryList' prop: a function to update the list of must-try restaurants
  */
 
-function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, mode }) {
+function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, mode}) {
     // States
     const [isChecked, setIsChecked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);

@@ -11,6 +11,10 @@ import Location from "../src/components/Location/Location";
 import Navigation from "./components/Navigation/Navigation";
 import AppBar from "./components/AppBar/AppBar";
 import { CssBaseline } from "@mui/material";
+import LogInPage from '../src/pages/LogInPage/LogInPage';
+import SignUpPage from '../src/pages/SignUpPage/SignUpPage';
+// import MainLayout from '../src/components/MainLayout/MainLayout';
+// import PublicLayout from "./components/PublicLayout/PublicLayout";
 
 /*
  * App.jsx
@@ -57,6 +61,12 @@ function App() {
 
                         <CssBaseline />
                         <Routes>
+                            {/* Login Page */}
+                            <Route path="/login" element={<LogInPage />} />
+
+                            {/* Sign Up Page */}
+                            <Route path="/signup" element={<SignUpPage />} />
+
                             {/* Home Page */}
                             <Route path="/" element={
                                 isLoading ? (

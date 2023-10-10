@@ -124,7 +124,6 @@ export default function SelectLocation() {
 
     // Handle location submission
     const handleLocationSubmit = () => {
-        console.log(value);
         // Fetch the Google API key
         fetchGoogleApiKey()
             .then((apiKey) => {
@@ -150,8 +149,6 @@ export default function SelectLocation() {
                                 // Make a POST request to update the user's location
                                 axios.post(`${config.serverUrl}/api/google-api/set-location`, locationData)
                                     .then((response) => {
-                                        console.log('Location updated successfully:', response.data);
-
                                         // Show a success message in the Snackbar
                                         setSnackbarMessage('Your new location is set!');
                                         setSnackbarOpen(true);

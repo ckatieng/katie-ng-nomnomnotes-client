@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { fetchRestaurantName } from '../../utils/googlePlacesService';
+import { fetchRestaurantDetails } from '../../utils/googlePlacesService';
 import './MustTryPage.scss';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -35,6 +35,30 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
     // Function to update the must-try list from the server
+    // const updateMustTryList = () => {
+    //     // Send a GET request to fetch must-try items
+    //     axios.get(mustTryUrl)
+    //         .then((response) => {
+    //             // Map over the must-try items and fetch restaurant names
+    //             Promise.all(
+    //                 response.data.map(async (item) => {
+    //                     // Fetch the restaurant name for each item
+    //                     const restaurantName = await fetchRestaurantName(item.google_places_id);
+    //                     // Return an object that includes the item and its restaurant name
+    //                     return { ...item, restaurantName };
+    //                 })
+    //             ).then((itemsWithNames) => {
+    //                 // Set the state with must-try items that now include restaurant names
+    //                 setMustTryItems(itemsWithNames);
+    //                 setIsLoading(false);
+    //             });
+    //         })
+    //         .catch((err) => {
+    //             console.error(`Error fetching or setting restaurant names: ${err}`);
+    //             setIsLoading(false);
+    //         });
+    // }
+
     const updateMustTryList = () => {
         // Send a GET request to fetch must-try items
         axios.get(mustTryUrl)
@@ -42,14 +66,31 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                 // Map over the must-try items and fetch restaurant names
                 Promise.all(
                     response.data.map(async (item) => {
-                        // Fetch the restaurant name for each item
-                        const restaurantName = await fetchRestaurantName(item.google_places_id);
-                        // Return an object that includes the item and its restaurant name
-                        return { ...item, restaurantName };
+                        // Fetch the restaurant name and city for each item
+                        const restaurantDetails = await fetchRestaurantDetails(item.google_places_id);
+                        const { name: restaurantName, city } = restaurantDetails;
+                        // Return an object that includes the item, restaurant name, and city
+                        return { ...item, restaurantName, city };
                     })
                 ).then((itemsWithNames) => {
-                    // Set the state with must-try items that now include restaurant names
-                    setMustTryItems(itemsWithNames);
+                    // Group restaurants by city
+                    const groupedRestaurants = itemsWithNames.reduce((acc, restaurant) => {
+                        // Extract the city name from the restaurant data
+                        const cityName = restaurant.city;
+                    
+                        // If the city name is not a key in the accumulator, create a new array for that city
+                        if (!acc[cityName]) {
+                            acc[cityName] = [];
+                        }
+                    
+                        // Push the current restaurant to the corresponding city array in the accumulator
+                        acc[cityName].push(restaurant);
+                    
+                        return acc;
+                    }, {});
+
+                    // Set the state with grouped and sorted restaurants
+                    setMustTryItems(groupedRestaurants);
                     setIsLoading(false);
                 });
             })
@@ -57,7 +98,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                 console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
-    }
+    };
 
     useEffect(() => {
         // Fetch the initial must-try items when the component mounts
@@ -72,13 +113,39 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     }, []);
 
     // Function to handle when the delete button is clicked
-    const deleteItemHandler = (itemId) => {
-        axios.delete(`${mustTryUrl}/${itemId}`)
+    const deleteItemHandler = (restaurantId) => {
+        // axios.delete(`${mustTryUrl}/${restaurantId}`)
+        //     .then((response) => {
+        //         // Remove the deleted item from the local state
+        //         console.log('prevItems before update:', mustTryItems);
+        //         setMustTryItems((prevItems) =>
+        //             prevItems.filter((item) => item.id !== restaurantId)
+        //         );
+        //         console.log('mustTryItems after update:', mustTryItems);
+        //     })
+        //     .catch((err) => {
+        //         console.error(`Error deleting items: ${err}`);
+        //     });
+
+        axios.delete(`${mustTryUrl}/${restaurantId}`)
             .then((response) => {
-                // Remove the deleted item from the local state
-                setMustTryItems((prevItems) =>
-                    prevItems.filter((item) => item.id !== itemId)
-                );
+                // Create a new object without the deleted restaurant
+                const updatedMustTryItems = { ...mustTryItems };
+
+                // Loop through cities and remove the restaurant from the corresponding city array
+                for (const city in updatedMustTryItems) {
+                    updatedMustTryItems[city] = updatedMustTryItems[city].filter(
+                        (restaurant) => restaurant.id !== restaurantId
+                    );
+
+                    // If the city array is empty after removal, remove the city from the object
+                    if (updatedMustTryItems[city].length === 0) {
+                        delete updatedMustTryItems[city];
+                    }
+                }
+
+                // Set the state with the updated object
+                setMustTryItems(updatedMustTryItems);
             })
             .catch((err) => {
                 console.error(`Error deleting items: ${err}`);
@@ -101,7 +168,11 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                         <>
                             {/* Must-Try Items (checkboxes) */}
                             <div className="must-try__checkboxes">
-                                {mustTryItems.length === 0 ? (
+                                {Object.keys(mustTryItems).length === 0 || 
+                                    (Object.keys(mustTryItems).length > 0 && 
+                                    Object.values(mustTryItems).every(restaurantsInCity => restaurantsInCity.length === 0)) ? (
+
+                                // {mustTryItems.length === 0 ? (
                                     // Display an empty state message when the list is empty
                                     <div className="must-try__empty-state">
                                         <img className="must-try__empty-state-img" src={burger} alt="burger" />
@@ -113,7 +184,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                 ) : (
                                     <>
                                     <h2 className="must-try__title">Must-Try List</h2>
-                                    {mustTryItems.map((item) => (
+                                    {/* {mustTryItems.map((item) => (
                                         <div className={`must-try__item ${mode === 'dark' ? 'must-try__item-dark-mode' : ''}`} key={item.id}>
                                             <CustomCheckbox 
                                                 key={item.id} 
@@ -128,6 +199,30 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                                     <DeleteIcon fontSize="inherit"/>
                                                 </IconButton>
                                             </div>
+                                        </div>
+                                    ))} */}
+
+                                    {Object.entries(mustTryItems).map(([city, restaurantsInCity]) => (
+                                        <div key={city}>
+                                            <h3 className={`must-try__city ${mode === 'dark' ? 'must-try__city-dark-mode' : ''}`}>{city}</h3>
+
+                                            {restaurantsInCity.map((restaurant) => (
+                                                <div className={`must-try__item ${mode === 'dark' ? 'must-try__item-dark-mode' : ''}`} key={restaurant.id}>
+                                                    <CustomCheckbox 
+                                                        key={restaurant.id} 
+                                                        itemId={restaurant.id} 
+                                                        itemName={restaurant.restaurantName}
+                                                        googlePlacesId={restaurant.google_places_id}
+                                                        updateMustTryList={updateMustTryList}
+                                                        mode={mode} 
+                                                    />
+                                                    <div className="must-try__delete">
+                                                        <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(restaurant.id)} style={{ color:'#73649b' }}>
+                                                            <DeleteIcon fontSize="inherit"/>
+                                                        </IconButton>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     ))}
                                     </>
