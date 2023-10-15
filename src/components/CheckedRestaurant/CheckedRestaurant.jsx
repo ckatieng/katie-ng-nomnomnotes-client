@@ -130,7 +130,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                     <HoverRating handleRatingChange={setRating} />
                 </div>
                 <div className="checked-restaurant__results">
-                    <p className="checked-restaurant__paragraph">Would you like to add <span style={{ fontWeight: 'bold' }}>{itemName}</span> to your favorites?</p>
+                    <p className="checked-restaurant__paragraph">Would you like to add <span style={{ fontWeight: 'bold' }}>{itemName}</span> to your favourites?</p>
                     <div className="checked-restaurant__radio">
                         <div className="checked-restaurant__radio-button">
                             <input

@@ -1,6 +1,6 @@
 
 import { useState, useMemo, createContext} from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './AppBar.scss';
 import IconButton from '@mui/material/IconButton';
@@ -32,6 +32,7 @@ export const ColorModeContext = createContext({ toggleColorMode: () => {} });
  */
 
 function AppBar({ children, showSearchRestaurant, mode, setMode }) {  
+    const navigate = useNavigate();
     const location = useLocation();
 
     // Create a context for controlling color mode
@@ -77,7 +78,7 @@ function AppBar({ children, showSearchRestaurant, mode, setMode }) {
         setAnchorEl(null);
     };
     const handleLocation = () => {
-        <Location />
+        navigate('/location');
     }
   
     return (
