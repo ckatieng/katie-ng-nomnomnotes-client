@@ -13,6 +13,7 @@ import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import config from '../../utils/config';
+import { useDarkMode } from "../../components/DarkModeProvider/DarkModeProvider";
 
 /*
  * FavouritesPage Component
@@ -20,12 +21,13 @@ import config from '../../utils/config';
  * - Allows users to delete items from their favorites
  */
 
-function FavouritesPage ({ mode }) {
+function FavouritesPage () {
     const location = useLocation();
 
     // States
     const [favouriteItems, setFavouriteItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { isDarkMode } = useDarkMode();
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -100,7 +102,7 @@ function FavouritesPage ({ mode }) {
     }
 
     return (
-        <div className="favourites">
+        <div className={`favourites ${isDarkMode ? 'favourites__dark-mode' : ''}`}>
             {isLoading ? (
                 // Display loading while fetching data
                 <LoadingSpinner />
@@ -111,8 +113,8 @@ function FavouritesPage ({ mode }) {
                             // Display an empty state message when the list is empty
                             <div className="favourites__empty-state">
                                 <img className="favourites__empty-state-img" src={dessert} alt="dessert" />
-                                <h3 className="favourites__empty-state-title">No Favourites Yet!</h3>
-                                <p className="favourites__empty-state-paragraph">
+                                <h3 className={`favourites__empty-state-title ${isDarkMode ? 'must-try__dark-mode' : ''}`}>No Favourites Yet!</h3>
+                                <p className={`favourites__empty-state-paragraph ${isDarkMode ? 'must-try__dark-mode-text' : ''}`}>
                                     Try restaurants from your list & see if they are worthy to become a favourite.
                                 </p>
                             </div>
@@ -127,23 +129,26 @@ function FavouritesPage ({ mode }) {
                                     borderRadius: 1,
                                     }}
                                 >
-                                    <div className="favourites__share-icon">
+                                    <div>
                                         <FontAwesomeIcon 
                                             style={{
                                                 fontSize: '18px',
                                             }}
                                             icon={faArrowUpFromBracket} 
                                             onClick={handleShareClick} 
-                                            className="favourites__share-icon"
+                                            className={`favourites__share-icon ${isDarkMode ? 'favourites__share-icon-dark-mode' : ''}`}
                                         />
                                     </div>
                                 </Box>
 
                                 <h2 className="favourites__title">Favourites List</h2>
                                 {favouriteItems.map((item) => (
-                                    // <li className={`favourite__item ${mode === 'dark' ? 'favourite__dark-mode' : ''}`} key={item.id}>
-                                    <li className="favourites__item" key={item.id}>
-                                        <Link to={`/restaurant/${item.google_places_id}`} className="favourites__item-name">{item.restaurantName}</Link> 
+                                    <li className={`favourites__item ${isDarkMode ? 'favourites__item-dark-mode' : ''}`} key={item.id}>
+                                        <Link 
+                                            to={`/restaurant/${item.google_places_id}`} 
+                                            className={`favourites__item-name ${isDarkMode ? 'favourites__item-name-dark-mode' : ''}`}>
+                                                {item.restaurantName}
+                                        </Link> 
                                         <div className="favourites__delete">
                                             <IconButton disableTouchRipple className="favourites__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
                                                 <DeleteIcon fontSize="inherit"/>

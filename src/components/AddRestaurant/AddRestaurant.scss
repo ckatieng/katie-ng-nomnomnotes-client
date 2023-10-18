@@ -12,9 +12,37 @@
     &__add {
         margin-top: 50px;
     }
+
+    &__results-dark-mode {
+        background-color: #050505;
+        
+        // Dark mode styles for Autocomplete options and paper
+        li.MuiAutocomplete-option:hover {
+            background-color: #1b1b1b;
+        }
+        // ul.MuiAutocomplete-listbox {
+        //     background-color: #1b1b1b !important;
+        // }
+
+        // .MuiAutocomplete-paper.MuiPaper-root {
+        //     background-color: #050505 !important;
+        // }
+    }
 }
 
 /* Change the icon color */
 .MuiAutocomplete-option .MuiSvgIcon-root {
     color: $primary-text-hover-colour;
 }
+
+// ul.MuiAutocomplete-listbox {
+//     background-color: #1b1b1b !important;
+// }
+
+// li.MuiAutocomplete-option:hover {
+//     background-color: #1b1b1b !important;
+// }
+
+// .MuiAutocomplete-paper.MuiPaper-root {
+//     background-color: #050505;
+// }

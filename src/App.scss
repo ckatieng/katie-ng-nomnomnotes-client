@@ -25,3 +25,13 @@ ul {
     list-style: none;
     padding: 0;
 }
+
+.App {
+    font-family: 'Montserrat', sans-serif;
+    background-color: $primary-light-background;
+    height: 100vh;
+
+    &__dark-mode {
+        background-color: $dark-mode-background;
+    }
+}

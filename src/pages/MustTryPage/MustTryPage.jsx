@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Close';
 import burger from "../../assets/images/Burger.png";
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import config from '../../utils/config';
+import { useDarkMode } from "../../components/DarkModeProvider/DarkModeProvider";
 
 /*
  * MustTryPage Component
@@ -25,40 +26,17 @@ import config from '../../utils/config';
  * 'handleCancelAddRestaurantClick' prop: Function to handle canceling the addition of a new restaurant
  */
 
-function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick, mode }) {
+function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCancelAddRestaurantClick }) {
     // States
     const [mustTryItems, setMustTryItems] = useState([]); // State for must-try restaurant items
     const [isLoading, setIsLoading] = useState(true); // State to track loading state
     const [isZoomed, setIsZoomed] = useState(false); // State to control zoom effect
+    const { isDarkMode } = useDarkMode();
 
     // Must-Try API URL
     const mustTryUrl = `${config.serverUrl}/api/must-try`;
 
     // Function to update the must-try list from the server
-    // const updateMustTryList = () => {
-    //     // Send a GET request to fetch must-try items
-    //     axios.get(mustTryUrl)
-    //         .then((response) => {
-    //             // Map over the must-try items and fetch restaurant names
-    //             Promise.all(
-    //                 response.data.map(async (item) => {
-    //                     // Fetch the restaurant name for each item
-    //                     const restaurantName = await fetchRestaurantName(item.google_places_id);
-    //                     // Return an object that includes the item and its restaurant name
-    //                     return { ...item, restaurantName };
-    //                 })
-    //             ).then((itemsWithNames) => {
-    //                 // Set the state with must-try items that now include restaurant names
-    //                 setMustTryItems(itemsWithNames);
-    //                 setIsLoading(false);
-    //             });
-    //         })
-    //         .catch((err) => {
-    //             console.error(`Error fetching or setting restaurant names: ${err}`);
-    //             setIsLoading(false);
-    //         });
-    // }
-
     const updateMustTryList = () => {
         // Send a GET request to fetch must-try items
         axios.get(mustTryUrl)
@@ -114,19 +92,6 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
 
     // Function to handle when the delete button is clicked
     const deleteItemHandler = (restaurantId) => {
-        // axios.delete(`${mustTryUrl}/${restaurantId}`)
-        //     .then((response) => {
-        //         // Remove the deleted item from the local state
-        //         console.log('prevItems before update:', mustTryItems);
-        //         setMustTryItems((prevItems) =>
-        //             prevItems.filter((item) => item.id !== restaurantId)
-        //         );
-        //         console.log('mustTryItems after update:', mustTryItems);
-        //     })
-        //     .catch((err) => {
-        //         console.error(`Error deleting items: ${err}`);
-        //     });
-
         axios.delete(`${mustTryUrl}/${restaurantId}`)
             .then((response) => {
                 // Create a new object without the deleted restaurant
@@ -153,7 +118,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
     }
 
     return (
-        <div className="must-try">
+        <div className={`must-try ${isDarkMode ? 'must-try__dark-mode' : ''}`}>
             {showSearchRestaurant ? (
                 <SearchRestaurant 
                     showSearchRestaurant={showSearchRestaurant} 
@@ -172,49 +137,29 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                     (Object.keys(mustTryItems).length > 0 && 
                                     Object.values(mustTryItems).every(restaurantsInCity => restaurantsInCity.length === 0)) ? (
 
-                                // {mustTryItems.length === 0 ? (
                                     // Display an empty state message when the list is empty
                                     <div className="must-try__empty-state">
                                         <img className="must-try__empty-state-img" src={burger} alt="burger" />
-                                        <h3 className="must-try__empty-state-title">No Restaurants Yet!</h3>
-                                        <p className="must-try__empty-state-paragraph">
+                                        <h3 className={`must-try__empty-state-title ${isDarkMode ? 'must-try__dark-mode' : ''}`}>No Restaurants Yet!</h3>
+                                        <p className={`must-try__empty-state-paragraph ${isDarkMode ? 'must-try__dark-mode-text' : ''}`}>
                                             Time to discover new restaurants & add them to your must-try list.
                                         </p>
                                     </div>
                                 ) : (
                                     <>
                                     <h2 className="must-try__title">Must-Try List</h2>
-                                    {/* {mustTryItems.map((item) => (
-                                        <div className={`must-try__item ${mode === 'dark' ? 'must-try__item-dark-mode' : ''}`} key={item.id}>
-                                            <CustomCheckbox 
-                                                key={item.id} 
-                                                itemId={item.id} 
-                                                itemName={item.restaurantName}
-                                                googlePlacesId={item.google_places_id}
-                                                updateMustTryList={updateMustTryList}
-                                                mode={mode} 
-                                            />
-                                            <div className="must-try__delete">
-                                                <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
-                                                    <DeleteIcon fontSize="inherit"/>
-                                                </IconButton>
-                                            </div>
-                                        </div>
-                                    ))} */}
-
                                     {Object.entries(mustTryItems).map(([city, restaurantsInCity]) => (
                                         <div key={city}>
-                                            <h3 className={`must-try__city ${mode === 'dark' ? 'must-try__city-dark-mode' : ''}`}>{city}</h3>
+                                            <h3 className={`must-try__city ${isDarkMode ? 'must-try__city-dark-mode' : ''}`}>{city}</h3>
 
                                             {restaurantsInCity.map((restaurant) => (
-                                                <div className={`must-try__item ${mode === 'dark' ? 'must-try__item-dark-mode' : ''}`} key={restaurant.id}>
+                                                <div className={`must-try__item ${isDarkMode ? 'must-try__item-dark-mode' : ''}`} key={restaurant.id}>
                                                     <CustomCheckbox 
                                                         key={restaurant.id} 
                                                         itemId={restaurant.id} 
                                                         itemName={restaurant.restaurantName}
                                                         googlePlacesId={restaurant.google_places_id}
                                                         updateMustTryList={updateMustTryList}
-                                                        mode={mode} 
                                                     />
                                                     <div className="must-try__delete">
                                                         <IconButton disableTouchRipple className="must-try__delete-icon" size="small" onClick={() => deleteItemHandler(restaurant.id)} style={{ color:'#73649b' }}>
@@ -242,6 +187,7 @@ function MustTryPage ({ showSearchRestaurant, handleAddRestaurantClick, handleCa
                                 position: 'fixed',
                                 bottom: 80,
                                 right: 25,
+                                color: isDarkMode ? '#000000' : '#ffffff',
                                 backgroundColor: '#bd8eff',
                                 '&:hover': {
                                     backgroundColor: '#ad86ea',

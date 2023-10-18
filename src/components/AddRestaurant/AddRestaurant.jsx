@@ -14,6 +14,7 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import config from'../../utils/config';
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 
 /* 
  * AddRestaurant Component
@@ -52,6 +53,7 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
     const [options, setOptions] = useState([]);
     const [locationData, setLocationData] = useState(null);
     const loaded = useRef(false);
+    const { isDarkMode } = useDarkMode();
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -192,10 +194,13 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
     };
 
     return (
-        <div className="add-restaurant">
+        <div className={`add-restaurant ${isDarkMode ? 'add-restaurant__dark-mode' : ''}`}>
             <Autocomplete
+                className={`add-restaurant__autocomplete ${isDarkMode ? 'add-restaurant__autocomplete-dark-mode' : ''}`}
                 id="google-map"
-                sx={{ width: 300 }}
+                sx={{ 
+                    width: 300,
+                }}
                 getOptionLabel={(option) =>
                     typeof option === "string" ? option : option.structured_formatting.main_text
                 }
@@ -205,7 +210,12 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                 includeInputInList
                 filterSelectedOptions
                 value={value}
-                noOptionsText="No locations"
+                noOptionsText={
+                    <Typography sx={{ 
+                        color: isDarkMode ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.3)',
+                    }}>No restaurants
+                    </Typography>
+                }
                 onChange={(event, newValue) => {
                     setOptions(newValue ? [newValue, ...options] : options);
                     setValue(newValue);
@@ -219,9 +229,13 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                         label="Where to eat?" 
                         sx={{
                             width: 300,
+                            // Input outline
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                borderColor: isDarkMode ? "rgba(255,255,255,0.25)" : 'rgba(0,0,0,0.2)',
+                            },
                             // Input hover outline
                             "&:hover .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "#8e7cd1",
+                                borderColor: isDarkMode ? "#ffffff": "#8e7cd1",
                             },
                             // Focused hover outline
                             "& .MuiOutlinedInput-root": {
@@ -237,6 +251,14 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                             "& .MuiInputLabel-root.MuiInputLabel-shrink": {
                                 color: "#8174c1", 
                             },
+                            // Input text color
+                            '& .MuiInputBase-input': {
+                                color: isDarkMode ? '#ffffff' : '#000000',
+                            },
+                            // Input default arrow
+                            '& .MuiSvgIcon-root': {
+                                color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+                            },
                         }}
                         fullWidth />
                 )}
@@ -250,10 +272,12 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                     );
 
                     return (
-                        <div key={option.description}>
+                        <div key={option.description}
+                            className={`add-restaurant__results ${isDarkMode ? 'add-restaurant__results-dark-mode' : ''}`}
+                        >
                             <li {...props}>
                                 <Grid container alignItems="center">
-                                    <Grid item sx={{ display: "flex", width: 44 }}>
+                                    <Grid item sx={{ display: "flex", width: 44}}>
                                         <LocationOnIcon sx={{ color: "text.secondary" }} />
                                     </Grid>
                                     <Grid
@@ -264,12 +288,19 @@ function AddRestaurant({ updateMustTryList, handleCancelAddRestaurantClick }) {
                                             <Box
                                                 key={index}
                                                 component="span"
-                                                sx={{ fontWeight: part.highlight ? "bold" : "regular" }}
+                                                sx={{ 
+                                                    fontWeight: part.highlight ? "bold" : "regular",
+                                                    color: part.highlight ? (isDarkMode ? '#ffffff' : '#000000') : (isDarkMode ? '#ffffff' : 'rgba(0, 0, 0, 0.8)'),
+                                                }}
                                             >
                                                 {part.text}
                                             </Box>
                                         ))}
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" color="text.secondary"
+                                            sx={{
+                                                color: isDarkMode ? '#aaaaaa' : 'rgba(0, 0, 0, 0.6)',
+                                            }}
+                                        >
                                             {option.structured_formatting.secondary_text}
                                         </Typography>
                                     </Grid>

@@ -15,6 +15,7 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import config from '../../utils/config';
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 
 /*
  * SelectLocation Component
@@ -47,6 +48,7 @@ export default function SelectLocation() {
     const [value, setValue] = useState(null); // Selected location
     const [inputValue, setInputValue] = useState(""); // Input value for location search
     const [options, setOptions] = useState([]); // Location suggestions
+    const { isDarkMode } = useDarkMode();
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -198,7 +200,12 @@ export default function SelectLocation() {
                 includeInputInList
                 filterSelectedOptions
                 value={value}
-                noOptionsText="No locations"
+                noOptionsText={
+                    <Typography sx={{ 
+                        color: isDarkMode ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.3)',
+                    }}>No locations
+                    </Typography>
+                }
                 onChange={(event, newValue) => {
                     setOptions(newValue ? [newValue, ...options] : options);
                     setValue(newValue);
@@ -212,9 +219,13 @@ export default function SelectLocation() {
                         label="Add a location" 
                         sx={{
                             width: 300,
+                            // Input outline
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                borderColor: isDarkMode ? "rgba(255,255,255,0.25)" : 'rgba(0,0,0,0.2)',
+                            },
                             // Input hover outline
                             "&:hover .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "#8e7cd1",
+                                borderColor: isDarkMode ? "#ffffff": "#8e7cd1",
                             },
                             // Focused hover outline
                             "& .MuiOutlinedInput-root": {
@@ -230,6 +241,16 @@ export default function SelectLocation() {
                             "& .MuiInputLabel-root.MuiInputLabel-shrink": {
                                 color: "#8174c1", 
                             },
+                            // Input text color
+                            '& .MuiInputBase-input': {
+                                color: isDarkMode ? '#ffffff' : '#000000',
+                            },
+                            '& .MuiSvgIcon-root': {
+                                color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+                            },
+                            '& .MuiButtonBase-root': {
+                                backgroundColor: 'transparent',
+                            },
                         }}
                         fullWidth />
                 )}
@@ -243,7 +264,9 @@ export default function SelectLocation() {
                     );
 
                     return (
-                        <div key={option.description}>
+                        <div key={option.description}
+                            className={`select-location__results ${isDarkMode ? 'select-location__results-dark-mode' : ''}`}
+                        >
                             <li {...props}>
                                 <Grid container alignItems="center">
                                     <Grid item sx={{ display: "flex", width: 44 }}>
@@ -257,12 +280,19 @@ export default function SelectLocation() {
                                             <Box
                                                 key={index}
                                                 component="span"
-                                                sx={{ fontWeight: part.highlight ? "bold" : "regular" }}
+                                                sx={{ 
+                                                    fontWeight: part.highlight ? "bold" : "regular",
+                                                    color: part.highlight ? (isDarkMode ? '#ffffff' : '#000000') : (isDarkMode ? '#ffffff' : 'rgba(0, 0, 0, 0.8)'),
+                                                }}
                                             >
                                                 {part.text}
                                             </Box>
                                         ))}
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" color="text.secondary"
+                                            sx={{
+                                                color: isDarkMode ? '#aaaaaa' : 'rgba(0, 0, 0, 0.6)',
+                                            }}
+                                        >
                                             {option.structured_formatting.secondary_text}
                                         </Typography>
                                     </Grid>

@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import config from '../../utils/config';
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 
 /*
  * CheckedRestaurant Component
@@ -21,10 +22,11 @@ import config from '../../utils/config';
  * 'updateMustTryList' prop: a function to update the list of must-try restaurants
  */
 
-function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList, mode }) {
+function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updateMustTryList }) {
     // States
     const [selectedOption, setSelectedOption] = useState("");
     const [rating, setRating] = useState(0);
+    const { isDarkMode } = useDarkMode();
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -112,7 +114,7 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
 
     return(
         <div className="checked-restaurant">
-            <div className={`checked-restaurant__container ${mode === 'dark' ? 'checked-restaurant__dark-mode' : ''}`}>
+            <div className={`checked-restaurant__container ${isDarkMode ? 'checked-restaurant__dark-mode' : ''}`}>
                 <IconButton
                     aria-label="close"
                     onClick={closeModal}
@@ -120,42 +122,42 @@ function CheckedRestaurant({ itemId, itemName, googlePlacesId, closeModal, updat
                         position: 'absolute',
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
                 <div className="checked-restaurant__rating">
-                    <p className="checked-restaurant__paragraph">How was <span style={{ fontWeight: 'bold' }}>{itemName}</span>? (Optional)</p>
+                    <p className={`checked-restaurant__paragraph ${isDarkMode ? 'checked-restaurant__paragraph-dark-mode' : ''}`}>How was <span style={{ fontWeight: 'bold' }}>{itemName}</span>? (Optional)</p>
                     <HoverRating handleRatingChange={setRating} />
                 </div>
                 <div className="checked-restaurant__results">
-                    <p className="checked-restaurant__paragraph">Would you like to add <span style={{ fontWeight: 'bold' }}>{itemName}</span> to your favourites?</p>
+                    <p className={`checked-restaurant__paragraph ${isDarkMode ? 'checked-restaurant__paragraph-dark-mode' : ''}`}>Would you like to add <span style={{ fontWeight: 'bold' }}>{itemName}</span> to your favourites?</p>
                     <div className="checked-restaurant__radio">
                         <div className="checked-restaurant__radio-button">
                             <input
-                                className={`checked-restaurant__radio-input ${mode === 'dark' ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
+                                className={`checked-restaurant__radio-input ${isDarkMode ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
                                 type="radio"
                                 id="radio-no"
                                 value="No"
                                 checked={selectedOption === "No"}
                                 onChange={handleOptionSelect}
                             />
-                            <label className={`checked-restaurant__radio-label ${mode === 'dark' ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-no">
+                            <label className={`checked-restaurant__radio-label ${isDarkMode ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-no">
                                 No
                             </label>
                         </div>
 
                         <div className="checked-restaurant__radio-button">
                             <input
-                                className={`checked-restaurant__radio-input ${mode === 'dark' ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
+                                className={`checked-restaurant__radio-input ${isDarkMode ? 'checked-restaurant__radio-input-dark-mode' : ''}`}
                                 type="radio"
                                 id="radio-yes"
                                 value="Yes"
                                 checked={selectedOption === "Yes"}
                                 onChange={handleOptionSelect}
                             />
-                            <label className={`checked-restaurant__radio-label ${mode === 'dark' ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-yes">
+                            <label className={`checked-restaurant__radio-label ${isDarkMode ? 'checked-restaurant__radio-label-dark-mode' : ''}`} htmlFor="radio-yes">
                                 Yes
                             </label>
                         </div>

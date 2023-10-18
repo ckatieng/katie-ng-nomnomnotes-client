@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center; 
     padding: 3.125rem 1rem 6.25rem; 
+    background-color: $primary-light-background;
 
     &__title {
         @include mobile-text-list-title();
@@ -46,6 +47,10 @@
 
     &__item {
         @include list-item();
+
+        &-dark-mode {
+            @include list-item-dark-mode();
+        }
     }
 
     &__item-name {
@@ -58,6 +63,10 @@
 
         &:hover { 
             color: $primary-text-hover-colour;
+        }
+
+        &-dark-mode {
+            color: $primary-colour-light-background;
         }
     }
 
@@ -72,5 +81,14 @@
     &__delete-icon {
         @include icon-hover-animation();
         visibility: hidden;
+    }
+
+    &__dark-mode {
+        background-color: $dark-mode-background;
+        color: $dark-mode-text-colour;
+
+        &-text {
+            color: $dark-mode-paragraph-colour;
+        }
     }
 }

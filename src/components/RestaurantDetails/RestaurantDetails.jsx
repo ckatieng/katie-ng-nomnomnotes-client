@@ -12,6 +12,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import config from '../../utils/config';
+import { useDarkMode } from '../DarkModeProvider/DarkModeProvider';
 
 /*
  * RestaurantDetails Component
@@ -24,6 +25,7 @@ function RestaurantDetails() {
     const { placeId } = useParams();
 
     const navigate = useNavigate();
+    const { isDarkMode } = useDarkMode();
 
     const handleCloseClick = useCallback(() => {
         // Use the navigate function to go back to the previous page
@@ -91,7 +93,7 @@ function RestaurantDetails() {
 
     // Render the restaurant details when they are available
     return (
-        <div className="restaurant-details">
+        <div className={`restaurant-details ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
             <div className="restaurant-details__container">
                 <IconButton
                     aria-label="close"
@@ -100,16 +102,16 @@ function RestaurantDetails() {
                         position: 'absolute',
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
                 <div className="restaurant-details__restaurant">
-                    <h2 className="restaurant-details__name">{restaurantDetails.name}</h2>
-                    <div className="restaurant-details__add">
-                        <IconButton disableTouchRipple className="restaurant-details__add-icon" size="medium" onClick={() => addItemHandler(placeId)} style={{ color:'#73649b' }}>
-                            <AddIcon fontSize="inherit"/>
+                    <h2 className={`restaurant-details__name ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>{restaurantDetails.name}</h2>
+                    <div>
+                        <IconButton disableTouchRipple className="restaurant-details__add" size="medium" onClick={() => addItemHandler(placeId)} style={{ color:'#73649b' }}>
+                            <AddIcon className={`restaurant-details__add-icon ${isDarkMode ? 'restaurant-details__add-icon-dark-mode' : ''}`} fontSize="inherit"/>
                         </IconButton>
                         <Snackbar
                             open={snackbarOpen}
@@ -125,21 +127,21 @@ function RestaurantDetails() {
                 
                 {/* Rating */}
                 {restaurantDetails.rating && (
-                    <p className="restaurant-details__info">
+                    <p className={`restaurant-details__info ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
                         <strong>Rating: </strong>{restaurantDetails.rating}
-                        <FontAwesomeIcon className="restaurant-details__star-icon" icon={faStar}/>
+                        <FontAwesomeIcon className={`restaurant-details__star-icon ${isDarkMode ? 'restaurant-details__star-icon-dark-mode' : ''}`} icon={faStar}/>
                     </p>
                 )}
 
                 {/* Price Level */}
                 {restaurantDetails.priceLevel && (
-                    <p className="restaurant-details__info">
+                    <p className={`restaurant-details__info ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
                         <strong>Price Level: </strong>{renderPriceLevel(restaurantDetails.priceLevel)}
                     </p>
                 )}
 
                 {/* Photos */}
-                <div className="restaurant-details__photo-container">
+                <div className={`restaurant-details__photo-container ${isDarkMode ? 'restaurant-details__photo-container-dark-mode' : ''}`}>
                     <div className="restaurant-details__photos">
                         {restaurantDetails.photos?.map((photo, index) => (
                             <img
@@ -154,44 +156,44 @@ function RestaurantDetails() {
 
                 {/* Address */}
                 {restaurantDetails.address && (
-                    <p className="restaurant-details__info">
+                    <p className={`restaurant-details__info ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
                         <strong>Address: </strong>{restaurantDetails.address}
                     </p>
                 )}
 
                 {/* Phone */}
                 {restaurantDetails.phone && (
-                    <p className="restaurant-details__info">
+                    <p className={`restaurant-details__info ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
                         <strong>Phone: </strong>{restaurantDetails.phone}
                     </p>
                 )}
 
                 {/* Website */}
                 {restaurantDetails.website && (
-                    <p className="restaurant-details__info">
+                    <p className={`restaurant-details__info ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
                         <strong>Website: </strong>{restaurantDetails.website}
                     </p>
                 )}
 
                 {/* Hours */}
-                <p className="restaurant-details__hours"><strong>Hours: </strong></p>
+                <p className={`restaurant-details__hours ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}><strong>Hours: </strong></p>
                     <ul className="restaurant-details__list">
                         {restaurantDetails.hours?.map((hour, index) => (
-                            <li key={index} className="restaurant-details__hour">{hour}</li>
+                            <li key={index} className={`restaurant-details__hour ${isDarkMode ? 'restaurant-details__dark-mode-text' : ''}`}>{hour}</li>
                         ))}
                     </ul>
 
                 {/* Reviews */}
-                <p className="restaurant-details__reviews"><strong>Reviews ({restaurantDetails.reviews.length}):</strong></p>
+                <p className={`restaurant-details__reviews ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}><strong>Reviews ({restaurantDetails.reviews.length}):</strong></p>
                 <ul className="restaurant-details__list">
                     {restaurantDetails.reviews.map((review, index) => (
                         <li key={index} className="restaurant-details__review">
-                            <p className="restaurant-details__review-name">{review.author_name}</p>
-                            <div className="restaurant-details__review-details">
-                                <p className="restaurant-details__review-rating">Rating: {review.rating}</p>
+                            <p className={`restaurant-details__review-name ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>{review.author_name}</p>
+                            <div className={`restaurant-details__review-details ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>
+                                <p className={`restaurant-details__review-rating ${isDarkMode ? 'restaurant-details__dark-mode' : ''}`}>Rating: {review.rating}</p>
                                 <p className="restaurant-details__review-time">{review.relative_time_description}</p>
                             </div>
-                            <p className="restaurant-details__review-text">{review.text}</p>
+                            <p className={`restaurant-details__review-text ${isDarkMode ? 'restaurant-details__dark-mode-text' : ''}`}>{review.text}</p>
                         </li>
                     ))}
                 </ul>

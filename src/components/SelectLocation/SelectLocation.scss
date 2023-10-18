@@ -12,4 +12,12 @@
     &__set {
         margin-top: 50px;
     }
+
+    &__results-dark-mode {
+        background-color: #050505;
+         
+        li.MuiAutocomplete-option:hover {
+            background-color: #1b1b1b;
+        }
+    }
 }

@@ -11,6 +11,10 @@
 
     &__title {
         margin-bottom: 1.875rem;
+
+        &-dark-mode {
+            color: #ffffff;
+        }
     }
 }
 

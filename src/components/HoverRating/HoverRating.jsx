@@ -2,6 +2,7 @@ import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider"; 
 
 const labels = {
     "": "",
@@ -33,6 +34,7 @@ function getLabelText(value) {
 function HoverRating({ handleRatingChange }) {
     const [value, setValue] = useState(null);
     const [hover, setHover] = useState(-1);
+    const { isDarkMode, toggleDarkMode } = useDarkMode();
 
     return(
         <Box
@@ -64,7 +66,7 @@ function HoverRating({ handleRatingChange }) {
                     style={{ 
                         opacity: 0.55,
                         fontSize: 40, // Adjust star size
-                        
+                        color: isDarkMode ? 'rgba(255, 255, 255, 0.26)' : 'rgba(0, 0, 0, 0.26)',
                     }} 
                 />
                 }

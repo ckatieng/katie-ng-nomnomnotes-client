@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center;  
     padding: 3.125rem 1rem 6.25rem; 
+    background-color: $primary-light-background;
 
     @include desktop {
         @include desktop-margin();
@@ -80,5 +81,14 @@
     &__delete-icon {
         @include icon-hover-animation();
         visibility: hidden;
+    }
+
+    &__dark-mode {
+        background-color: $dark-mode-background;
+        color: $dark-mode-text-colour;
+
+        &-text {
+            color: $dark-mode-paragraph-colour;
+        }
     }
 }

@@ -3,6 +3,7 @@ import AddRestaurant from "../AddRestaurant/AddRestaurant";
 import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDarkMode } from '../DarkModeProvider/DarkModeProvider';
 
 /*
  * SearchRestaurant Component
@@ -16,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
  */
 
 function SearchRestaurant ({ showSearchRestaurant, handleCancelAddRestaurantClick, updateMustTryList }) {
+    const { isDarkMode } = useDarkMode();
 
     return (
         <Slide direction="up" in={showSearchRestaurant} mountOnEnter unmountOnExit>
@@ -27,13 +29,13 @@ function SearchRestaurant ({ showSearchRestaurant, handleCancelAddRestaurantClic
                         position: 'absolute',
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
                 <div>
-                    <h2 className="search-restaurant__title">Find a Restaurant</h2>
+                    <h2 className={`search-restaurant__title ${isDarkMode ? 'search-restaurant__title-dark-mode' : ''}`}>Find a Restaurant</h2>
                 </div>
                 <AddRestaurant updateMustTryList={updateMustTryList} handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}/>
             </div>

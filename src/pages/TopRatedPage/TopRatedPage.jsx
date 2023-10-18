@@ -12,6 +12,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import config from '../../utils/config';
+import { useDarkMode } from "../../components/DarkModeProvider/DarkModeProvider";
 
 /*
  * TopRatedPage Component
@@ -23,6 +24,7 @@ function TopRatedPage () {
     // States
     const [topRatedItems, setTopRatedItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { isDarkMode } = useDarkMode();
 
     // State to control Snackbar open state and message
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -55,7 +57,7 @@ function TopRatedPage () {
                 console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
-    }, []);
+    }, [topRatedUrl]);
 
     // Must-Try API URL
     const mustTryUrl = `${config.serverUrl}/api/must-try`;
@@ -81,7 +83,7 @@ function TopRatedPage () {
     }
 
     return (
-        <div className="top-rated">
+        <div className={`top-rated ${isDarkMode ? 'top-rated__dark-mode' : ''}`}>
             
             {isLoading ? (
                 // Display loading while fetching data
@@ -92,14 +94,14 @@ function TopRatedPage () {
                         // Display an empty state message when the list is empty
                         <div className="must-try__empty-state">
                             <img className="must-try__empty-state-img" src={paella} alt="paella" />
-                            <h3 className="must-try__empty-state-title">Top 10 is Empty!</h3>
-                            <p className="must-try__empty-state-paragraph">Explore new restaurants, rate them & help create the top-rated list.</p>
+                            <h3 className={`must-try__empty-state-title ${isDarkMode ? 'must-try__dark-mode' : ''}`}>Top 10 is Empty!</h3>
+                            <p className={`must-try__empty-state-paragraph ${isDarkMode ? 'must-try__dark-mode-text' : ''}`}>Explore new restaurants, rate them & help create the top-rated list.</p>
                         </div>
                     ) : (
                         <>
                             <h2 className="top-rated__title">Top 10 List</h2>
                             {topRatedItems.map((item) => (
-                                <li className="top-rated__item" key={item.id}>
+                                <li className={`top-rated__item ${isDarkMode ? 'top-rated__item-dark-mode' : ''}`} key={item.id}>
                                     <div className="top-rated__add">
                                         <IconButton disableTouchRipple className="top-rated__add-icon" onClick={() => addItemHandler(item.google_places_id)} style={{ color:'#73649b' }}>
                                             <AddIcon fontSize="inherit"/>
@@ -107,10 +109,13 @@ function TopRatedPage () {
                                     </div>
                                     <div className="top-rated__item-container">
                                         <Link to={`/restaurant/${item.google_places_id}`}>
-                                            <div className="top-rated__item-name">{item.restaurantName}</div>
+                                            <div 
+                                                className={`top-rated__item-name ${isDarkMode ? 'top-rated__item-name-dark-mode' : ''}`}>
+                                                    {item.restaurantName}
+                                            </div>
                                         </Link> 
-                                        <div className="top-rated__item-rating">{item.averageRating}  
-                                             <div className="top-rated__star-icon"><FontAwesomeIcon icon={faStar}/></div>
+                                        <div className={`top-rated__item-rating ${isDarkMode ? 'top-rated__item-rating-dark-mode' : ''}`}>{item.averageRating}  
+                                             <div className={`top-rated__star-icon ${isDarkMode ? 'top-rated__star-icon-dark-mode' : ''}`}><FontAwesomeIcon icon={faStar}/></div>
                                         </div>
                                     </div>
                                 </li>

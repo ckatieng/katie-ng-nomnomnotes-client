@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Close';
 import dimsum from '../../assets/images/Dimsum.png';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import config from '../../utils/config';
+import { useDarkMode } from '../../components/DarkModeProvider/DarkModeProvider';
 
 /*
  * VisitedPage Component
@@ -19,6 +20,7 @@ function VisitedPage () {
     // States
     const [visitedItems, setVisitedItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { isDarkMode, toggleDarkMode } = useDarkMode();
 
     // Visited API URL
     const visitedUrl = `${config.serverUrl}/api/visited`;
@@ -45,7 +47,7 @@ function VisitedPage () {
                 console.error(`Error fetching or setting restaurant names: ${err}`);
                 setIsLoading(false);
             });
-    }, []);
+    }, [visitedUrl]);
 
     // Function to handle when the delete button is clicked
     const deleteItemHandler = (itemId) => {
@@ -62,7 +64,7 @@ function VisitedPage () {
     }
 
     return (
-        <div className="visited">
+        <div className={`visited ${isDarkMode ? 'visited__dark-mode' : ''}`}>
             {isLoading ? (
                 // Display loading while fetching data
                 <LoadingSpinner />
@@ -72,15 +74,19 @@ function VisitedPage () {
                         // Display an empty state message when the list is empty
                         <div className="visited__empty-state">
                             <img className="visited__empty-state-img" src={dimsum} alt="dimsum" />
-                            <h3 className="visited__empty-state-title">No History Yet!</h3>
-                            <p className="visited__empty-state-paragraph">This list displays the restaurants you've visited, but did not favourite to help track your history.</p>
+                            <h3 className={`visited__empty-state-title ${isDarkMode ? 'must-try__dark-mode' : ''}`}>No History Yet!</h3>
+                            <p className={`visited__empty-state-paragraph ${isDarkMode ? 'must-try__dark-mode-text' : ''}`}>This list displays the restaurants you've visited, but did not favourite to help track your history.</p>
                         </div>
                     ) : (
                         <>
                             <h2 className="visited__title">Visited List</h2>
                             {visitedItems.map((item) => (
-                                <li className="visited__item" key={item.id}>
-                                    <Link to={`/restaurant/${item.google_places_id}`} className="visited__item-name">{item.restaurantName}</Link> 
+                                <li className={`visited__item ${isDarkMode ? 'visited__item-dark-mode' : ''}`} key={item.id}>
+                                    <Link 
+                                        to={`/restaurant/${item.google_places_id}`} 
+                                        className={`visited__item-name ${isDarkMode ? 'visited__item-name-dark-mode' : ''}`}>
+                                            {item.restaurantName}
+                                    </Link> 
                                     <div className="visited__delete">
                                         <IconButton disableTouchRipple className="visited__delete-icon" size="small" onClick={() => deleteItemHandler(item.id)} style={{ color:'#73649b' }}>
                                             <DeleteIcon fontSize="inherit"/>

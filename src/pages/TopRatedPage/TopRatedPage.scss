@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center;
     padding: 3.125rem 1rem 6.25rem; 
+    background-color: $primary-light-background;
 
     &__title {
         @include mobile-text-list-title();
@@ -54,6 +55,10 @@
 
     &__item {
         @include list-item();
+
+        &-dark-mode {
+            @include list-item-dark-mode();
+        }
     }
 
     &__item-name {
@@ -67,6 +72,10 @@
         &:hover { 
             color: $primary-text-hover-colour;
         }
+
+        &-dark-mode {
+            color: $primary-colour-light-background;
+        }
     }
 
     &__item-rating {
@@ -74,11 +83,19 @@
         justify-content: flex-end;
         align-items: center;
         margin-left: 1.875rem;
+
+        &-dark-mode {
+            color: $primary-colour-light-background;
+        }
     }
 
     &__star-icon {
         margin-left: 0.625rem;
         color: $primary-text-colour;
+
+        &-dark-mode {
+            color: #bd8eff;
+        }
     }
 
     &__add {
@@ -87,5 +104,14 @@
 
     &__add-icon {
         @include icon-hover-animation();
+    }
+
+    &__dark-mode {
+        background-color: $dark-mode-background;
+        color: $dark-mode-text-colour;
+
+        &-text {
+            color: $dark-mode-paragraph-colour;
+        }
     }
 }

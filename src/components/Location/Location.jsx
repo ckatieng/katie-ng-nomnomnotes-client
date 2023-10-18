@@ -4,6 +4,7 @@ import "./Location.scss";
 import SelectLocation from "../SelectLocation/SelectLocation";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDarkMode } from '../DarkModeProvider/DarkModeProvider';
 
 /*
  * Location Component
@@ -13,6 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function Location() {
     const navigate = useNavigate();
+    const { isDarkMode } = useDarkMode();
 
     // Callback function to handle the close button click
     const handleCloseClick = useCallback(() => {
@@ -29,12 +31,12 @@ function Location() {
                         position: 'absolute',
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        color: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
                     }}
             >
                 <CloseIcon />
             </IconButton>
-            <h2 className="location__title">Set Location</h2>
+            <h2 className={`location__title ${isDarkMode ? 'location__title-dark-mode' : ''}`}>Set Location</h2>
             
             <div className="location__search">
                 <SelectLocation />

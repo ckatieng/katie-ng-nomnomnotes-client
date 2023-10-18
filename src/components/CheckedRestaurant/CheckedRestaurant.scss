@@ -63,6 +63,10 @@
         line-height: 1.75rem;
         padding-bottom: 1.25rem;
         text-align: center;
+
+        &-dark-mode {
+            color: #ffffff;
+        }
     }
  
     &__radio {

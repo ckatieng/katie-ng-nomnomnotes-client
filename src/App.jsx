@@ -13,8 +13,9 @@ import AppBar from "./components/AppBar/AppBar";
 import { CssBaseline } from "@mui/material";
 import LogInPage from '../src/pages/LogInPage/LogInPage';
 import SignUpPage from '../src/pages/SignUpPage/SignUpPage';
-// import MainLayout from '../src/components/MainLayout/MainLayout';
-// import PublicLayout from "./components/PublicLayout/PublicLayout";
+import { useDarkMode } from "./components/DarkModeProvider/DarkModeProvider";
+import { ThemeProvider } from '@mui/material/styles';
+import Theme from './components/Theme/Theme';
 
 /*
  * App.jsx
@@ -28,7 +29,7 @@ function App() {
     // State to track whether "Add Restaurant" button is clicked
     const [showSearchRestaurant, setShowSearchRestaurant] = useState(false);
     // State to track light/dark mode
-    const [mode, setMode] = useState('light');
+    const { isDarkMode } = useDarkMode();
     
     useEffect(() => {
         document.title = 'NomNom Notes';
@@ -51,75 +52,76 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="App">
-                {isLoading && <LoadingScreen />}
-                {!isLoading && (
-                    <AppBar
-                        showSearchRestaurant={showSearchRestaurant} 
-                        mode={mode} 
-                        setMode={setMode}>
+            <ThemeProvider theme={Theme}>
+                {/* <div className="App"> */}
+                <div className={`App ${isDarkMode ? 'App__dark-mode' : ''}`}>
+                    {isLoading && <LoadingScreen />}
+                    {!isLoading && (
+                        <AppBar
+                            showSearchRestaurant={showSearchRestaurant} 
+                            // mode={mode} 
+                            // setMode={setMode}
+                            >
 
-                        <CssBaseline />
-                        <Routes>
-                            {/* Login Page */}
-                            <Route path="/login" element={<LogInPage />} />
+                            <CssBaseline />
+                            <Routes>
+                                {/* Login Page */}
+                                <Route path="/login" element={<LogInPage />} />
 
-                            {/* Sign Up Page */}
-                            <Route path="/signup" element={<SignUpPage />} />
+                                {/* Sign Up Page */}
+                                <Route path="/signup" element={<SignUpPage />} />
 
-                            {/* Home Page */}
-                            <Route path="/" element={
-                                isLoading ? (
-                                    <LoadingScreen />
-                                ) : (
+                                {/* Home Page */}
+                                <Route path="/" element={
+                                    isLoading ? (
+                                        <LoadingScreen />
+                                    ) : (
+                                        <MustTryPage
+                                            showSearchRestaurant={showSearchRestaurant}
+                                            handleAddRestaurantClick={handleAddRestaurantClick}
+                                            handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                        />
+                                    )}
+                                />
+
+                                {/* Must-Try Page */}
+                                <Route path="/must-try" element={
                                     <MustTryPage
                                         showSearchRestaurant={showSearchRestaurant}
                                         handleAddRestaurantClick={handleAddRestaurantClick}
                                         handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
-                                        mode={mode}
                                     />
-                                )}
-                            />
+                                }/>
 
-                            {/* Must-Try Page */}
-                            <Route path="/must-try" element={
-                                <MustTryPage
-                                    showSearchRestaurant={showSearchRestaurant}
-                                    handleAddRestaurantClick={handleAddRestaurantClick}
-                                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
-                                    mode={mode}
+                                {/* Restaurant Details */}
+                                <Route path="/restaurant/:placeId" element={<RestaurantDetails />} />
+
+                                {/* Favourites Page */}
+                                <Route path="/favourites" element={<FavouritesPage />} />
+
+                                {/* Top 10 Page */}
+                                <Route path="/top-rated" element={<TopRatedPage />} />
+
+                                {/* Visited Page */}
+                                <Route path="/visited" element={<VisitedPage />} />
+
+                                {/* Location */}
+                                <Route path="/location" element={<Location />} />
+
+                                {/* Catch-all to redirect to Home Page */}
+                                <Route path="*" element={
+                                    <MustTryPage
+                                        showSearchRestaurant={showSearchRestaurant}
+                                        handleAddRestaurantClick={handleAddRestaurantClick}
+                                        handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
+                                    />} 
                                 />
-                            }/>
-
-                            {/* Restaurant Details */}
-                            <Route path="/restaurant/:placeId" element={<RestaurantDetails />} />
-
-                            {/* Favourites Page */}
-                            <Route path="/favourites" element={<FavouritesPage />} />
-
-                            {/* Top 10 Page */}
-                            <Route path="/top-rated" element={<TopRatedPage />} />
-
-                            {/* Visited Page */}
-                            <Route path="/visited" element={<VisitedPage />} />
-
-                            {/* Location */}
-                            <Route path="/location" element={<Location />} />
-
-                            {/* Catch-all to redirect to Home Page */}
-                            <Route path="*" element={
-                                <MustTryPage
-                                    showSearchRestaurant={showSearchRestaurant}
-                                    handleAddRestaurantClick={handleAddRestaurantClick}
-                                    handleCancelAddRestaurantClick={handleCancelAddRestaurantClick}
-                                    mode={mode}
-                                />} 
-                            />
-                        </Routes>
-                        {!showSearchRestaurant && <Navigation mode={mode} />}
-                    </AppBar>
-                )}
-            </div>
+                            </Routes>
+                            {!showSearchRestaurant && <Navigation />}
+                        </AppBar>
+                    )}
+                </div>
+            </ThemeProvider>
         </BrowserRouter>
     );
 }

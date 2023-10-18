@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./CustomCheckbox.scss";
 import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 
 /*
  * CustomCheckbox Component
@@ -14,10 +15,11 @@ import CheckedRestaurant from "../CheckedRestaurant/CheckedRestaurant";
  * 'updateMustTryList' prop: a function to update the list of must-try restaurants
  */
 
-function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, mode}) {
+function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList }) {
     // States
     const [isChecked, setIsChecked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isDarkMode } = useDarkMode();
 
     // Effect to handle modal opening when the checkbox state changes
     useEffect(() => {
@@ -49,7 +51,7 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, m
         <div className="custom-checkbox">
             <label className="custom-checkbox__label">
                 <input
-                    className={`custom-checkbox__checkbox ${mode === 'dark' ? 'custom-checkbox__checkbox-dark-mode' : ''}`}
+                    className={`custom-checkbox__checkbox ${isDarkMode ? 'custom-checkbox__checkbox-dark-mode' : ''}`}
                     type="checkbox"
                     checked={isChecked}
                     onChange={handleCheckboxClick}
@@ -57,7 +59,7 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, m
                 />
                 <Link 
                     to={`/restaurant/${googlePlacesId}`} 
-                    className={`custom-checkbox__item-name ${mode === 'dark' ? 'custom-checkbox__item-name-dark-mode' : ''}`}
+                    className={`custom-checkbox__item-name ${isDarkMode ? 'custom-checkbox__item-name-dark-mode' : ''}`}
                 >
                     {itemName}
                 </Link>  
@@ -71,7 +73,6 @@ function CustomCheckbox({ itemId, itemName, googlePlacesId, updateMustTryList, m
                     googlePlacesId={googlePlacesId}
                     closeModal={closeModal}
                     updateMustTryList={updateMustTryList}
-                    mode={mode}
                 />
             )}
         </div>
